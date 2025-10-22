@@ -5,7 +5,7 @@ public class Main {
 
         System.out.println
         (
-            //ESTA ES LA VERSION DE NOLE
+            
                 "╲┏━┳━━━━━━━━┓╲╲\n" +
                 "╲┃◯┃╭┻┻╮╭┻┻╮┃╲╲\n" +
                 "╲┃╮┃┃╭╮┃┃╭╮┃┃╲╲\n" +
