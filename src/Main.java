@@ -4,7 +4,7 @@ public class Main {
 
         System.out.println
         (
-
+            //Nole
                 "╲┏━┳━━━━━━━━┓╲╲\n" +
                 "╲┃◯┃╭┻┻╮╭┻┻╮┃╲╲\n" +
                 "╲┃╮┃┃╭╮┃┃╭╮┃┃╲╲\n" +
