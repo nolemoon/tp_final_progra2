@@ -1,8 +1,8 @@
 import java.time.LocalDate;
 
 
-public class Clientes {
-    /// EXTENDS usuarios implements ICRUD
+public class Clientes extends Usuario{
+
 
     private static int contadorId = 0;
     private final int idCliente;
@@ -17,16 +17,15 @@ public class Clientes {
 
     }
 
+    public Clientes(String nombre, String email, String telefono, int idCliente) {
+        super(nombre, email, telefono);
+        this.idCliente = idCliente;
+    }
+
     /// CONSTRUCTOR - INICIO
 
 
-    public Clientes(LocalDate fecha) {
-        //Super(usuarios);
-        this.idCliente = contadorId++;
 
-        //this.tipoSuscripcion=tipoSuscripcion;
-        //this.productosAdquiridos=productosAdquiridos;
-    }
     public Clientes() {
         this.idCliente = contadorId++;
         }
