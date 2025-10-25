@@ -1,7 +1,7 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public abstract class Usuario implements ABM<Usuario> {
+public abstract class Usuario{
     protected String nombre;
     protected String email;
     protected String telefono;
@@ -63,7 +63,7 @@ public abstract class Usuario implements ABM<Usuario> {
     public abstract boolean alta(Usuario obj);
 
     @Override
-    public abstract Usuario baja(int id);
+    public abstract boolean baja(Usuario obj);
 
     @Override
     public abstract boolean modificar(Usuario obj);

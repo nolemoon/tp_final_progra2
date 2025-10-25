@@ -10,22 +10,14 @@ public class Clientes extends Usuario{
 
     //private static Biblioteca productosAdquiridos;
 
-    @Override
-    public boolean alta(Usuario obj) {
-        return obj.usuarioActivo=true;
-    }
-
     /// Metodos
 
 
-
+    /// CONSTRUCTOR - INICIO
     public Clientes(String nombre, String email, String telefono, int idCliente) {
         super(nombre, email, telefono);
         this.idCliente = idCliente;
     }
-
-    /// CONSTRUCTOR - INICIO
-
 
 
     public Clientes() {
