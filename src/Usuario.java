@@ -2,10 +2,10 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public abstract class Usuario implements ABM<Usuario> {
-    private String nombre;
-    private String email;
-    private String telefono;
-    private boolean usuarioActivo;
+    protected String nombre;
+    protected String email;
+    protected String telefono;
+    protected boolean usuarioActivo;
     private final LocalDateTime fechaRegistro;
 
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yy HH:mm:ss");

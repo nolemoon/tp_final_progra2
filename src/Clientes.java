@@ -1,4 +1,4 @@
-import java.time.LocalDate;
+
 
 
 public class Clientes extends Usuario{
@@ -10,12 +10,14 @@ public class Clientes extends Usuario{
 
     //private static Biblioteca productosAdquiridos;
 
-/// Metodos
-
-    public void ALTA(){
-/// aca tengo que usar el atributo super.altaUsuario
-
+    @Override
+    public boolean alta(Usuario obj) {
+        return obj.usuarioActivo=true;
     }
+
+    /// Metodos
+
+
 
     public Clientes(String nombre, String email, String telefono, int idCliente) {
         super(nombre, email, telefono);
