@@ -1,16 +1,17 @@
 
-
+import Enum.Suscripcion;
 
 public class Clientes extends Usuario{
 
 
     private static int contadorId = 0;
     private final int idCliente;
-    private Enum.Suscripcion Suscripcion;
+    private Suscripcion tipoSuscripcion;
 
     //private static Biblioteca productosAdquiridos;
 
-    /// Metodos
+    /// METODOS
+
 
 
     /// CONSTRUCTOR - INICIO
@@ -30,18 +31,15 @@ public class Clientes extends Usuario{
         return idCliente;
     }
 
-
-
-
-
-
-   public SUSCRIPCION getTipoSuscripcion() {
-        return tipoSuscripcion();
+    public Suscripcion getTipoSuscripcion() {
+        return tipoSuscripcion;
     }
-    public static void setTipoSuscripcion(SUSCRIPCION tipoSuscripcion) {
-        Clientes.tipoSuscripcion = tipoSuscripcion;
+
+    public void setTipoSuscripcion(Suscripcion tipoSuscripcion) {
+        this.tipoSuscripcion = tipoSuscripcion;
     }
-/*
+
+    /*
     public Biblioteca getProductosAdquiridos() {
         return productosAdquiridos;
     }
