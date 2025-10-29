@@ -6,7 +6,7 @@ public class Clientes extends Usuario{
 
     private static int contadorId = 0;
     private final int idCliente;
-    //private static SUSCRIPCION tipoSuscripcion;
+    private Enum.Suscripcion Suscripcion;
 
     //private static Biblioteca productosAdquiridos;
 
@@ -34,14 +34,14 @@ public class Clientes extends Usuario{
 
 
 
-   /*
+
    public SUSCRIPCION getTipoSuscripcion() {
         return tipoSuscripcion();
     }
     public static void setTipoSuscripcion(SUSCRIPCION tipoSuscripcion) {
         Clientes.tipoSuscripcion = tipoSuscripcion;
     }
-
+/*
     public Biblioteca getProductosAdquiridos() {
         return productosAdquiridos;
     }
