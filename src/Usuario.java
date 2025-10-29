@@ -1,7 +1,7 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public abstract class Usuario{
+public abstract class Usuario  {
     protected String nombre;
     protected String email;
     protected String telefono;
@@ -59,15 +59,18 @@ public abstract class Usuario{
         this.nombre = nombre;
     }
 
-    @Override
-    public abstract boolean alta(Usuario obj);
 
-    @Override
-    public abstract boolean baja(Usuario obj);
+    public abstract boolean alta();
 
-    @Override
-    public abstract boolean modificar(Usuario obj);
 
+    public abstract boolean baja();
+
+
+    public abstract boolean modificar(int opcion);
+
+    public abstract boolean consultar(String email);
+
+    public abstract String lista();
 
     @Override
     public String toString() {

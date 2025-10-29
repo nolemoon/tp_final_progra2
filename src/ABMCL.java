@@ -1,8 +1,8 @@
 public interface ABMCL<T> {
 
-    boolean alta(T obj);
-    T baja(int id);
-    boolean modificar(T obj);
+    abstract boolean alta();
+    T baja();
+    boolean modificar();
     T consultar(String nombre);
     String lista();
 

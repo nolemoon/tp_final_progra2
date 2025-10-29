@@ -12,6 +12,54 @@ public class Clientes extends Usuario{
 
     /// METODOS
 
+    @Override
+    public boolean alta() {
+        return super.usuarioActivo = true;
+    }
+
+    @Override
+    public boolean baja() {
+        return super.usuarioActivo=false;
+    }
+
+    @Override
+    public boolean modificar(int opcion) {
+
+        return switch (opcion) {
+            case 1 -> {
+                super.usuarioActivo = true;
+                yield true;
+            }
+            case 2 -> {
+                super.usuarioActivo = false;
+                yield true;
+            }
+            case 3 -> {
+                this.tipoSuscripcion = Suscripcion.BASICA;
+                yield true;
+            }
+            case 4 -> {
+                this.tipoSuscripcion = Suscripcion.PREMIUM;
+                yield true;
+            }
+            default -> false;
+        };
+    }
+
+    @Override
+    public String toString() {
+        return super.toString()+
+                "idCliente=" + idCliente
+                + ", tipoSuscripcion=" + tipoSuscripcion;
+    }
+
+    @Override
+    public boolean consultar(String email) {
+        // TODO: crear lista usuarios.
+
+        return false;
+    }
+
 
 
     /// CONSTRUCTOR - INICIO
