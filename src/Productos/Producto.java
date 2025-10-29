@@ -78,6 +78,18 @@ public abstract class Producto {
         this.tipoSuscripcion = tipoSuscripcion;
     }
 
-    
+    @Override
+    public String toString() {
+        return "Producto{" +
+                "id_Producto=" + id_Producto +
+                ", nombre='" + nombre + '\'' +
+                ", genero=" + genero +
+                ", precio=" + precio +
+                ", anioPublicado=" + anioPublicado +
+                ", creador='" + creador + '\'' +
+                ", descripcion='" + descripcion + '\'' +
+                ", tipoSuscripcion=" + tipoSuscripcion +
+                '}';
+    }
 }
 
