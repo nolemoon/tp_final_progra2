@@ -1,6 +1,5 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-
 /**
  * La clase abstracta USUARIO tiene como campos su nombre, email, telefono y fecha de registro.
  * Además, tiene como atributo 'usuarioActivo' para controlar su estado de actividad.
@@ -9,7 +8,6 @@ import java.time.format.DateTimeFormatter;
  * Implementa la interfaz ABMCL<Usuario> y sus métodos: alta, baja, modificar, consultar y lista.
  * @author Renata
  */
-
 public abstract class Usuario implements ABMCL<Usuario> {  //tengo que actualizar con ABMCL
     private String nombre;
     private String email;
