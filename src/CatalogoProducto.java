@@ -2,18 +2,23 @@ import Productos.Producto;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * La clase CatalogoProductos tiene como campo una lista de productos.
+ * Métodos: filtrarPorTipo, filtrarPorGenero y mostrarCatalogo.
+ * @author Renata
+ */
 public class CatalogoProducto {
     private List<Producto> productos;
 
     public CatalogoProducto() {
-        this.productos = new ArrayList<>();  //se cargan los datos desde json, aca tiene que recibir la lista deserializada
+        this.productos = new ArrayList<>();  //se cargan los datos desde json, aca tendría que recibir la lista deserializada
     }
 
     public List<Producto> getProductos() {
         return productos;
     }
 
-    public List<Producto> filtrarPorTipo(Class<?> tipoProducto){
+    public List<Producto> filtrarPorTipo(Class<? extends Producto> tipoProducto){
         List<Producto> listaFiltrada = new ArrayList<>();
         for(Producto p : productos){
             if(tipoProducto.isInstance(p)){
