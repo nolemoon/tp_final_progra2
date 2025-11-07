@@ -16,9 +16,9 @@ public interface ABMCL<T> {
     /**
      * Da de baja un objeto en el sistema por su id
      * @param id identificador del objeto a dar de baja
-     * @return objeto dado de baja
+     * @return {@code true} si la baja fue exitosa, {@code false} en caso contrario
      */
-    T baja(int id);
+    boolean baja(int id);
 
     /**
      * Modifica un objeto existente en el sistema

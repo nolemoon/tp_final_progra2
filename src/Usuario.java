@@ -1,5 +1,6 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
 /**
  * La clase abstracta USUARIO tiene como campos su nombre, email, telefono y fecha de registro.
  * Además, tiene como atributo 'usuarioActivo' para controlar su estado de actividad.
@@ -86,10 +87,10 @@ public abstract class Usuario implements ABMCL<Usuario> {  //tengo que actualiza
     /**
      * Da de baja un usuario por su id
      * @param id identificador único del usuario
-     * @return usuario dado de baja
+     * @return {@code true} si se elimina con éxito, {@code false} en caso contrario
      */
     @Override
-    public abstract Usuario baja(int id);
+    public abstract boolean baja(int id);
 
     /**
      * Modifica la información de un usuario que ya existe
