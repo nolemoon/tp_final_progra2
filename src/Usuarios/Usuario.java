@@ -1,3 +1,7 @@
+package Usuarios;
+
+import Exceptions.OpcionInvalidaException;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -65,15 +69,15 @@ public abstract class Usuario  {
         return listaUsuarios;
     }
 
-    public abstract boolean alta();
+    public abstract boolean alta(Object o);
 
 
-    public abstract boolean baja();
+    public abstract boolean baja(Object o);
 
 
-    public abstract boolean modificar(int opcion);
+    public abstract Object modificar(int opcion, Object o) throws OpcionInvalidaException;
 
-    public abstract Object consultar(String email);
+    public abstract Object consultar(String string);
 
     public abstract void lista();
 
@@ -81,7 +85,7 @@ public abstract class Usuario  {
 
     @Override
     public String toString() {
-        return "Usuario {" +
+        return "Usuarios.Usuario {" +
                 "nombre='" + nombre + '\'' +
                 ", email='" + email + '\'' +
                 ", telefono='" + telefono + '\'' +
