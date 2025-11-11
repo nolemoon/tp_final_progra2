@@ -1,5 +1,7 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+
 
 public abstract class Usuario  {
     protected String nombre;
@@ -7,7 +9,7 @@ public abstract class Usuario  {
     protected String telefono;
     protected boolean usuarioActivo;
     private final LocalDateTime fechaRegistro;
-
+    private ArrayList<Usuario> listaUsuarios=null;
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yy HH:mm:ss");
 
     public Usuario(String nombre, String email, String telefono) {
@@ -16,6 +18,7 @@ public abstract class Usuario  {
         this.telefono = telefono;
         this.usuarioActivo = true;
         this.fechaRegistro = LocalDateTime.now();
+        this.listaUsuarios=new ArrayList<>();
     }
 
     public Usuario() {
@@ -58,7 +61,9 @@ public abstract class Usuario  {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-
+    public ArrayList<Usuario> getListaUsuarios() {
+        return listaUsuarios;
+    }
 
     public abstract boolean alta();
 
@@ -68,9 +73,11 @@ public abstract class Usuario  {
 
     public abstract boolean modificar(int opcion);
 
-    public abstract boolean consultar(String email);
+    public abstract Object consultar(String email);
 
-    public abstract String lista();
+    public abstract void lista();
+
+
 
     @Override
     public String toString() {
