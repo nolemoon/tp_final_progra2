@@ -2,9 +2,12 @@ package Usuarios;
 
 import Exceptions.OpcionInvalidaException;
 import Productos.Producto;
+import Enum.Suscripcion;
+import Enum.Genero;
 
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.Scanner;
 
 public class Administrador extends Usuario{
     private final int idAdministrador=contadorId;
@@ -61,6 +64,40 @@ public class Administrador extends Usuario{
 
     @Override
     public Object modificar(int opcion,Object o) throws OpcionInvalidaException {
+Scanner sc=new Scanner(System.in);
+        String aux=null;
+switch (opcion){
+
+            case 1:
+                o.nombre=sc.nextLine();
+
+            case 2: aux=sc.nextLine();
+            aux=aux.toUpperCase();
+
+                switch (aux) {
+                    case "ACCION" -> o.Genero = Genero.ACCION;
+                    case "AVENTURA" -> o.Genero = Genero.AVENTURA;
+                    case "COMEDIA" -> o.Genero = Genero.COMEDIA;
+                    case "DRAMA" -> o.Genero = Genero.DRAMA;
+                    case "FANTASIA" -> o.Genero = Genero.FANTASIA;
+                    case "TERROR" -> o.Genero = Genero.TERROR;
+                    case "ROMANCE" -> o.Genero = Genero.ROMANCE;
+                    case "CIENCIA_FICCION" -> o.Genero = Genero.CIENCIA_FICCION;
+                } default: throw new OpcionInvalidaException("Opcion invalida");
+
+
+            case 3: o.precio=sc.nextDouble();
+
+            case 4: aux=sc.nextLine();
+            aux=aux.toUpperCase();
+
+            if (aux.equals("PREMIUM")){o.Suscripcion=Suscripcion.PREMIUM;}
+            else if(aux.equals("BASICA")|| aux.equals("BASICO")){o.Suscripcion=Suscripcion.BASICA;}
+
+            return o;
+        }
+
+
         return false;
     }
 
