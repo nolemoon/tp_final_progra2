@@ -6,6 +6,7 @@ import Productos.Producto;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
+import java.util.StringJoiner;
 
 public class Cliente extends Usuario{
 
@@ -58,13 +59,6 @@ public class Cliente extends Usuario{
         }
 
     @Override
-    public String toString() {
-        return super.toString()+
-                "idCliente=" + idCliente
-                + ", tipoSuscripcion=" + tipoSuscripcion;
-    }
-
-    @Override
     public Usuario consultar(String email) {
         for(int i=0; i<super.getListaUsuarios().size(); i++){
 
@@ -82,11 +76,7 @@ public class Cliente extends Usuario{
 
             Cliente aux = (Cliente) super.getListaUsuarios().get(i);
             System.out.println("cliente numero "+ i +
-                                "nombre: "+ aux.nombre+
-                    "email: "+ aux.email+
-                    "telefono: "+aux.telefono+
-                    "tipoSuscripcion: "+aux.tipoSuscripcion+
-                    "fecha de registro: "+ aux.getFechaRegistro());
+                                aux.toString());
         }
     }
 
@@ -107,7 +97,18 @@ HashMap<String,Producto> productosHashMap = new HashMap<>();
 return false;
 }
 
-
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Cliente{");
+        sb.append("idCliente=").append(idCliente).append('\n');
+        sb.append(", tipoSuscripcion=").append(tipoSuscripcion).append('\n');
+        sb.append(", nombre='").append(nombre).append('\n');
+        sb.append(", email='").append(email).append('\n');
+        sb.append(", telefono='").append(telefono).append('\n');
+        sb.append(", usuarioActivo=").append(usuarioActivo).append('\n');
+        sb.append('}');
+        return sb.toString();
+    }
 
     /// CONSTRUCTOR - INICIO
     public Cliente(String nombre, String email, String telefono) {
