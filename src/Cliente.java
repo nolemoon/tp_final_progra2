@@ -1,6 +1,10 @@
 
 import Enum.Suscripcion;
+import Exceptions.OpcionInvalidaException;
+import Productos.Producto;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Objects;
 
 public class Cliente extends Usuario{
@@ -27,7 +31,7 @@ public class Cliente extends Usuario{
     }
 
     @Override
-    public boolean modificar(int opcion) {
+    public boolean modificar(int opcion) throws OpcionInvalidaException {
 
 
             return switch (opcion) {
@@ -47,7 +51,8 @@ public class Cliente extends Usuario{
                     this.tipoSuscripcion = Suscripcion.PREMIUM;
                     yield true;
                 }
-                default -> false;
+                default -> throw new OpcionInvalidaException("Opcion invalida");
+
             }
                     ;
         }
@@ -84,6 +89,23 @@ public class Cliente extends Usuario{
                     "fecha de registro: "+ aux.getFechaRegistro());
         }
     }
+
+public boolean comprarProducto(String nombreProducto){
+
+ArrayList<Producto> productos = new ArrayList<>();
+HashMap<String,Producto> productosHashMap = new HashMap<>();
+
+    for(int i=0; i<productos.size(); i++){
+
+    if(productos.get(i).getNombre().equals(nombreProducto)){
+        productosHashMap.put(nombreProducto,productos.get(i));
+
+        return true;
+    }
+}
+
+return false;
+}
 
 
 
