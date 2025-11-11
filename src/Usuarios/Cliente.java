@@ -1,3 +1,4 @@
+package Usuarios;
 
 import Enum.Suscripcion;
 import Exceptions.OpcionInvalidaException;
@@ -6,7 +7,6 @@ import Productos.Producto;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
-import java.util.StringJoiner;
 
 public class Cliente extends Usuario{
 
@@ -20,42 +20,39 @@ public class Cliente extends Usuario{
     /// METODOS
 
     @Override
-    public boolean alta() {
+    public boolean alta(Object o) {
 
+        if (!(o instanceof Cliente cliente)) return false;
         return super.usuarioActivo = true;
 
     }
 
     @Override
-    public boolean baja() {
-        return super.usuarioActivo=false;
+    public boolean baja(Object o) {
+
+if (!(o instanceof Cliente cliente)) return false;
+
+return super.usuarioActivo=false;
     }
 
     @Override
-    public boolean modificar(int opcion) throws OpcionInvalidaException {
+    public Object modificar(int opcion, Object o) throws OpcionInvalidaException {
 
 
             return switch (opcion) {
+
                 case 1 -> {
-                    super.usuarioActivo = true;
-                    yield true;
-                }
-                case 2 -> {
-                    super.usuarioActivo = false;
-                    yield true;
-                }
-                case 3 -> {
                     this.tipoSuscripcion = Suscripcion.BASICA;
                     yield true;
                 }
-                case 4 -> {
+                case 2 -> {
                     this.tipoSuscripcion = Suscripcion.PREMIUM;
                     yield true;
                 }
                 default -> throw new OpcionInvalidaException("Opcion invalida");
 
-            }
-                    ;
+            };
+
         }
 
     @Override
@@ -85,29 +82,27 @@ public boolean comprarProducto(String nombreProducto){
 ArrayList<Producto> productos = new ArrayList<>();
 HashMap<String,Producto> productosHashMap = new HashMap<>();
 
-    for(int i=0; i<productos.size(); i++){
+    for (Producto producto : productos) {
 
-    if(productos.get(i).getNombre().equals(nombreProducto)){
-        productosHashMap.put(nombreProducto,productos.get(i));
+        if (producto.getNombre().equals(nombreProducto)) {
+            productosHashMap.put(nombreProducto, producto);
 
-        return true;
+            return true;
+        }
     }
-}
 
 return false;
 }
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Cliente{");
-        sb.append("idCliente=").append(idCliente).append('\n');
-        sb.append(", tipoSuscripcion=").append(tipoSuscripcion).append('\n');
-        sb.append(", nombre='").append(nombre).append('\n');
-        sb.append(", email='").append(email).append('\n');
-        sb.append(", telefono='").append(telefono).append('\n');
-        sb.append(", usuarioActivo=").append(usuarioActivo).append('\n');
-        sb.append('}');
-        return sb.toString();
+        return "Usuarios.Cliente{" + "idCliente=" + idCliente + '\n' +
+                ", tipoSuscripcion=" + tipoSuscripcion + '\n' +
+                ", nombre='" + nombre + '\n' +
+                ", email='" + email + '\n' +
+                ", telefono='" + telefono + '\n' +
+                ", usuarioActivo=" + usuarioActivo + '\n' +
+                '}';
     }
 
     /// CONSTRUCTOR - INICIO
@@ -152,7 +147,7 @@ return false;
         return productosAdquiridos;
     }
     public static void setProductosAdquiridos(int productosAdquiridos) {
-        Cliente.productosAdquiridos = productosAdquiridos;
+        Usuarios.Cliente.productosAdquiridos = productosAdquiridos;
     }
     */
 /// GETTER AND SETTER - FINAL
