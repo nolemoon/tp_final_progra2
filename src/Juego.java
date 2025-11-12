@@ -1,11 +1,10 @@
 public final class Juego extends Producto{
 
     // Atributos
-    private String requisitosMinimos; // Y si usamos un array de requisitos por separado?
+    private String requisitosMinimos;
     private boolean multiplayer;
 
     // Constructor
-    // TODO: añadir llamado al constructor super + sus atributos.
     public Juego() {
         super();
     }
