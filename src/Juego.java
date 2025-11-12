@@ -1,4 +1,4 @@
-public final class Juego extends AbstractProducto{
+public final class Juego extends Producto{
 
     // Atributos
     private String requisitosMinimos; // Y si usamos un array de requisitos por separado?
@@ -7,9 +7,12 @@ public final class Juego extends AbstractProducto{
     // Constructor
     // TODO: añadir llamado al constructor super + sus atributos.
     public Juego() {
+        super();
     }
 
-    public Juego(String requisitosMinimos, boolean multiplayer) {
+    public Juego(String nombre, Genero genero, double precio, int anioPublicado, String creador, String descripcion,
+                 Suscripcion tipoSuscripcion, String requisitosMinimos, boolean multiplayer) {
+        super(nombre, genero, precio, anioPublicado, creador, descripcion, tipoSuscripcion);
         this.requisitosMinimos = requisitosMinimos;
         this.multiplayer = multiplayer;
     }
@@ -32,12 +35,11 @@ public final class Juego extends AbstractProducto{
     }
 
     // To String
-    // TODO: Invocar al Super To String
     @Override
     public String toString() {
         return "Juego{" +
                 "requisitosMinimos='" + requisitosMinimos + '\'' +
-                ", multiplayer=" + multiplayer +
+                ", multiplayer=" + multiplayer + super.toString() +
                 '}';
     }
 

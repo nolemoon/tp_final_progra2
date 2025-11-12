@@ -1,4 +1,4 @@
-public final class Ebook extends AbstractProducto{
+public final class Ebook extends Producto{
 
     // Atributos
     private int numPaginas;
@@ -6,11 +6,13 @@ public final class Ebook extends AbstractProducto{
     private String idioma;
 
     // Constructores
-    // TODO: añadir llamado al constructor super + sus atributos.
     public Ebook() {
+        super();
     }
 
-    public Ebook(int numPaginas, String formato, String idioma) {
+    public Ebook(String nombre, Genero genero, double precio, int anioPublicado, String creador, String descripcion,
+                 Suscripcion tipoSuscripcion, int numPaginas, String formato, String idioma) {
+        super(nombre, genero, precio, anioPublicado, creador, descripcion, tipoSuscripcion);
         this.numPaginas = numPaginas;
         this.formato = formato;
         this.idioma = idioma;
@@ -42,13 +44,13 @@ public final class Ebook extends AbstractProducto{
     }
 
     // To String
-    // TODO: Invocar al Super To String
     @Override
     public String toString() {
         return "Ebook{" +
                 "numPaginas=" + numPaginas +
                 ", formato='" + formato + '\'' +
                 ", idioma='" + idioma + '\'' +
+                super.toString() +
                 '}';
     }
 

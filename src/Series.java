@@ -1,15 +1,17 @@
-public final class Series extends AbstractProducto{
+public final class Series extends Producto{
 
     // Atributos
     private int temporadas;
     private int capitulos;
 
     // Constructores
-    // TODO: añadir llamado al constructor super + sus atributos.
     public Series() {
+        super();
     }
 
-    public Series(int temporadas, int capitulos) {
+    public Series(String nombre, Genero genero, double precio, int anioPublicado, String creador, String descripcion,
+                  Suscripcion tipoSuscripcion, int temporadas, int capitulos) {
+        super(nombre, genero, precio, anioPublicado, creador, descripcion, tipoSuscripcion);
         this.temporadas = temporadas;
         this.capitulos = capitulos;
     }
@@ -32,12 +34,11 @@ public final class Series extends AbstractProducto{
     }
 
     // To String
-    // TODO: Invocar al Super To String
     @Override
     public String toString() {
         return "Series{" +
                 "temporadas=" + temporadas +
-                ", capitulos=" + capitulos +
+                ", capitulos=" + capitulos + super.toString() +
                 '}';
     }
 

@@ -1,15 +1,17 @@
-public final class Pelicula extends AbstractProducto{
+public final class Pelicula extends Producto{
 
     // Atributos
     private double duracion;
     private String clasificacion;
 
     // Constructores
-    // TODO: añadir llamado al constructor super + sus atributos.
     public Pelicula() {
+        super();
     }
 
-    public Pelicula(double duracion, String clasificacion) {
+    public Pelicula(String nombre, Genero genero, double precio, int anioPublicado, String creador, String descripcion,
+                    Suscripcion tipoSuscripcion, double duracion, String clasificacion) {
+        super(nombre, genero, precio, anioPublicado, creador, descripcion, tipoSuscripcion);
         this.duracion = duracion;
         this.clasificacion = clasificacion;
     }
@@ -32,12 +34,11 @@ public final class Pelicula extends AbstractProducto{
     }
 
     // To String
-    // TODO: Invocar al Super To String
     @Override
     public String toString() {
         return "Pelicula{" +
                 "duracion=" + duracion +
-                ", clasificacion='" + clasificacion + '\'' +
+                ", clasificacion='" + clasificacion + '\'' + super.toString() +
                 '}';
     }
 }
