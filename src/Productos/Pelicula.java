@@ -1,4 +1,6 @@
-public final class Pelicula extends AbstractProducto{
+package Productos;
+
+public final class Pelicula {
 
     // Atributos
     private double duracion;
@@ -35,7 +37,7 @@ public final class Pelicula extends AbstractProducto{
     // TODO: Invocar al Super To String
     @Override
     public String toString() {
-        return "Pelicula{" +
+        return "Productos.Pelicula{" +
                 "duracion=" + duracion +
                 ", clasificacion='" + clasificacion + '\'' +
                 '}';

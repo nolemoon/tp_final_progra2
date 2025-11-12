@@ -1,3 +1,5 @@
+import Interfaces.ABMCL;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -6,10 +8,10 @@ import java.time.format.DateTimeFormatter;
  * Además, tiene como atributo 'usuarioActivo' para controlar su estado de actividad.
  * Cuenta con un constructor vacío y otro con los atributos nombre, email y teléfono.
  * Métodos: setters y getters de cada atributo, toString para devolver sus datos.
- * Implementa la interfaz ABMCL<Usuario> y sus métodos: alta, baja, modificar, consultar y lista.
+ * Implementa la interfaz Interfaces.ABMCL<Usuario> y sus métodos: alta, baja, modificar, consultar y lista.
  * @author Renata
  */
-public abstract class Usuario implements ABMCL<Usuario> {  //tengo que actualizar con ABMCL
+public abstract class Usuario implements ABMCL<Usuario> {  //tengo que actualizar con Interfaces.ABMCL
     private String nombre;
     private String email;
     private String telefono;

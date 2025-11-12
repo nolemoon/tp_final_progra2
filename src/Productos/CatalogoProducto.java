@@ -1,4 +1,5 @@
-import Productos.Producto;
+package Productos;
+
 import java.util.ArrayList;
 import java.util.List;
 

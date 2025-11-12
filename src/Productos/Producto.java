@@ -1,3 +1,5 @@
+package Productos;
+
 import Enum.Genero;
 import Enum.Suscripcion;
 
@@ -79,7 +81,7 @@ public abstract class Producto {
 
     @Override
     public String toString() {
-        return "Producto{" +
+        return "Productos.Producto{" +
                 "id_Producto=" + id_Producto +
                 ", nombre='" + nombre + '\'' +
                 ", genero=" + genero +

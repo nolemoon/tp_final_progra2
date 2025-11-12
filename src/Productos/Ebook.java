@@ -1,4 +1,6 @@
-public final class Ebook extends AbstractProducto{
+package Productos;
+
+public final class Ebook {
 
     // Atributos
     private int numPaginas;
@@ -45,7 +47,7 @@ public final class Ebook extends AbstractProducto{
     // TODO: Invocar al Super To String
     @Override
     public String toString() {
-        return "Ebook{" +
+        return "Productos.Ebook{" +
                 "numPaginas=" + numPaginas +
                 ", formato='" + formato + '\'' +
                 ", idioma='" + idioma + '\'' +

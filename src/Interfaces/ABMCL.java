@@ -1,6 +1,8 @@
+package Interfaces;
+
 /**
- * Interfaz genérica que define las operaciones básicas alta, baja, modificación, consulta y listado (ABMCL)
- * para ser implementadas en las clases {@code Usuario} y {@code Producto} y sus respectivas hijas.
+ * Interfaz genérica que define las operaciones básicas alta, baja, modificación, consulta y listado (Interfaces.ABMCL)
+ * para ser implementadas en las clases {@code Usuario} y {@code Productos.Producto} y sus respectivas hijas.
  * @param <T> tipo genérico
  * @author Renata, Franco
  */

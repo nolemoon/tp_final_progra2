@@ -37,7 +37,7 @@ public class Administrador extends Usuario{
 
     @Override
     public boolean alta(Object o) {
-// TODO: crear atributo altaProducto en Producto
+// TODO: crear atributo altaProducto en Productos.Producto
 
         if (o instanceof Producto producto) {
 
@@ -52,7 +52,7 @@ public class Administrador extends Usuario{
 
     @Override
     public boolean baja(Object o) {
-// TODO: crear atributo altaProducto en Producto
+// TODO: crear atributo altaProducto en Productos.Producto
 
         if (o instanceof Producto producto) {
            // o.altaProducto=false;

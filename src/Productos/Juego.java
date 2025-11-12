@@ -1,4 +1,6 @@
-public final class Juego extends AbstractProducto{
+package Productos;
+
+public final class Juego {
 
     // Atributos
     private String requisitosMinimos; // Y si usamos un array de requisitos por separado?
@@ -35,7 +37,7 @@ public final class Juego extends AbstractProducto{
     // TODO: Invocar al Super To String
     @Override
     public String toString() {
-        return "Juego{" +
+        return "Productos.Juego{" +
                 "requisitosMinimos='" + requisitosMinimos + '\'' +
                 ", multiplayer=" + multiplayer +
                 '}';

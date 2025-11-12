@@ -1,4 +1,6 @@
-public final class Series extends AbstractProducto{
+package Productos;
+
+public final class Series {
 
     // Atributos
     private int temporadas;
@@ -35,7 +37,7 @@ public final class Series extends AbstractProducto{
     // TODO: Invocar al Super To String
     @Override
     public String toString() {
-        return "Series{" +
+        return "Productos.Series{" +
                 "temporadas=" + temporadas +
                 ", capitulos=" + capitulos +
                 '}';
