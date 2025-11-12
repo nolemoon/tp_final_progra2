@@ -3,7 +3,6 @@ package Usuarios;
 import Enum.Suscripcion;
 import Exceptions.OpcionInvalidaException;
 import Productos.Producto;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
