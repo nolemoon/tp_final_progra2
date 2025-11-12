@@ -2,6 +2,7 @@ package Usuarios;
 
 import Enum.Suscripcion;
 import Exceptions.OpcionInvalidaException;
+import Exceptions.UsuarioNoEncontradoException;
 import Productos.Producto;
 
 import java.util.ArrayList;
@@ -56,13 +57,15 @@ return super.usuarioActivo=false;
         }
 
     @Override
-    public Usuario consultar(String email) {
-        for(int i=0; i<super.getListaUsuarios().size(); i++){
+    public Usuario consultar(String email)throws UsuarioNoEncontradoException {
+              for(int i=0; i<super.getListaUsuarios().size(); i++){
 
             if(super.getListaUsuarios().get(i).getEmail().equals(email)){
                 return super.getListaUsuarios().get(i);
-            }
+
+            }throw new UsuarioNoEncontradoException("Usuario no encontrado");
         }
+
         return null;
     }
 
@@ -76,6 +79,8 @@ return super.usuarioActivo=false;
                                 aux.toString());
         }
     }
+
+
 
 public boolean comprarProducto(String nombreProducto){
 
