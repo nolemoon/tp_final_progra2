@@ -1,3 +1,7 @@
+import Productos.Producto;
+import Enum.Genero;
+import Enum.Suscripcion;
+
 public final class Pelicula extends Producto{
 
     // Atributos

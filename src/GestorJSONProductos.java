@@ -3,10 +3,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
+import Productos.Producto;
+import Enum.Suscripcion;
+import Enum.Genero;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.util.ArrayList;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public final class GestorJSONProductos {
     private String aJson  = "productos.json";
@@ -191,7 +194,7 @@ public final class GestorJSONProductos {
             p.setAnioPublicado(json.getInt("anioPublicado"));
             p.setCreador(json.getString("creador"));
             p.setDescripcion(json.getString("descripcion"));
-            p.setTipoSuscripcion(TipoSuscripcion.valueOf(json.getString("tipoSuscripcion")));
+            p.setTipoSuscripcion(Suscripcion.valueOf(json.getString("tipoSuscripcion")));
         } catch (JSONException ex) {
             ex.printStackTrace();
         }
@@ -297,6 +300,51 @@ public final class GestorJSONProductos {
         }
     }
 
-    // TODO: Serializar colecciones.
+    /**
+     * Serializa un mapa de productos a un JSONObject y lo guarda en un archivo JSON.
+     * @param productos {@code LinkedHashMap} de productos a serializar
+     */
+    public void mapaProductosToArchi(LinkedHashMap<Integer, Producto> productos){
+        JSONArray ja = new JSONArray();
+        try{
+            for(Map.Entry<Integer, Producto> entry : productos.entrySet()){
+                JSONObject jo = new JSONObject();
+                jo.put("id", entry.getKey());
+                jo.put("producto", serializarProducto(entry.getValue()));
+                ja.put(jo);
+            }
 
+            JSONObject jo = new JSONObject();
+            jo.put("productos", ja);
+            OperacionesArchivos.grabarArchivo(jo, aJson);
+        }
+        catch (JSONException e){
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Lee un archivo JSON y lo guarda en un mapa de productos.
+     * @return {@code LinkedHashMap} de productos deserializados
+     */
+    public LinkedHashMap<Integer, Producto> archiToMapaProductos(){
+        LinkedHashMap<Integer, Producto> mapa = new LinkedHashMap<>();
+        JSONTokener tk = OperacionesArchivos.leerArchivo(aJson);
+
+        try{
+            JSONObject jo = new JSONObject(tk);
+            JSONArray ja = jo.getJSONArray("productos");
+
+            for(int i = 0; i < ja.length(); i++){
+                JSONObject jo2 = ja.getJSONObject(i);
+                Integer id = jo2.getInt("id");
+                Producto p = deserializarProducto(jo2.getJSONObject("producto"));
+                mapa.put(id, p);
+            }
+        }
+        catch(JSONException e){
+            e.printStackTrace();
+        }
+        return mapa;
+    }
 }

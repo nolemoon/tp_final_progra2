@@ -1,4 +1,8 @@
-public final class Ebook extends Producto{
+import Productos.Producto;
+import Enum.Genero;
+import Enum.Suscripcion;
+
+public final class Ebook extends Producto {
 
     // Atributos
     private int numPaginas;

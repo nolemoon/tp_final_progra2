@@ -1,4 +1,8 @@
-public final class Juego extends Producto{
+import Productos.Producto;
+import Enum.Suscripcion;
+import Enum.Genero;
+
+public final class Juego extends Producto {
 
     // Atributos
     private String requisitosMinimos;
