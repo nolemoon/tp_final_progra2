@@ -1,4 +1,3 @@
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -6,8 +5,6 @@ import org.json.JSONTokener;
 import Productos.Producto;
 import Enum.Suscripcion;
 import Enum.Genero;
-
-
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -336,9 +333,9 @@ public final class GestorJSONProductos {
             JSONArray ja = jo.getJSONArray("productos");
 
             for(int i = 0; i < ja.length(); i++){
-                JSONObject jo2 = ja.getJSONObject(i);
-                Integer id = jo2.getInt("id");
-                Producto p = deserializarProducto(jo2.getJSONObject("producto"));
+                JSONObject obj = ja.getJSONObject(i);
+                Integer id = obj.getInt("id");
+                Producto p = deserializarProducto(obj.getJSONObject("producto"));
                 mapa.put(id, p);
             }
         }
