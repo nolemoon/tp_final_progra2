@@ -1,0 +1,302 @@
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.json.JSONTokener;
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.util.ArrayList;
+
+public final class GestorJSONProductos {
+    private String aJson  = "productos.json";
+
+    // Constructores
+    public GestorJSONProductos() {
+    }
+
+    // Productos - Archivo intercambio.
+    /**
+     * Graba un producto en un archivo, llamando al metodo de serializar y grabar archivo.
+     * @param p objeto Producto a grabar.
+     */
+    public void productoaArchivo(Producto p){
+        OperacionesArchivos.grabarArchivo(serializarProducto(p),aJson);
+    }
+
+    /**
+     * Lee un archivo de un producto y lo devuelve en un tipo objeto.
+     * @return objeto Producto proveniente del archivo.
+     */
+    public Producto archivoAproducto(){
+        JSONTokener token = OperacionesArchivos.leerArchivo(aJson);
+        Producto p = null;
+        try{
+            p = deserializarProducto(new JSONObject(token));
+        }
+        catch (JSONException e){
+            e.printStackTrace();
+        }
+        return p;
+    }
+
+    // Metodos Serializacion.
+    /**
+     * Serializa los atributos en comun de la clase abstracta Producto.
+     * @param p objeto Producto a serializar
+     * @return objeto JSON con los datos básicos del producto
+     */
+    public JSONObject serializarProductoABS(Producto p) {
+        JSONObject jsonTemp = null;
+        try{
+            jsonTemp = new JSONObject();
+            jsonTemp.put("nombre", p.getNombre());
+            jsonTemp.put("genero", p.getGenero().toString());
+            jsonTemp.put("precio", p.getPrecio());
+            jsonTemp.put("anioPublicado", p.getAnioPublicado());
+            jsonTemp.put("creador", p.getCreador());
+            jsonTemp.put("descripcion", p.getDescripcion());
+            jsonTemp.put("tipoSuscripcion", p.getTipoSuscripcion().toString());
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return jsonTemp;
+    }
+
+    /**
+     * Serializa el objeto de tipo Juego sumando a los atributos de la clase abstracta.
+     * @param j objeto Juego a serializar
+     * @return objeto JSON con los datos completos del juego.
+     */
+    public JSONObject serializarJuego(Juego j){
+        JSONObject jsonTemp = null;
+
+        try{
+            jsonTemp = serializarProductoABS(j);
+            jsonTemp.put("requisitosMinimos", j.getRequisitosMinimos());
+            jsonTemp.put("multiplayer", j.isMultiplayer());
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return jsonTemp;
+    }
+
+    /**
+     * Serializa el objeto de tipo Pelicula sumando a los atributos de la clase abstracta.
+     * @param p objeto Pelicula a serializar
+     * @return objeto JSON con los datos completos de la pelicula.
+     */
+    public JSONObject serializarPelicula(Pelicula p){
+        JSONObject jsonTemp = null;
+
+        try {
+            jsonTemp = serializarProductoABS(p);
+
+            jsonTemp.put("duracion", p.getDuracion());
+            jsonTemp.put("clasificacion", p.getClasificacion());
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return jsonTemp;
+    }
+
+    /**
+     * Serializa el objeto de tipo Ebook sumando a los atributos de la clase abstracta.
+     * @param e objeto Ebook a serializar
+     * @return objeto JSON con los datos completos del eBook.
+     */
+    public JSONObject serializarEbook(Ebook e){
+        JSONObject jsonTemp = null;
+
+        try {
+            jsonTemp = serializarProductoABS(e);
+
+            jsonTemp.put("numPaginas", e.getNumPaginas());
+            jsonTemp.put("formato", e.getFormato());
+            jsonTemp.put("idioma", e.getIdioma());
+
+        } catch (JSONException ex) {
+            ex.printStackTrace();
+        }
+
+        return jsonTemp;
+    }
+
+    /**
+     * Serializa el objeto de tipo Serie sumando a los atributos de la clase abstracta.
+     * @param s objeto Series a serializar
+     * @return objeto JSON con los datos completos de la serie.
+     */
+    public JSONObject serializarSerie(Series s){
+        JSONObject jsonTemp = null;
+
+        try {
+            jsonTemp = serializarProductoABS(s);
+
+            jsonTemp.put("temporadas", s.getTemporadas());
+            jsonTemp.put("capitulos", s.getCapitulos());
+
+        } catch (JSONException ex) {
+            ex.printStackTrace();
+        }
+
+        return jsonTemp;
+    }
+
+    /**
+     * Serializa cualquier tipo de objeto que extienda de producto, llamando a los serializadores de cada objeto.
+     * @param pd objeto a Serializar de manera completa.
+     * @return objeto JSON con los datos completos del producto.
+     */
+    public JSONObject serializarProducto(Producto pd) {
+        JSONObject json = null;
+        try {
+            if (pd instanceof Juego j) {
+                json = serializarJuego(j);
+            } else if (pd instanceof Pelicula p) {
+                json = serializarPelicula(p);
+            } else if (pd instanceof Ebook e) {
+                json = serializarEbook(e);
+            } else if (pd instanceof Series s) {
+                json = serializarSerie(s);
+            }
+
+            if (json != null) {
+                json.put("tipo", pd.getClass().getSimpleName());
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return json;
+    }
+
+    // Metodos Deserializacion.
+    /**
+     * Deserializa los atributos en comun de un producto desde un objeto JSON.
+     * @param json objeto JSON con los datos básicos del producto.
+     * @param p producto donde se cargan los datos deserializados.
+     */
+    public void deserializarProductoABS(JSONObject json, Producto p) {
+        try {
+            p.setNombre(json.getString("nombre"));
+            p.setGenero(Genero.valueOf(json.getString("genero")));
+            p.setPrecio(json.getDouble("precio"));
+            p.setAnioPublicado(json.getInt("anioPublicado"));
+            p.setCreador(json.getString("creador"));
+            p.setDescripcion(json.getString("descripcion"));
+            p.setTipoSuscripcion(TipoSuscripcion.valueOf(json.getString("tipoSuscripcion")));
+        } catch (JSONException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    /**
+     * Deserializa un juego que extienda de producto, deserializando tambien sus atributos heredados.
+     * @param json objeto JSON con los datos del juego.
+     */
+    public Juego deserializarJuego(JSONObject json) {
+        Juego j = null;
+        try {
+            j = new Juego();
+            deserializarProductoABS(json, j);
+            j.setRequisitosMinimos(json.getString("requisitosMinimos"));
+            j.setMultiplayer(json.getBoolean("multiplayer"));
+        } catch (JSONException ex) {
+            ex.printStackTrace();
+        }
+        return j;
+    }
+
+    /**
+     * Deserializa una pelicula que extienda de producto, deserializando tambien sus atributos heredados.
+     * @param json objeto JSON con los datos de la pelicula.
+     */
+    public Pelicula deserializarPelicula(JSONObject json) {
+        Pelicula p = null;
+        try {
+            p = new Pelicula();
+            deserializarProductoABS(json, p);
+            p.setDuracion(json.getInt("duracion"));
+            p.setClasificacion(json.getString("clasificacion"));
+        } catch (JSONException ex) {
+            ex.printStackTrace();
+        }
+        return p;
+    }
+
+    /**
+     * Deserializa un eBook que extienda de producto, deserializando tambien sus atributos heredados.
+     * @param json objeto JSON con los datos del Ebook.
+     */
+    public Ebook deserializarEbook(JSONObject json) {
+        Ebook e = null;
+        try {
+            e = new Ebook();
+            deserializarProductoABS(json, e);
+            e.setNumPaginas(json.getInt("numPaginas"));
+            e.setFormato(json.getString("formato"));
+            e.setIdioma(json.getString("idioma"));
+        } catch (JSONException ex) {
+            ex.printStackTrace();
+        }
+        return e;
+    }
+
+    /**
+     * Deserializa una Serie que extienda de producto, deserializando tambien sus atributos heredados.
+     * @param json objeto JSON con los datos de la serie.
+     */
+    public Series deserializarSerie(JSONObject json) {
+        Series s = null;
+        try {
+            s = new Series();
+            deserializarProductoABS(json, s);
+            s.setTemporadas(json.getInt("temporadas"));
+            s.setCapitulos(json.getInt("capitulos"));
+        } catch (JSONException ex) {
+            ex.printStackTrace();
+        }
+        return s;
+    }
+
+    /**
+     * Deserializa cualquier tipo que extienda de producto, llamando a los deserializadores de cada tipo de producto,
+     * deserializando tambien sus atributos heredados.
+     * @param json objeto JSON con los datos completos del producto.
+     */
+    public Producto deserializarProducto(JSONObject json) {
+        try {
+            String tipo = json.getString("tipo");
+
+            if (tipo.equals(Juego.class.getSimpleName())) {
+                return deserializarJuego(json);
+            }
+            else if (tipo.equals(Pelicula.class.getSimpleName())) {
+                return deserializarPelicula(json);
+            }
+            else if (tipo.equals(Ebook.class.getSimpleName())) {
+                return deserializarEbook(json);
+            }
+            else if (tipo.equals(Series.class.getSimpleName())) {
+                return deserializarSerie(json);
+            }
+            else {
+                return null;
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    // TODO: Serializar colecciones.
+
+}
