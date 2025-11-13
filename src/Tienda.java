@@ -1,3 +1,4 @@
+import Exceptions.UsuarioExistenteException;
 import Exceptions.UsuarioNoEncontradoException;
 
 import java.util.Scanner;
@@ -16,18 +17,26 @@ public class Tienda {
 
         switch (opcionIngreso) {
             case 1:
-                ingresar();
+                try {
+                    ingresar();
+                }catch (UsuarioNoEncontradoException e){
+                    e.printStackTrace();
+                }
                 break;
             //if(tipoUsuario==1){ buscarenlalista}
             case 2:
-                registrarse();
+                try {
+                    registrarse();
+                }catch (UsuarioExistenteException e){
+                    e.printStackTrace();
+                }
                 break;
             default:
                 System.out.println("Opcion invalida");
         }
     }
 
-    public void registrarse() {
+    public void registrarse() throws UsuarioExistenteException {
         String email;
         String contrasenia;
         String nombre;
@@ -35,6 +44,11 @@ public class Tienda {
 
         System.out.println("Ingrese su e-mail");
         email = sc.nextLine();
+        for (Usuario aux : listaUsuarios) {
+            if (aux.getEmail().equals(email)){
+                throw new UsuarioExistenteException("El mail ya se encuentra registrado");
+            }
+        }
         System.out.println("Ingrese su contraseña");
         contrasenia = sc.nextLine();
         System.out.println("Ingrese su nombre");
