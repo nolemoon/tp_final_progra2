@@ -1,4 +1,3 @@
-package org.example;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -16,15 +15,21 @@ public final class GestorJSONProductos {
     public GestorJSONProductos() {
     }
 
-    // TODO: CREAR LA CLASE operacionesArchivos. Lo comento por que todavía no fue creada la clase.
-      /*
     // Productos - Archivo intercambio.
+    /**
+     * Graba un producto en un archivo, llamando al metodo de serializar y grabar archivo.
+     * @param p objeto Producto a grabar.
+     */
     public void productoaArchivo(Producto p){
-        operacionesArchivos.grabarArchivo(serializarProducto(p),aJson);
+        OperacionesArchivos.grabarArchivo(serializarProducto(p),aJson);
     }
 
+    /**
+     * Lee un archivo de un producto y lo devuelve en un tipo objeto.
+     * @return objeto Producto proveniente del archivo.
+     */
     public Producto archivoAproducto(){
-        JSONTokener token = operacionesArchivos.leerArchivo(aJson);
+        JSONTokener token = OperacionesArchivos.leerArchivo(aJson);
         Producto p = null;
         try{
             p = deserializarProducto(new JSONObject(token));
@@ -33,11 +38,14 @@ public final class GestorJSONProductos {
             e.printStackTrace();
         }
         return p;
-
     }
-    */
 
     // Metodos Serializacion.
+    /**
+     * Serializa los atributos en comun de la clase abstracta Producto.
+     * @param p objeto Producto a serializar
+     * @return objeto JSON con los datos básicos del producto
+     */
     public JSONObject serializarProductoABS(Producto p) {
         JSONObject jsonTemp = null;
         try{
@@ -57,6 +65,11 @@ public final class GestorJSONProductos {
         return jsonTemp;
     }
 
+    /**
+     * Serializa el objeto de tipo Juego sumando a los atributos de la clase abstracta.
+     * @param j objeto Juego a serializar
+     * @return objeto JSON con los datos completos del juego.
+     */
     public JSONObject serializarJuego(Juego j){
         JSONObject jsonTemp = null;
 
@@ -72,6 +85,11 @@ public final class GestorJSONProductos {
         return jsonTemp;
     }
 
+    /**
+     * Serializa el objeto de tipo Pelicula sumando a los atributos de la clase abstracta.
+     * @param p objeto Pelicula a serializar
+     * @return objeto JSON con los datos completos de la pelicula.
+     */
     public JSONObject serializarPelicula(Pelicula p){
         JSONObject jsonTemp = null;
 
@@ -88,6 +106,11 @@ public final class GestorJSONProductos {
         return jsonTemp;
     }
 
+    /**
+     * Serializa el objeto de tipo Ebook sumando a los atributos de la clase abstracta.
+     * @param e objeto Ebook a serializar
+     * @return objeto JSON con los datos completos del eBook.
+     */
     public JSONObject serializarEbook(Ebook e){
         JSONObject jsonTemp = null;
 
@@ -105,6 +128,11 @@ public final class GestorJSONProductos {
         return jsonTemp;
     }
 
+    /**
+     * Serializa el objeto de tipo Serie sumando a los atributos de la clase abstracta.
+     * @param s objeto Series a serializar
+     * @return objeto JSON con los datos completos de la serie.
+     */
     public JSONObject serializarSerie(Series s){
         JSONObject jsonTemp = null;
 
@@ -121,6 +149,11 @@ public final class GestorJSONProductos {
         return jsonTemp;
     }
 
+    /**
+     * Serializa cualquier tipo de objeto que extienda de producto, llamando a los serializadores de cada objeto.
+     * @param pd objeto a Serializar de manera completa.
+     * @return objeto JSON con los datos completos del producto.
+     */
     public JSONObject serializarProducto(Producto pd) {
         JSONObject json = null;
         try {
@@ -145,6 +178,11 @@ public final class GestorJSONProductos {
     }
 
     // Metodos Deserializacion.
+    /**
+     * Deserializa los atributos en comun de un producto desde un objeto JSON.
+     * @param json objeto JSON con los datos básicos del producto.
+     * @param p producto donde se cargan los datos deserializados.
+     */
     public void deserializarProductoABS(JSONObject json, Producto p) {
         try {
             p.setNombre(json.getString("nombre"));
@@ -159,6 +197,10 @@ public final class GestorJSONProductos {
         }
     }
 
+    /**
+     * Deserializa un juego que extienda de producto, deserializando tambien sus atributos heredados.
+     * @param json objeto JSON con los datos del juego.
+     */
     public Juego deserializarJuego(JSONObject json) {
         Juego j = null;
         try {
@@ -172,6 +214,10 @@ public final class GestorJSONProductos {
         return j;
     }
 
+    /**
+     * Deserializa una pelicula que extienda de producto, deserializando tambien sus atributos heredados.
+     * @param json objeto JSON con los datos de la pelicula.
+     */
     public Pelicula deserializarPelicula(JSONObject json) {
         Pelicula p = null;
         try {
@@ -185,6 +231,10 @@ public final class GestorJSONProductos {
         return p;
     }
 
+    /**
+     * Deserializa un eBook que extienda de producto, deserializando tambien sus atributos heredados.
+     * @param json objeto JSON con los datos del Ebook.
+     */
     public Ebook deserializarEbook(JSONObject json) {
         Ebook e = null;
         try {
@@ -199,6 +249,10 @@ public final class GestorJSONProductos {
         return e;
     }
 
+    /**
+     * Deserializa una Serie que extienda de producto, deserializando tambien sus atributos heredados.
+     * @param json objeto JSON con los datos de la serie.
+     */
     public Series deserializarSerie(JSONObject json) {
         Series s = null;
         try {
@@ -212,6 +266,11 @@ public final class GestorJSONProductos {
         return s;
     }
 
+    /**
+     * Deserializa cualquier tipo que extienda de producto, llamando a los deserializadores de cada tipo de producto,
+     * deserializando tambien sus atributos heredados.
+     * @param json objeto JSON con los datos completos del producto.
+     */
     public Producto deserializarProducto(JSONObject json) {
         try {
             String tipo = json.getString("tipo");
