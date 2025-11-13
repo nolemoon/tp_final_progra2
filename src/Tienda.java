@@ -58,6 +58,7 @@ public class Tienda {
         for (Usuario aux : listaUsuarios) {
             if (aux.getEmail().equals(email) && aux.getContrasenia().equals(contrasenia)) {
                 System.out.println("Bienvenido" + aux.getNombre);
+                mostrarmenu
             } else throw new UsuarioNoEncontradoException("No se encontró usuario con los datos ingresados.");
         }
 
