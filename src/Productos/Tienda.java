@@ -12,6 +12,18 @@ import Usuarios.Usuario;
 import java.util.Map;
 import java.util.Scanner;
 
+/**
+ * La clase Tienda contiene un catálogo de productos, permite el registro e inicio de sesión de clientes y administradores,
+ * y proporciona menús para la navegación y gestión de productos según el tipo de usuario..
+ * Métodos:
+ * - iniciar(): inicia la interacción con el usuario, permitiendo registro o inicio de sesión., toString para devolver sus datos, equals y hashcode.
+ * - registrarse(): permite crear un nuevo cliente si el correo no está registrado.
+ * - ingresar(int tipoUsuario): valida el inicio de sesión de un cliente o administrador.
+ * - menuCliente(): muestra el menú de opciones para un cliente.
+ * - VerComprar(Producto p): muestra opciones de ver o comprar un producto.
+ * - menuAdmin(): muestra el menú de opciones para un administrador.
+ * @author Noel
+ */
 
 public class Tienda {
     protected CatalogoProducto catalogo;
