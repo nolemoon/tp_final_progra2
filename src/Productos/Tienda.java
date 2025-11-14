@@ -70,12 +70,11 @@ public class Tienda {
         String contrasenia;
         String nombre;
         String telefono;
-        Cliente nuevo = new Cliente();
 
         System.out.println("Ingrese su e-mail");
         email = sc.nextLine();
         for (Usuario aux : Usuario.getListaUsuarios()) {
-            if (aux.getEmail().equals(email)) {
+            if (aux.getEmail().equalsIgnoreCase(email)) {
                 throw new UsuarioExistenteException("El mail ya se encuentra registrado");
             }
         }
@@ -85,9 +84,10 @@ public class Tienda {
         nombre = sc.nextLine();
         System.out.println("Ingrese su telefono");
         telefono = sc.nextLine();
-        Cliente aux = new Cliente(nombre, email, telefono, contrasenia);
 
-        Usuario.getListaUsuarios().add(aux);
+        Cliente nuevo = new Cliente(nombre, email, telefono, contrasenia);
+
+        Usuario.getListaUsuarios().add(nuevo);
 
         System.out.println("Usuario registrado");
         try {
@@ -111,10 +111,9 @@ public class Tienda {
 
         for (Usuario aux : Usuario.getListaUsuarios()) {
             if (aux.getEmail().equals(email) && aux.getContrasenia().equals(contrasenia)) {
-                System.out.println("Bienvenido " + aux.getNombre());
+                System.out.println("Bienvenido" + aux.getNombre());
 
-                if (aux instanceof Cliente && tipoUsuario == 1) {
-                    clienteActual = (Cliente) aux;
+                if (tipoUsuario == 1) {
                     menuCliente();
                 } else {
                     menuAdmin();
