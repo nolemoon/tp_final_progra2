@@ -114,9 +114,13 @@ public class Tienda {
 
         switch (opcion){
             case 1 :  Map<Integer, Producto> peliculas = aux.filtrarPorTipo(Pelicula.class);
+            aux.mostrarCatalogo(peliculas);
             case 2 :  Map<Integer, Producto> series = aux.filtrarPorTipo(Series.class);
+            aux.mostrarCatalogo(series);
             case 3 :  Map<Integer, Producto> juegos = aux.filtrarPorTipo(Juegos.class);
+                aux.mostrarCatalogo(juegos);
             case 4 : Map<Integer, Producto> ebooks = aux.filtrarPorTipo(Ebook.class);
+                aux.mostrarCatalogo(ebooks);
 
 
         }
