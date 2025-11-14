@@ -1,17 +1,17 @@
-package JSON;
+package JSONYArchivos;
 
+import Productos.*;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
-import Productos.Producto;
 import Enum.Suscripcion;
 import Enum.Genero;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 public final class GestorJSONProductos {
-    private String aJson  = "productos.json";
+    private final String aJson  = "productos.json";
 
     // Constructores
     public GestorJSONProductos() {
