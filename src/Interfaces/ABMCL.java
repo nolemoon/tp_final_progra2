@@ -1,5 +1,9 @@
+package Interfaces;
+
+
+
 /**
- * Interfaz genérica que define las operaciones básicas alta, baja, modificación, consulta y listado (ABMCL)
+ * Interfaz genérica que define las operaciones básicas alta, baja, modificación, consulta y listado (Interfaces.ABMCL)
  * para ser implementadas en las clases {@code Usuario} y {@code Producto} y sus respectivas hijas.
  * @param <T> tipo genérico
  * @author Renata, Franco
@@ -11,7 +15,7 @@ public interface ABMCL<T> {
      * @param obj objeto a registrar
      * @return {@code true} si el alta fue exitoso, {@code false} en caso contrario
      */
-    boolean alta(T obj);
+     <T> boolean alta(T obj);
 
     /**
      * Da de baja un objeto en el sistema por su id
@@ -38,6 +42,5 @@ public interface ABMCL<T> {
      * Devuelve listado con los objetos registrados
      * @return cadena con los datos de los objetos
      */
-    String lista();
+    void lista();}
 
-}
