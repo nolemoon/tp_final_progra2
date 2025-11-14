@@ -1,18 +1,17 @@
 package Usuarios;
 
-import Exceptions.OpcionInvalidaException;
+
+import Exceptions.ProductoNoEncontradoException;
+import Interfaces.ABMCL;
+import Productos.CatalogoProducto;
 import Productos.Producto;
 import Enum.Suscripcion;
 import Enum.Genero;
 
-import java.util.ArrayList;
-import java.util.Objects;
+
 import java.util.Scanner;
 
-public class Administrador extends Usuario{
-    private final int idAdministrador=contadorId;
-    private static final int contadorId=0;
-
+public class Administrador extends Usuario implements ABMCL {
 
     public Administrador(String nombre, String email, String telefono) {
         super(nombre, email, telefono);
@@ -21,29 +20,16 @@ public class Administrador extends Usuario{
     public Administrador() {
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (!(o instanceof Administrador that)) return false;
-        return idAdministrador == that.idAdministrador;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(idAdministrador);
-    }
-
 
     /// Metodos
 
     @Override
     public boolean alta(Object o) {
 // TODO: crear atributo altaProducto en Producto
+CatalogoProducto catalogo=new CatalogoProducto();
 
-        if (o instanceof Producto producto) {
 
-            //o.altaProducto=true;
-           return true;
-        }
+        Producto producto = (Producto) o;
 
 
         return true;
@@ -51,70 +37,83 @@ public class Administrador extends Usuario{
 
 
     @Override
-    public boolean baja(Object o) {
+    public boolean baja(int id) throws ProductoNoEncontradoException {
 // TODO: crear atributo altaProducto en Producto
+CatalogoProducto catalogo=new CatalogoProducto();
 
-        if (o instanceof Producto producto) {
-           // o.altaProducto=false;
-            return true;
+Producto p=catalogo.buscarPorId(id);
 
-        }
+       p.setAltaProducto(false);
+
+
         return false;
     }
 
+
+
     @Override
-    public Object modificar(int opcion,Object o) throws OpcionInvalidaException {
-Scanner sc=new Scanner(System.in);
-        String aux=null;
+    public boolean modificar(Object o) {
+        Scanner sc=new Scanner(System.in);
+
+
+if (!(o instanceof Producto producto)) return false;
+
+
+
+        System.out.println("""
+                Ingrese el numero de la opcion que desea modificar\\
+                               \s
+                                1. Nombre\\
+                               \s
+                                2. genero\\
+                               \s
+                                3. precio\\
+                               \s
+                                4. tipoSuscripcion\\
+                               \s
+                                5. salir""\");""");
+       int opcion= sc.nextInt();
+        sc.nextLine();
+        String aux;
+
 switch (opcion){
 
             case 1:
-                o.nombre=sc.nextLine();
+                producto.setNombre(sc.nextLine());
 
             case 2: aux=sc.nextLine();
             aux=aux.toUpperCase();
 
                 switch (aux) {
-                    case "ACCION" -> o.Genero = Genero.ACCION;
-                    case "AVENTURA" -> o.Genero = Genero.AVENTURA;
-                    case "COMEDIA" -> o.Genero = Genero.COMEDIA;
-                    case "DRAMA" -> o.Genero = Genero.DRAMA;
-                    case "FANTASIA" -> o.Genero = Genero.FANTASIA;
-                    case "TERROR" -> o.Genero = Genero.TERROR;
-                    case "ROMANCE" -> o.Genero = Genero.ROMANCE;
-                    case "CIENCIA_FICCION" -> o.Genero = Genero.CIENCIA_FICCION;
-                } default: throw new OpcionInvalidaException("Opcion invalida");
+                    case "ACCION" -> producto.setGenero(Genero.ACCION);
+                    case "AVENTURA" -> producto.setGenero(Genero.AVENTURA);
+                    case "COMEDIA" -> producto.setGenero(Genero.COMEDIA);
+                    case "DRAMA" -> producto.setGenero(Genero.DRAMA);
+                    case "FANTASIA" -> producto.setGenero(Genero.FANTASIA) ;
+                    case "TERROR" -> producto.setGenero(Genero.TERROR);
+                    case "ROMANCE" -> producto.setGenero(Genero.ROMANCE) ;
+                    case "CIENCIA_FICCION" -> producto.setGenero(Genero.CIENCIA_FICCION);
+                } default:
 
 
-            case 3: o.precio=sc.nextDouble();
+            case 3: producto.setPrecio(sc.nextDouble());
 
             case 4: aux=sc.nextLine();
             aux=aux.toUpperCase();
 
-            if (aux.equals("PREMIUM")){o.Suscripcion=Suscripcion.PREMIUM;}
-            else if(aux.equals("BASICA")|| aux.equals("BASICO")){o.Suscripcion=Suscripcion.BASICA;}
+            if (aux.equals("PREMIUM")){producto.setTipoSuscripcion(Suscripcion.PREMIUM);}
+            else if(aux.equals("BASICA")|| aux.equals("BASICO")){producto.setTipoSuscripcion(Suscripcion.BASICA);}
 
-            return o;
+            return true;
         }
-
-
-        return false;
     }
 
     @Override
-    public Object consultar(String nombreProducto) {
+    public Object consultar(String nombreProducto) throws ProductoNoEncontradoException {
 
-        ArrayList<Producto> catalogo=new ArrayList<>();
-        // TODO hacer clase catalogo.
+       CatalogoProducto catalogo=new CatalogoProducto();
 
-        for (Producto producto : catalogo) {
-            if (producto.getNombre().equals(nombreProducto)) {
-                return producto;
-            }
-
-        }
-
-        return null;
+        return catalogo.buscarPorNombre(nombreProducto);
     }
 
     @Override
@@ -124,16 +123,10 @@ switch (opcion){
        // Catalogo.showAll();
     }
 
+
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Administrador{").append('\'');
-        sb.append("idAdministrador=").append(idAdministrador).append('\'');
-        sb.append(", nombre='").append(nombre).append('\'');
-        sb.append(", email='").append(email).append('\'');
-        sb.append(", telefono='").append(telefono).append('\'');
-        sb.append(", usuarioActivo=").append(usuarioActivo);
-        sb.append('}');
-        return sb.toString();
+        return super.toString();
     }
 }
 

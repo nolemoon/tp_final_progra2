@@ -1,6 +1,7 @@
-import Productos.Producto;
-import java.util.*;
+package Productos;
 
+import java.util.*;
+import Exceptions.ProductoNoEncontradoException;
 /**
  * La clase CatalogoProductos representa un catálogo de productos disponible en {@code Tienda}.
  * Los productos se almacenan en un {@code LinkedHashMap} para mantener el orden de inserción
@@ -9,7 +10,7 @@ import java.util.*;
  * @author Renata
  */
 public class CatalogoProducto {
-    private Map<Integer, Producto> productos;
+    private final Map<Integer, Producto> productos;
 
     /**
      * Constructor vacío que inicializa el mapa de productos.
@@ -81,7 +82,7 @@ public class CatalogoProducto {
      * @return {@code Producto} correspondiente al ID indicado
      * @throws ProductoNoEncontradoException si no se encuentra ningún producto con el ID indicado.
      */
-    public Producto buscarPorId(int id) throws ProductoNoEncontradoException{
+    public Producto buscarPorId(int id) throws ProductoNoEncontradoException {
         Producto p = productos.get(id);
         if(p == null){
             throw new ProductoNoEncontradoException("\nNo se ha encontrado un producto con el ID indicado.");
@@ -95,7 +96,7 @@ public class CatalogoProducto {
      * @return {@code Producto} correspondiente al nombre indicado
      * @throws ProductoNoEncontradoException si no se encuentra ningún producto con el nombre indicado.
      */
-    public Producto buscarPorNombre(String nombre) throws ProductoNoEncontradoException{
+    public Producto buscarPorNombre(String nombre) throws ProductoNoEncontradoException {
         for(Producto p : productos.values()){
             if(p.getNombre().equalsIgnoreCase(nombre)){
                 return p;

@@ -10,8 +10,7 @@ import java.util.*;
 public class Cliente extends Usuario implements ABMCL {
 
 
-    private static int contadorId = 0;
-    private final int idCliente;
+
     private Suscripcion tipoSuscripcion;
 private static HashSet<Producto> biblioteca=null;
 
@@ -31,10 +30,14 @@ private static HashSet<Producto> biblioteca=null;
 
     @Override
     public boolean baja(int id) {
+Cliente aux=buscarUsuario(id);
+
+aux.getListaUsuarios().remove(aux);
+aux.setUsuarioActivo(false);
+aux.getListaUsuarios().add(aux);
 
 
-
-return super.usuarioActivo=false;
+return true;
     }
 
 
@@ -116,36 +119,39 @@ if (!(o instanceof Cliente cliente)) return false;
         System.out.println(biblioteca);
     }
 
+    public Cliente buscarUsuario(int id) {
+        for(int i=0; i<super.getListaUsuarios().size(); i++){
+            if(super.getListaUsuarios().get(i).getId()==id){
+                return (Cliente) super.getListaUsuarios().get(i);
+            }
+        }
+
+
+        return null;
+    }
 
 
     @Override
     public String toString() {
-        return "Usuarios.Cliente{" + "idCliente=" + idCliente + '\n' +
-                ", tipoSuscripcion=" + tipoSuscripcion + '\n' +
-                ", nombre='" + nombre + '\n' +
-                ", email='" + email + '\n' +
-                ", telefono='" + telefono + '\n' +
-                ", usuarioActivo=" + usuarioActivo + '\n' +
-                '}';
+        return "Usuarios.Cliente{" + super.toString() +
+                ", tipo Suscripcion=" + tipoSuscripcion + '\n';
     }
 
     /// CONSTRUCTOR - INICIO
     public Cliente(String nombre, String email, String telefono) {
         super(nombre, email, telefono);
-        this.idCliente = contadorId++;
+
         biblioteca=new HashSet<>();
     }
 
     public Cliente() {
-        this.idCliente = contadorId++;
+
         }
 
    /// CONSTRUCTOR - FINAL
 
     /// GETTER AND SETTER - INICIO
-    public int getIdCliente() {
-        return idCliente;
-    }
+
 
     public Suscripcion getTipoSuscripcion() {
         return tipoSuscripcion;
@@ -156,18 +162,5 @@ if (!(o instanceof Cliente cliente)) return false;
     }
 
     /// GETTER AND SETTER - FINAL
-    ///
-    /// EQUALS AND HASHCODE
-    @Override
-    public boolean equals(Object o) {
-        if (!(o instanceof Cliente cliente)) return false;
-        return idCliente == cliente.idCliente;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(idCliente);
-    }
-
 
 }
