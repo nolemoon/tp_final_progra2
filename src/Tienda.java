@@ -1,6 +1,7 @@
 import Exceptions.UsuarioExistenteException;
 import Exceptions.UsuarioNoEncontradoException;
 
+import java.util.Map;
 import java.util.Scanner;
 
 public class Tienda {
@@ -67,6 +68,14 @@ public class Tienda {
         Usuario aux = new Usuario(nombre, email, telefono, contrasenia);
 
         Usuario.listaUsuarios.add(aux);
+
+        System.out.println("Usuario registrado");
+        try {
+            ingresar(1);
+        } catch (UsuarioNoEncontradoException e) {
+            e.printStackTrace();
+        }
+
     }
 
     public void ingresar(int tipoUsuario) throws UsuarioNoEncontradoException {
@@ -81,11 +90,15 @@ public class Tienda {
         for (Usuario aux : listaUsuarios) {
             if (aux.getEmail().equals(email) && aux.getContrasenia().equals(contrasenia)) {
                 System.out.println("Bienvenido" + aux.getNombre);
-                mostrarmenu();
+                if(tipoUsuario==1) { menuCliente();
+                }else menuAdmin();
+
             } else throw new UsuarioNoEncontradoException("No se encontró usuario con los datos ingresados.");
         }
 
+
     }
+
 
     public void menuCliente(){
         int opcion;
@@ -93,13 +106,18 @@ public class Tienda {
                 "2-Ver series disponibles.\n"+
                 "3-Ver juegos disponibles.\n"+
                 "4-Ver e-books disponibles.\n");
-        sc.nextInt();
+        opcion =sc.nextInt();
+        sc.nextLine();
+
         switch (opcion){
-            case 1:
+            case 1:  CatalogoProductos.mostrarCatalogo();
+            case 2 :
+
 
         }
 
     }
 
     public void menuAdmin(){}
+
 
