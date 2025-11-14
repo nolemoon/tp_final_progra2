@@ -1,6 +1,7 @@
 import Exceptions.UsuarioExistenteException;
 import Exceptions.UsuarioNoEncontradoException;
 
+import java.util.Map;
 import java.util.Scanner;
 
 public class Tienda {
@@ -109,7 +110,9 @@ public class Tienda {
         sc.nextLine();
 
         switch (opcion){
-        case 1:
+        case 1:  CatalogoProductos.mostrarCatalogo();
+        case 2 :
+
 
         }
 
