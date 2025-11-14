@@ -44,10 +44,11 @@ public class Tienda {
             try {
                 ingresar(2);
             } catch (UsuarioNoEncontradoException e) {
-                e.printStackTrace();
+                System.out.println(e.getMessage());
             } catch (ProductoNoEncontradoException e) {
-                throw new RuntimeException(e);
+                System.out.println(e.getMessage());
             }
+
         } else {
             System.out.println("1)Ya tengo cuenta\n2)Registrarme");
             int opcionIngreso = sc.nextInt();
@@ -58,9 +59,9 @@ public class Tienda {
                     try {
                         ingresar(1);
                     } catch (UsuarioNoEncontradoException e) {
-                        e.printStackTrace();
+                        System.out.println(e.getMessage());
                     } catch (ProductoNoEncontradoException e) {
-                        throw new RuntimeException(e);
+                        System.out.println(e.getMessage());
                     }
                     break;
                 case 2:
@@ -151,10 +152,11 @@ public class Tienda {
         Map<Integer, Producto> juegos = catalogo.filtrarPorTipo(Juego.class);
         Map<Integer, Producto> ebooks = catalogo.filtrarPorTipo(Ebook.class);
 
-        System.out.println(
-                "1-Ver disponibles." +
-                        "2-Buscar" +
-                        "3-Ver biblioteca ");
+        System.out.println("""
+                        1 - Ver disponibles.
+                        2 - Buscar.
+                        3 - Ver biblioteca.
+                        """);
 
         opcion = sc.nextInt();
         sc.nextLine();
@@ -169,6 +171,7 @@ public class Tienda {
                         """);
                 opcion = sc.nextInt();
                 sc.nextLine();
+
 
                 switch (opcion) {
                     case 1:
@@ -186,6 +189,7 @@ public class Tienda {
 
                 }
                 //buscar por nombre
+                break;
             case 2:
                 String nombre;
                 System.out.println("Ingrese el nombre:");
