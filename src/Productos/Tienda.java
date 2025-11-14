@@ -43,9 +43,7 @@ public class Tienda {
         if (tipoUsuario == 2) {//ADMIN{
             try {
                 ingresar(2);
-            } catch (UsuarioNoEncontradoException e) {
-                System.out.println(e.getMessage());
-            } catch (ProductoNoEncontradoException e) {
+            } catch (UsuarioNoEncontradoException | ProductoNoEncontradoException e) {
                 System.out.println(e.getMessage());
             }
 
@@ -58,9 +56,7 @@ public class Tienda {
                 case 1:
                     try {
                         ingresar(1);
-                    } catch (UsuarioNoEncontradoException e) {
-                        System.out.println(e.getMessage());
-                    } catch (ProductoNoEncontradoException e) {
+                    } catch (UsuarioNoEncontradoException | ProductoNoEncontradoException e) {
                         System.out.println(e.getMessage());
                     }
                     break;
@@ -124,9 +120,10 @@ public class Tienda {
 
         for (Usuario aux : Usuario.getListaUsuarios()) {
             if (aux.getEmail().equals(email) && aux.getContrasenia().equals(contrasenia)) {
-                System.out.println("Bienvenido" + aux.getNombre());
+                System.out.println("Bienvenido " + aux.getNombre());
 
-                if (tipoUsuario == 1) {
+                if (aux instanceof Cliente && tipoUsuario == 1) {
+                    clienteActual = (Cliente) aux;
                     menuCliente();
                 } else {
                     menuAdmin();
