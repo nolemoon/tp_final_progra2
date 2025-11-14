@@ -116,8 +116,8 @@ public class Tienda {
 
         System.out.println(
                 "1-Ver disponibles."+
-                "2-Buscar"+
-                "3-Ver biblioteca ");
+                        "2-Buscar"+
+                        "3-Ver biblioteca ");
 
         opcion =sc.nextInt();
         sc.nextLine();
@@ -157,13 +157,6 @@ public class Tienda {
                 }
 
 
-            }
         }
-
-
-
     }
-
-    public void menuAdmin(){}
-
 
