@@ -344,77 +344,77 @@ public class Main {
                 Suscripcion.PREMIUM, 118.0, "PG-13");
 
         /// SERIES
-        Series serie1 = new Series("Los Anillos del Destino", Genero.FANTASIA, 15.00, 2022,
+        Serie serie1 = new Serie("Los Anillos del Destino", Genero.FANTASIA, 15.00, 2022,
                 "Showrunners Épicos", "Adaptación de una novela clásica de alta fantasía.",
                 Suscripcion.PREMIUM, 3, 24);
 
 // Serie 2: ACCION
-        Series serie2 = new Series("Agentes 47", Genero.ACCION, 9.99, 2024,
+        Serie serie2 = new Serie("Agentes 47", Genero.ACCION, 9.99, 2024,
                 "Stunt Productions", "Serie de espías internacionales y combates coreografiados.",
                 Suscripcion.BASICA, 1, 8);
 
 // Serie 3: COMEDIA
-        Series serie3 = new Series("Vida de Vecinos", Genero.COMEDIA, 7.50, 2021,
+        Serie serie3 = new Serie("Vida de Vecinos", Genero.COMEDIA, 7.50, 2021,
                 "Sitcom Factory", "Comedia sobre la convivencia en un edificio de apartamentos.",
                 Suscripcion.BASICA, 5, 50);
 
 // Serie 4: DRAMA
-        Series serie4 = new Series("El Bufete Central", Genero.DRAMA, 12.00, 2023,
+        Serie serie4 = new Serie("El Bufete Central", Genero.DRAMA, 12.00, 2023,
                 "Legal Dramas", "Drama judicial enfocado en casos complejos de alto perfil.",
                 Suscripcion.PREMIUM, 2, 18);
 
 // Serie 5: CIENCIA_FICCION
-        Series serie5 = new Series("Viajeros del Tiempo 3000", Genero.CIENCIA_FICCION, 14.99, 2022,
+        Serie serie5 = new Serie("Viajeros del Tiempo 3000", Genero.CIENCIA_FICCION, 14.99, 2022,
                 "Future Tech TV", "Un equipo viaja al pasado para corregir errores históricos.",
                 Suscripcion.PREMIUM, 4, 40);
 
 // Serie 6: TERROR
-        Series serie6 = new Series("El Pueblo Olvidado", Genero.TERROR, 10.50, 2023,
+        Serie serie6 = new Serie("El Pueblo Olvidado", Genero.TERROR, 10.50, 2023,
                 "Horror Stream", "Misterios y eventos sobrenaturales en una zona rural.",
                 Suscripcion.BASICA, 1, 10);
 
 // Serie 7: ROMANCE
-        Series serie7 = new Series("Siempre en Invierno", Genero.ROMANCE, 6.99, 2024,
+        Serie serie7 = new Serie("Siempre en Invierno", Genero.ROMANCE, 6.99, 2024,
                 "Heart Series", "Una historia de amor entre estudiantes de arte.",
                 Suscripcion.BASICA, 1, 6);
 
 // Serie 8: AVENTURA
-        Series serie8 = new Series("Expedición Cobre", Genero.AVENTURA, 11.99, 2022,
+        Serie serie8 = new Serie("Expedición Cobre", Genero.AVENTURA, 11.99, 2022,
                 "Wilderness Films", "Documental de aventuras sobre exploradores en la Patagonia.",
                 Suscripcion.PREMIUM, 3, 15);
 
 // Serie 9: FANTASIA
-        Series serie9 = new Series("Magos de la Ciudad", Genero.FANTASIA, 13.00, 2024,
+        Serie serie9 = new Serie("Magos de la Ciudad", Genero.FANTASIA, 13.00, 2024,
                 "Urban Magic Inc.", "Fantasía urbana sobre magos que viven en secreto.",
                 Suscripcion.PREMIUM, 1, 10);
 
 // Serie 10: ACCION
-        Series serie10 = new Series("Rescate de Élite", Genero.ACCION, 8.50, 2020,
+        Serie serie10 = new Serie("Rescate de Élite", Genero.ACCION, 8.50, 2020,
                 "Misión Studios", "Un equipo de rescate especializado en situaciones extremas.",
                 Suscripcion.BASICA, 5, 65);
 
 // Serie 11: COMEDIA
-        Series serie11 = new Series("El Trabajo Soñado", Genero.COMEDIA, 5.00, 2021,
+        Serie serie11 = new Serie("El Trabajo Soñado", Genero.COMEDIA, 5.00, 2021,
                 "Laugh Out Loud", "Un joven consigue un trabajo absurdo en una startup.",
                 Suscripcion.BASICA, 2, 18);
 
 // Serie 12: DRAMA
-        Series serie12 = new Series("Hospital Central 'B'", Genero.DRAMA, 11.50, 2023,
+        Serie serie12 = new Serie("Hospital Central 'B'", Genero.DRAMA, 11.50, 2023,
                 "Medical Dramas", "Historias de doctores y pacientes en una sala de emergencias.",
                 Suscripcion.PREMIUM, 1, 12);
 
 // Serie 13: CIENCIA_FICCION
-        Series serie13 = new Series("La Realidad Simulada", Genero.CIENCIA_FICCION, 16.00, 2024,
+        Serie serie13 = new Serie("La Realidad Simulada", Genero.CIENCIA_FICCION, 16.00, 2024,
                 "Mind Bender Studios", "Personajes descubren que viven en una simulación virtual.",
                 Suscripcion.PREMIUM, 2, 16);
 
 // Serie 14: TERROR
-        Series serie14 = new Series("Rituales Nocturnos", Genero.TERROR, 9.00, 2022,
+        Serie serie14 = new Serie("Rituales Nocturnos", Genero.TERROR, 9.00, 2022,
                 "Dark Tales", "Antología de cuentos de terror cortos.",
                 Suscripcion.BASICA, 3, 12);
 
 // Serie 15: ROMANCE
-        Series serie15 = new Series("Primavera Tardía", Genero.ROMANCE, 7.00, 2023,
+        Serie serie15 = new Serie("Primavera Tardía", Genero.ROMANCE, 7.00, 2023,
                 "Romance Stream", "Un romance maduro que florece en la edad adulta.",
                 Suscripcion.BASICA, 1, 7);
 
