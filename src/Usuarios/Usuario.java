@@ -1,13 +1,16 @@
 package Usuarios;
-
-
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Objects;
 
-
+/**
+ * La clase abstracta USUARIO tiene como campos su nombre, email, telefono, contraseña y fecha de registro.
+ * Además, tiene como atributo 'usuarioActivo' para controlar su estado de actividad.
+ * Cuenta con un constructor vacío y otro con los atributos nombre, email, teléfono y contraseña.
+ * Métodos: setters y getters de cada atributo, toString para devolver sus datos, equals y hashcode.
+ * @author Renata
+ */
 public abstract class Usuario  {
     protected String nombre;
     protected String email;
@@ -21,6 +24,13 @@ public abstract class Usuario  {
     private String contrasenia;
 
 
+    /**
+     * Constructor que inicializa un usuario con los datos indicados
+     * @param nombre nombre de usuario
+     * @param email correo electrónico del usuario
+     * @param telefono número de teléfono del usuario
+     * @param contrasenia contraseña de la cuenta del usuario
+     */
     public Usuario(String nombre, String email, String telefono, String contrasenia) {
         this.id=contador++;
         this.nombre = nombre;
@@ -32,6 +42,9 @@ public abstract class Usuario  {
         this.contrasenia=contrasenia;
     }
 
+    /**
+     * Constructor vacío que inicializa un usuario con su estado activo y fecha de registro
+     */
     public Usuario() {
         this.usuarioActivo = true;
         this.fechaRegistro = LocalDateTime.now();
@@ -78,6 +91,7 @@ public abstract class Usuario  {
     public void setContrasenia(String contrasenia) {
         this.contrasenia = contrasenia;
     }
+    /// FIN GETTER AND SETTER
 
     @Override
     public boolean equals(Object o) {
@@ -89,10 +103,6 @@ public abstract class Usuario  {
     public int hashCode() {
         return Objects.hashCode(id);
     }
-
-    /// FIN GETTER AND SETTER
-
-
 
     @Override
     public String toString() {
