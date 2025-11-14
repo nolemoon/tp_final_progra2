@@ -70,12 +70,11 @@ public class Tienda {
         String contrasenia;
         String nombre;
         String telefono;
-        Cliente nuevo = new Cliente();
 
         System.out.println("Ingrese su e-mail");
         email = sc.nextLine();
-        for (Usuario aux : nuevo.getListaUsuarios()) {
-            if (aux.getEmail().equals(email)) {
+        for (Usuario aux : Usuario.getListaUsuarios()) {
+            if (aux.getEmail().equalsIgnoreCase(email)) {
                 throw new UsuarioExistenteException("El mail ya se encuentra registrado");
             }
         }
@@ -85,9 +84,10 @@ public class Tienda {
         nombre = sc.nextLine();
         System.out.println("Ingrese su telefono");
         telefono = sc.nextLine();
-        Cliente aux = new Cliente(nombre, email, telefono, contrasenia);
 
-        aux.getListaUsuarios().add(aux);
+        Cliente nuevo = new Cliente(nombre, email, telefono, contrasenia);
+
+        Usuario.getListaUsuarios().add(nuevo);
 
         System.out.println("Usuario registrado");
         try {

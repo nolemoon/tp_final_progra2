@@ -19,7 +19,7 @@ public abstract class Usuario  {
     private final LocalDateTime fechaRegistro;
     private static ArrayList<Usuario> listaUsuarios = new ArrayList<>();
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yy HH:mm:ss");
-    protected int id = contador;
+    protected int id;
     private static int contador = 0;
     private String contrasenia;
 
@@ -79,7 +79,7 @@ public abstract class Usuario  {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    public ArrayList<Usuario> getListaUsuarios() {
+    public static ArrayList<Usuario> getListaUsuarios() {
         return listaUsuarios;
     }
     public int getId() {return id;}
