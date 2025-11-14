@@ -3,6 +3,7 @@ package Productos;
 import Exceptions.ProductoNoEncontradoException;
 import Exceptions.UsuarioExistenteException;
 import Exceptions.UsuarioNoEncontradoException;
+import Usuarios.Administrador;
 import Usuarios.Cliente;
 import Usuarios.Usuario;
 
@@ -16,6 +17,7 @@ public class Tienda {
     protected CatalogoProducto catalogo;
     protected Scanner sc = new Scanner(System.in);
     protected Cliente clienteActual;
+    protected Administrador adminAux = new Administrador();
 
     public Tienda() {
         catalogo = new CatalogoProducto();
@@ -100,7 +102,6 @@ public class Tienda {
         String email;
         String contrasenia;
         Usuario aux2 = new Cliente();
-
         System.out.println("Ingrese su e-mail");
         email = sc.nextLine();
         System.out.println("Ingrese su contraseña");
@@ -111,13 +112,14 @@ public class Tienda {
                 System.out.println("Bienvenido" + aux.getNombre());
                 clienteActual = (Cliente) aux;
                 if (tipoUsuario == 1) {
-                    //menuCliente();
-                    //}else menuAdmin();
+                    menuCliente();
+                } else {
+                    menuAdmin();
+                }
 
-                } else throw new UsuarioNoEncontradoException("No se encontró usuario con los datos ingresados.");
+
+                break;
             }
-
-
         }
     }
 
@@ -207,6 +209,51 @@ public class Tienda {
             }
 
         }
+
+
+        public void menuAdmin(){
+            int opcion;
+            Producto aux;
+            System.out.println("1-Ver catalogo"+
+                            "2-Buscar producto"
+
+
+            );
+            opcion=sc.nextInt(); sc.nextLine();
+
+            switch (opcion) {
+                case 1:
+                    catalogo.mostrarCatalogo();
+                    break;
+                case 2:
+                    System.out.println("Ingrese el id del producto");
+                    int id  = sc.nextInt(); sc.nextLine();
+                   try{
+                       aux = catalogo.buscarPorId(id);
+                       System.out.println("Encontrado:" +aux.getNombre());
+                       System.out.println("1-Ver"+
+                                            "2-Eliminar"+
+                                            "3-Modificar+"+
+                                              "4-Atras");
+                       opcion= sc.nextInt();sc.nextLine();
+                       switch (opcion){
+                           case 1:  System.out.println(aux.toString());break;
+                           case 2: catalogo.getProductos().remove(id);break;
+                           case 3: adminAux.modificar(aux);break;
+                           case 4: menuAdmin(); break;
+                           default:
+                               System.out.println("Opción incorrecta.");
+                       }
+
+                   }catch (ProductoNoEncontradoException e){e.printStackTrace();}
+                    break;
+                default:
+                    System.out.println("Opcion incorrecta.");
+            }
+
+        }
+
+
 
 
 
