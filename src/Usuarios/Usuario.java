@@ -17,10 +17,10 @@ public abstract class Usuario  {
     protected String telefono;
     protected boolean usuarioActivo;
     private final LocalDateTime fechaRegistro;
-    private static ArrayList<Usuario> listaUsuarios = new ArrayList<>();
+    private static ArrayList<Usuario> listaUsuarios= new ArrayList<>();
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yy HH:mm:ss");
-    protected int id;
-    private static int contador = 0;
+    protected int id=contador;
+    private static int contador=0;
     private String contrasenia;
 
 
@@ -45,7 +45,6 @@ public abstract class Usuario  {
      * Constructor vacío que inicializa un usuario con su estado activo y fecha de registro
      */
     public Usuario() {
-        this.id = contador++;
         this.usuarioActivo = true;
         this.fechaRegistro = LocalDateTime.now();
     }
