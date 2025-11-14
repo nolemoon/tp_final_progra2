@@ -104,11 +104,5 @@ public class CatalogoProducto {
         throw new ProductoNoEncontradoException("\nNo se ha encontrado un producto con el nombre indicado.");
     }
 
-    /**
-     * Agrega un nuevo producto al catálogo.
-     * @param p producto a agregar
-     */
-    public void agregarProducto(Producto p){
-        productos.put(p.getId_Producto(), p);
-    }
+
 }
