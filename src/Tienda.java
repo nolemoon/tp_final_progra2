@@ -4,9 +4,16 @@ import Exceptions.UsuarioNoEncontradoException;
 import java.util.Map;
 import java.util.Scanner;
 
-public class Tienda {
 
+public class Tienda {
+    CatalogoProducto catalogo;
     Scanner sc = new Scanner(System.in);
+
+    public Tienda() {
+        catalogo = new CatalogoProducto();
+    }
+
+
 
     public void iniciar() {
         System.out.println(" Ingresar como: \n1)CLIENTE\n2)ADMINISTRADOR");
@@ -18,32 +25,32 @@ public class Tienda {
             } catch (UsuarioNoEncontradoException e) {
                 e.printStackTrace();
             }
-    } else {
-        System.out.println("1)Ya tengo cuenta\n2)Registrarme");
-        int opcionIngreso = sc.nextInt();
-        sc.nextLine();
+        } else {
+            System.out.println("1)Ya tengo cuenta\n2)Registrarme");
+            int opcionIngreso = sc.nextInt();
+            sc.nextLine();
 
-        switch (opcionIngreso) {
-            case 1:
-                try {
-                    ingresar(1);
-                } catch (UsuarioNoEncontradoException e) {
-                    e.printStackTrace();
-                }
-                break;
-            //if(tipoUsuario==1){ buscarenlalista}
-            case 2:
-                try {
-                    registrarse();
-                } catch (UsuarioExistenteException e) {
-                    System.out.println("El usuario ya existe");
-                }
-                break;
-            default:
-                System.out.println("Opcion invalida");
+            switch (opcionIngreso) {
+                case 1:
+                    try {
+                        ingresar(1);
+                    } catch (UsuarioNoEncontradoException e) {
+                        e.printStackTrace();
+                    }
+                    break;
+                //if(tipoUsuario==1){ buscarenlalista}
+                case 2:
+                    try {
+                        registrarse();
+                    } catch (UsuarioExistenteException e) {
+                        System.out.println("El usuario ya existe");
+                    }
+                    break;
+                default:
+                    System.out.println("Opcion invalida");
+            }
         }
     }
-}
 
 
     public void registrarse() throws UsuarioExistenteException {
@@ -65,7 +72,7 @@ public class Tienda {
         nombre = sc.nextLine();
         System.out.println("Ingrese su telefono");
         telefono = sc.nextLine();
-        Usuario aux = new Usuario(nombre, email, telefono, contrasenia);
+        Cliente aux = new Cliente(nombre, email, telefono, contrasenia);
 
         Usuario.listaUsuarios.add(aux);
 
@@ -90,8 +97,8 @@ public class Tienda {
         for (Usuario aux : listaUsuarios) {
             if (aux.getEmail().equals(email) && aux.getContrasenia().equals(contrasenia)) {
                 System.out.println("Bienvenido" + aux.getNombre);
-              if(tipoUsuario==1) { menuCliente();
-              }else menuAdmin();
+                if(tipoUsuario==1) { menuCliente();
+                }else menuAdmin();
 
             } else throw new UsuarioNoEncontradoException("No se encontró usuario con los datos ingresados.");
         }
@@ -102,25 +109,62 @@ public class Tienda {
 
     public void menuCliente(){
         int opcion;
-        System.out.println("1-Ver peliculas disponibles.\n"+
-        "2-Ver series disponibles.\n"+
-        "3-Ver juegos disponibles.\n"+
-        "4-Ver e-books disponibles.\n");
+        Map<Integer, Producto> peliculas = catalogo.filtrarPorTipo(Pelicula.class);
+        Map<Integer, Producto> series = catalogo.filtrarPorTipo(Series.class);
+        Map<Integer, Producto> juegos = catalogo.filtrarPorTipo(Juegos.class);
+        Map<Integer, Producto> ebooks = catalogo.filtrarPorTipo(Ebook.class);
+
+        System.out.println(
+                "1-Ver disponibles."+
+                        "2-Buscar"+
+                        "3-Ver biblioteca ");
+
         opcion =sc.nextInt();
         sc.nextLine();
 
-        switch (opcion){
-        case 1:  CatalogoProductos.mostrarCatalogo();
-        case 2 :
+        switch (opcion) {
+            case 1:
+                System.out.println("1-Peliculas\n" +
+                        "2-Series\n" +
+                        "3-Juegos \n" +
+                        "4-E-books\n");
+                opcion = sc.nextInt();
+                sc.nextLine();
+                switch (opcion) {
+                    case 1:
+                        catalogo.mostrarCatalogo(peliculas);
+                        break;
+                    case 2:
+                        catalogo.mostrarCatalogo(series);
+                        break;
+                    case 3:
+                        catalogo.mostrarCatalogo(juegos);
+                        break;
+                    case 4:
+                        catalogo.mostrarCatalogo(ebooks);
+                        break;
+                }
+                //buscar por nombre
+            case 2:
+                String nombre = "";
+                System.out.println("Ingrese el nombre:");
+                nombre = sc.nextLine();
+                try {
+                    Producto buscado = catalogo.buscarPorNombre(nombre);
+
+                }catch (ProductoNoEncontradoException e){
+                    e.printStackTrace();
+                }
 
 
         }
-
     }
 
-    public void menuAdmin(){}
 
 
+}
+
+public void menuAdmin(){}
 
 
 
