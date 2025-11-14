@@ -11,8 +11,8 @@ import java.util.Scanner;
 
 public class Administrador extends Usuario implements ABMCL<Producto> {
 
-    public Administrador(String nombre, String email, String telefono) {
-        super(nombre, email, telefono);
+    public Administrador(String nombre, String email, String telefono, String contrasenia) {
+        super(nombre, email, telefono, contrasenia);
     }
 
     public Administrador() {
