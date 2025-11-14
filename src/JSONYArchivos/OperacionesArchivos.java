@@ -1,4 +1,5 @@
-import org.json.JSONException;
+package JSONYArchivos;
+
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
