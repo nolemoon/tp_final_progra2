@@ -32,10 +32,11 @@ public class Tienda {
             try {
                 ingresar(2);
             } catch (UsuarioNoEncontradoException e) {
-                e.printStackTrace();
+                System.out.println(e.getMessage());
             } catch (ProductoNoEncontradoException e) {
-                throw new RuntimeException(e);
+                System.out.println(e.getMessage());
             }
+
         } else {
             System.out.println("1)Ya tengo cuenta\n2)Registrarme");
             int opcionIngreso = sc.nextInt();
@@ -46,9 +47,9 @@ public class Tienda {
                     try {
                         ingresar(1);
                     } catch (UsuarioNoEncontradoException e) {
-                        e.printStackTrace();
+                        System.out.println(e.getMessage());
                     } catch (ProductoNoEncontradoException e) {
-                        throw new RuntimeException(e);
+                        System.out.println(e.getMessage());
                     }
                     break;
                 case 2:
