@@ -1,7 +1,4 @@
 package Usuarios;
-
-
-
 import Exceptions.ProductoNoEncontradoException;
 import Interfaces.ABMCL;
 import Productos.CatalogoProducto;
@@ -12,11 +9,10 @@ import Enum.Genero;
 
 import java.util.Scanner;
 
-public class Administrador extends Usuario implements ABMCL {
+public class Administrador extends Usuario implements ABMCL<Producto> {
 
-    public Administrador(String nombre, String email, String telefono, String password) {
-
-        super(nombre, email, telefono,password);
+    public Administrador(String nombre, String email, String telefono, String contrasenia) {
+        super(nombre, email, telefono, contrasenia);
     }
 
     public Administrador() {
@@ -26,13 +22,10 @@ public class Administrador extends Usuario implements ABMCL {
     /// Metodos
 
     @Override
-    public boolean alta(Object o) {
+    public boolean alta(Producto p) {
 // TODO: crear atributo altaProducto en Producto
-CatalogoProducto catalogo=new CatalogoProducto();
-
-
-        Producto producto = (Producto) o;
-
+        CatalogoProducto catalogo = new CatalogoProducto();
+        catalogo.agregarProducto(p);
 
         return true;
     }
@@ -41,12 +34,9 @@ CatalogoProducto catalogo=new CatalogoProducto();
     @Override
     public boolean baja(int id) throws ProductoNoEncontradoException {
 // TODO: crear atributo altaProducto en Producto
-CatalogoProducto catalogo=new CatalogoProducto();
-
-Producto p=catalogo.buscarPorId(id);
-
-       p.setAltaProducto(false);
-
+        CatalogoProducto catalogo=new CatalogoProducto();
+        Producto p = catalogo.buscarPorId(id);
+        p.setAltaProducto(false);
 
         return false;
     }
@@ -54,13 +44,8 @@ Producto p=catalogo.buscarPorId(id);
 
 
     @Override
-    public boolean modificar(Object o) {
+    public boolean modificar(Producto producto) {
         Scanner sc=new Scanner(System.in);
-
-
-if (!(o instanceof Producto producto)) return false;
-
-
 
         System.out.println("""
                 Ingrese el numero de la opcion que desea modificar\\
@@ -111,18 +96,17 @@ switch (opcion){
     }
 
     @Override
-    public Object consultar(String nombreProducto) throws ProductoNoEncontradoException {
-        CatalogoProducto catalogo=new CatalogoProducto();
-
-
+    public Producto consultar(String nombreProducto) throws ProductoNoEncontradoException {
+        CatalogoProducto catalogo = new CatalogoProducto();
         return catalogo.buscarPorNombre(nombreProducto);
     }
 
     @Override
-    public void lista() {
+    public void listar() {
         //TODO: hacer clase catalogo.
+        CatalogoProducto catalogo = new CatalogoProducto();
+        catalogo.mostrarCatalogo();
 
-       // Catalogo.showAll();
     }
 
 

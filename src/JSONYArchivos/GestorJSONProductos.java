@@ -135,7 +135,7 @@ public final class GestorJSONProductos {
      * @param s objeto Series a serializar
      * @return objeto JSON con los datos completos de la serie.
      */
-    public JSONObject serializarSerie(Series s){
+    public JSONObject serializarSerie(Serie s){
         JSONObject jsonTemp = null;
 
         try {
@@ -165,7 +165,7 @@ public final class GestorJSONProductos {
                 json = serializarPelicula(p);
             } else if (pd instanceof Ebook e) {
                 json = serializarEbook(e);
-            } else if (pd instanceof Series s) {
+            } else if (pd instanceof Serie s) {
                 json = serializarSerie(s);
             }
 
@@ -255,10 +255,10 @@ public final class GestorJSONProductos {
      * Deserializa una Serie que extienda de producto, deserializando tambien sus atributos heredados.
      * @param json objeto JSON con los datos de la serie.
      */
-    public Series deserializarSerie(JSONObject json) {
-        Series s = null;
+    public Serie deserializarSerie(JSONObject json) {
+        Serie s = null;
         try {
-            s = new Series();
+            s = new Serie();
             deserializarProductoABS(json, s);
             s.setTemporadas(json.getInt("temporadas"));
             s.setCapitulos(json.getInt("capitulos"));
@@ -286,7 +286,7 @@ public final class GestorJSONProductos {
             else if (tipo.equals(Ebook.class.getSimpleName())) {
                 return deserializarEbook(json);
             }
-            else if (tipo.equals(Series.class.getSimpleName())) {
+            else if (tipo.equals(Serie.class.getSimpleName())) {
                 return deserializarSerie(json);
             }
             else {

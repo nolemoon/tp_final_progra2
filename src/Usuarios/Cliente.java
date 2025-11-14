@@ -101,7 +101,7 @@ if (!(o instanceof Cliente cliente)) return false;
     }
 
     @Override
-    public void lista() {
+    public void listar() {
 
         for(int i=0; i<super.getListaUsuarios().size(); i++){
 

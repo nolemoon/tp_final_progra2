@@ -125,7 +125,7 @@ public class Tienda {
     public void menuCliente() throws ProductoNoEncontradoException {
         int opcion;
         Map<Integer, Producto> peliculas = catalogo.filtrarPorTipo(Pelicula.class);
-        Map<Integer, Producto> series = catalogo.filtrarPorTipo(Series.class);
+        Map<Integer, Producto> series = catalogo.filtrarPorTipo(Serie.class);
         Map<Integer, Producto> juegos = catalogo.filtrarPorTipo(Juego.class);
         Map<Integer, Producto> ebooks = catalogo.filtrarPorTipo(Ebook.class);
 
