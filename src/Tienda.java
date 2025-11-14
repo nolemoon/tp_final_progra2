@@ -11,30 +11,39 @@ public class Tienda {
         System.out.println(" Ingresar como: \n1)CLIENTE\n2)ADMINISTRADOR");
         int tipoUsuario = sc.nextInt();
         sc.nextLine();
-        System.out.println("1)Ya tengo cuenta\n2)Registrarme");
-        int opcionIngreso = sc.nextInt();
-        sc.nextLine();
+        if (tipoUsuario == 2) {//ADMIN{
+            try {
+                ingresar(2);
+            } catch (UsuarioNoEncontradoException e) {
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("1)Ya tengo cuenta\n2)Registrarme");
+            int opcionIngreso = sc.nextInt();
+            sc.nextLine();
 
-        switch (opcionIngreso) {
-            case 1:
-                try {
-                    ingresar();
-                }catch (UsuarioNoEncontradoException e){
-                    e.printStackTrace();
-                }
-                break;
-            //if(tipoUsuario==1){ buscarenlalista}
-            case 2:
-                try {
-                    registrarse();
-                }catch (UsuarioExistenteException e){
-                    e.printStackTrace();
-                }
-                break;
-            default:
-                System.out.println("Opcion invalida");
+            switch (opcionIngreso) {
+                case 1:
+                    try {
+                        ingresar(1);
+                    } catch (UsuarioNoEncontradoException e) {
+                        e.printStackTrace();
+                    }
+                    break;
+                //if(tipoUsuario==1){ buscarenlalista}
+                case 2:
+                    try {
+                        registrarse();
+                    } catch (UsuarioExistenteException e) {
+                        System.out.println("El usuario ya existe");
+                    }
+                    break;
+                default:
+                    System.out.println("Opcion invalida");
+            }
         }
     }
+
 
     public void registrarse() throws UsuarioExistenteException {
         String email;
@@ -60,7 +69,7 @@ public class Tienda {
         Usuario.listaUsuarios.add(aux);
     }
 
-    public void ingresar() throws UsuarioNoEncontradoException {
+    public void ingresar(int tipoUsuario) throws UsuarioNoEncontradoException {
         String email;
         String contrasenia;
 
@@ -72,11 +81,25 @@ public class Tienda {
         for (Usuario aux : listaUsuarios) {
             if (aux.getEmail().equals(email) && aux.getContrasenia().equals(contrasenia)) {
                 System.out.println("Bienvenido" + aux.getNombre);
-                mostrarmenu
+                mostrarmenu();
             } else throw new UsuarioNoEncontradoException("No se encontró usuario con los datos ingresados.");
         }
 
+    }
+
+    public void menuCliente(){
+        int opcion;
+        System.out.println("1-Ver peliculas disponibles.\n"+
+                "2-Ver series disponibles.\n"+
+                "3-Ver juegos disponibles.\n"+
+                "4-Ver e-books disponibles.\n");
+        sc.nextInt();
+        switch (opcion){
+            case 1:
+
+        }
 
     }
 
-}
+    public void menuAdmin(){}
+
