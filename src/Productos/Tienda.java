@@ -101,27 +101,35 @@ public class Tienda {
     public void ingresar(int tipoUsuario) throws UsuarioNoEncontradoException, ProductoNoEncontradoException {
         String email;
         String contrasenia;
-        Usuario aux2 = new Cliente();
+        boolean encontrado=false;
+
         System.out.println("Ingrese su e-mail");
         email = sc.nextLine();
         System.out.println("Ingrese su contraseña");
         contrasenia = sc.nextLine();
 
-        for (Usuario aux : aux2.getListaUsuarios()) {
+
+        for (Usuario aux : Usuario.getListaUsuarios()) {
             if (aux.getEmail().equals(email) && aux.getContrasenia().equals(contrasenia)) {
                 System.out.println("Bienvenido" + aux.getNombre());
-                clienteActual = (Cliente) aux;
+
                 if (tipoUsuario == 1) {
                     menuCliente();
                 } else {
                     menuAdmin();
                 }
-
-
+                encontrado= true;
                 break;
             }
+
+        }
+
+        if(!encontrado){
+            throw new UsuarioNoEncontradoException("No encontrado");
+
         }
     }
+
 
 
     public void menuCliente() throws ProductoNoEncontradoException {
@@ -149,6 +157,7 @@ public class Tienda {
                         """);
                 opcion = sc.nextInt();
                 sc.nextLine();
+
                 switch (opcion) {
                     case 1:
                         catalogo.mostrarCatalogo(peliculas);
@@ -162,6 +171,7 @@ public class Tienda {
                     case 4:
                         catalogo.mostrarCatalogo(ebooks);
                         break;
+
                 }
                 //buscar por nombre
             case 2:
@@ -175,7 +185,9 @@ public class Tienda {
                 } catch (ProductoNoEncontradoException e) {
                     e.printStackTrace();
                 }
+                break;
             case 3: clienteActual.mostrarBiblioteca();
+            break;
         }
     }
 
@@ -237,7 +249,7 @@ public class Tienda {
                                               "4-Atras");
                        opcion= sc.nextInt();sc.nextLine();
                        switch (opcion){
-                           case 1:  System.out.println(aux.toString());break;
+                           case 1:  System.out.println(aux);break;
                            case 2: catalogo.getProductos().remove(id);break;
                            case 3: adminAux.modificar(aux);break;
                            case 4: menuAdmin(); break;
