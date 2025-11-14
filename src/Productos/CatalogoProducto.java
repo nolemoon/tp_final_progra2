@@ -1,5 +1,12 @@
+
+package Productos;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import Productos.Producto;
 import java.util.*;
+
 
 /**
  * La clase CatalogoProductos representa un catálogo de productos disponible en {@code Tienda}.
