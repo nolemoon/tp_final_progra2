@@ -159,6 +159,7 @@ public class Tienda {
                 opcion = sc.nextInt();
                 sc.nextLine();
 
+
                 switch (opcion) {
                     case 1:
                         catalogo.mostrarCatalogo(peliculas);
@@ -175,6 +176,7 @@ public class Tienda {
 
                 }
                 //buscar por nombre
+                break;
             case 2:
                 String nombre;
                 System.out.println("Ingrese el nombre:");
