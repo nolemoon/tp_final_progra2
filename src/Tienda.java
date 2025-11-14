@@ -109,6 +109,10 @@ public class Tienda {
 
     public void menuCliente(){
         int opcion;
+        Map<Integer, Producto> peliculas = catalogo.filtrarPorTipo(Pelicula.class);
+        Map<Integer, Producto> series = catalogo.filtrarPorTipo(Series.class);
+        Map<Integer, Producto> juegos = catalogo.filtrarPorTipo(Juegos.class);
+        Map<Integer, Producto> ebooks = catalogo.filtrarPorTipo(Ebook.class);
 
         System.out.println(
                 "1-Ver disponibles."+
@@ -126,18 +130,34 @@ public class Tienda {
                         "4-E-books\n");
                 opcion = sc.nextInt();
                 sc.nextLine();
-                switch (opcion){
-                    case 1 :  Map<Integer, Producto> peliculas = catalogo.filtrarPorTipo(Pelicula.class);
-                        catalogo.mostrarCatalogo(peliculas);  break;
-                    case 2 :  Map<Integer, Producto> series = catalogo.filtrarPorTipo(Series.class);
-                        catalogo.mostrarCatalogo(series);  break;
-                    case 3 :  Map<Integer, Producto> juegos = catalogo.filtrarPorTipo(Juegos.class);
-                        catalogo.mostrarCatalogo(juegos);  break;
-                    case 4 : Map<Integer, Producto> ebooks = catalogo.filtrarPorTipo(Ebook.class);
-                        catalogo.mostrarCatalogo(ebooks);  break;
-
-
+                switch (opcion) {
+                    case 1:
+                        catalogo.mostrarCatalogo(peliculas);
+                        break;
+                    case 2:
+                        catalogo.mostrarCatalogo(series);
+                        break;
+                    case 3:
+                        catalogo.mostrarCatalogo(juegos);
+                        break;
+                    case 4:
+                        catalogo.mostrarCatalogo(ebooks);
+                        break;
                 }
+                //buscar por nombre
+            case 2:
+                String nombre = "";
+                System.out.println("Ingrese el nombre:");
+                nombre = sc.nextLine();
+                try {
+                    Producto buscado = catalogo.buscarPorNombre(nombre);
+                    
+                }catch (ProductoNoEncontradoException e){
+                    e.printStackTrace();
+                }
+
+
+            }
         }
 
 
