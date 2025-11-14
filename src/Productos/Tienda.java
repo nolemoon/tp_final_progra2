@@ -3,6 +3,10 @@ package Productos;
 import Exceptions.ProductoNoEncontradoException;
 import Exceptions.UsuarioExistenteException;
 import Exceptions.UsuarioNoEncontradoException;
+import Usuarios.Cliente;
+import Usuarios.Usuario;
+
+
 
 import java.util.Map;
 import java.util.Scanner;
@@ -27,6 +31,8 @@ public class Tienda {
                 ingresar(2);
             } catch (UsuarioNoEncontradoException e) {
                 e.printStackTrace();
+            } catch (ProductoNoEncontradoException e) {
+                throw new RuntimeException(e);
             }
         } else {
             System.out.println("1)Ya tengo cuenta\n2)Registrarme");
@@ -39,6 +45,8 @@ public class Tienda {
                         ingresar(1);
                     } catch (UsuarioNoEncontradoException e) {
                         e.printStackTrace();
+                    } catch (ProductoNoEncontradoException e) {
+                        throw new RuntimeException(e);
                     }
                     break;
                 //if(tipoUsuario==1){ buscarenlalista}
@@ -61,10 +69,11 @@ public class Tienda {
         String contrasenia;
         String nombre;
         String telefono;
+Cliente nuevo = new Cliente();
 
         System.out.println("Ingrese su e-mail");
         email = sc.nextLine();
-        for (Usuario aux : listaUsuarios) {
+        for (Usuario aux : nuevo.getListaUsuarios()) {
             if (aux.getEmail().equals(email)){
                 throw new UsuarioExistenteException("El mail ya se encuentra registrado");
             }
@@ -77,29 +86,30 @@ public class Tienda {
         telefono = sc.nextLine();
         Cliente aux = new Cliente(nombre, email, telefono, contrasenia);
 
-        Usuario.listaUsuarios.add(aux);
+        aux.getListaUsuarios().add(aux);
 
         System.out.println("Usuario registrado");
         try {
             ingresar(1);
-        } catch (UsuarioNoEncontradoException e) {
+        } catch (UsuarioNoEncontradoException | ProductoNoEncontradoException e) {
             e.printStackTrace();
         }
 
     }
 
-    public void ingresar(int tipoUsuario) throws UsuarioNoEncontradoException {
+    public void ingresar(int tipoUsuario) throws UsuarioNoEncontradoException, ProductoNoEncontradoException {
         String email;
         String contrasenia;
+        Usuario aux2=new Cliente();
 
         System.out.println("Ingrese su e-mail");
         email = sc.nextLine();
         System.out.println("Ingrese su contraseña");
         contrasenia = sc.nextLine();
 
-        for (Usuario aux : listaUsuarios) {
+        for (Usuario aux : aux2.getListaUsuarios()) {
             if (aux.getEmail().equals(email) && aux.getContrasenia().equals(contrasenia)) {
-                System.out.println("Bienvenido" + aux.getNombre);
+                System.out.println("Bienvenido" + aux.getNombre());
                 if(tipoUsuario==1) { menuCliente();
                 }else menuAdmin();
 
@@ -110,11 +120,11 @@ public class Tienda {
     }
 
 
-    public void menuCliente(){
+    public void menuCliente() throws ProductoNoEncontradoException {
         int opcion;
         Map<Integer, Producto> peliculas = catalogo.filtrarPorTipo(Pelicula.class);
         Map<Integer, Producto> series = catalogo.filtrarPorTipo(Series.class);
-        Map<Integer, Producto> juegos = catalogo.filtrarPorTipo(Juegos.class);
+        Map<Integer, Producto> juegos = catalogo.filtrarPorTipo(Juego.class);
         Map<Integer, Producto> ebooks = catalogo.filtrarPorTipo(Ebook.class);
 
         System.out.println(
@@ -127,10 +137,12 @@ public class Tienda {
 
         switch (opcion) {
             case 1:
-                System.out.println("1-Peliculas\n" +
-                        "2-Series\n" +
-                        "3-Juegos \n" +
-                        "4-E-books\n");
+                System.out.println("""
+                        1-Peliculas
+                        2-Series
+                        3-Juegos\s
+                        4-E-books
+                        """);
                 opcion = sc.nextInt();
                 sc.nextLine();
                 switch (opcion) {
@@ -149,17 +161,12 @@ public class Tienda {
                 }
                 //buscar por nombre
             case 2:
-                String nombre = "";
+                String nombre;
                 System.out.println("Ingrese el nombre:");
                 nombre = sc.nextLine();
-                try {
-                    Producto buscado = catalogo.buscarPorNombre(nombre);
-
-                }catch (ProductoNoEncontradoException e){
-                    e.printStackTrace();
-                }
+                Producto buscado = catalogo.buscarPorNombre(nombre);
 
 
         }
-    }
+    }}
 

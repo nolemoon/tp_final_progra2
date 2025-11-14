@@ -1,7 +1,12 @@
+
 package Productos;
+
+
+
 import Exceptions.ProductoNoEncontradoException;
 
 import java.util.*;
+
 
 /**
  * La clase CatalogoProductos representa un catálogo de productos disponible en {@code Productos.Tienda}.
@@ -11,7 +16,7 @@ import java.util.*;
  * @author Renata
  */
 public class CatalogoProducto {
-    private Map<Integer, Producto> productos;
+    private final Map<Integer, Producto> productos;
 
     /**
      * Constructor vacío que inicializa el mapa de productos.
@@ -113,5 +118,4 @@ public class CatalogoProducto {
     public void agregarProducto(Producto p){
         productos.put(p.getId_Producto(), p);
     }
-
 }
