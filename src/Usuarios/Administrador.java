@@ -4,8 +4,7 @@ package Usuarios;
 
 import Exceptions.ProductoNoEncontradoException;
 import Interfaces.ABMCL;
-import Productos.CatalogoProducto;
-import Productos.Producto;
+import Productos.*;
 import Enum.Suscripcion;
 import Enum.Genero;
 
@@ -74,7 +73,28 @@ if (!(o instanceof Producto producto)) return false;
                                \s
                                 4. tipoSuscripcion\\
                                \s
-                                5. salir""\");""");
+                                5. salir""\");\\
+                                \s
+                                Juegos\\
+                                \s
+                                11. requisitosMinimos\\
+                                12. multiplayer\\
+                                \s
+                                E-books\\
+                                \s
+                                21. formato\\
+                                22. idioma\\
+                                23. numPaginas\\
+                                \s
+                                Peliculas\\
+                                \s
+                                31. clasificacion\\
+                                32. duracion\\
+                                \s
+                                Series\\
+                                \s
+                                41. temporadas\\
+                                42. capitulos\\""");
        int opcion= sc.nextInt();
         sc.nextLine();
         String aux;
@@ -107,9 +127,41 @@ switch (opcion){
             if (aux.equals("PREMIUM")){producto.setTipoSuscripcion(Suscripcion.PREMIUM);}
             else if(aux.equals("BASICA")|| aux.equals("BASICO")){producto.setTipoSuscripcion(Suscripcion.BASICA);}
 
+            case 11: if(o instanceof Juego) {
+            ((Juego) o).setRequisitosMinimos(sc.nextLine());
+            }
+            case 12: if(o instanceof Juego) {
+                ((Juego) o).setMultiplayer(sc.nextBoolean());
+            }
+            case 21: if(o instanceof Ebook) {
+                ((Ebook) o).setFormato(sc.nextLine());
+
+            }
+            case 22: if(o instanceof Ebook) {
+                ((Ebook) o).setIdioma(sc.nextLine());
+            }
+            case 23: if(o instanceof Ebook) {
+                ((Ebook) o).setNumPaginas(sc.nextInt());
+            }
+            case 31: if(o instanceof Pelicula){
+                ((Pelicula) o).setClasificacion(sc.nextLine());
+
+            }
+            case 32: if(o instanceof Pelicula){
+                ((Pelicula) o).setDuracion(sc.nextInt());
+            }
+    case 41: if(o instanceof Series){
+        ((Series) o).setTemporadas(sc.nextInt());
+    }
+    case 42: if (o instanceof Series){
+        ((Series) o).setCapitulos(sc.nextInt());
+    }
+
+
+            }
             return true;
         }
-    }
+
 
     @Override
     public Object consultar(String nombreProducto) throws ProductoNoEncontradoException {
