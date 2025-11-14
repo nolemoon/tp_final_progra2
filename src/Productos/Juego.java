@@ -1,4 +1,6 @@
-import Productos.Producto;
+package Productos;
+
+
 import Enum.Suscripcion;
 import Enum.Genero;
 

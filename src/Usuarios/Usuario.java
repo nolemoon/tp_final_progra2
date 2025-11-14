@@ -18,8 +18,10 @@ public abstract class Usuario  {
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yy HH:mm:ss");
     protected int id=contador;
     private static int contador=0;
+    private String contrasenia;
 
-    public Usuario(String nombre, String email, String telefono) {
+
+    public Usuario(String nombre, String email, String telefono, String contrasenia) {
         this.id=contador++;
         this.nombre = nombre;
         this.email = email;
@@ -27,6 +29,7 @@ public abstract class Usuario  {
         this.usuarioActivo = true;
         this.fechaRegistro = LocalDateTime.now();
         this.listaUsuarios=new ArrayList<>();
+        this.contrasenia=contrasenia;
     }
 
     public Usuario() {
@@ -67,6 +70,14 @@ public abstract class Usuario  {
         return listaUsuarios;
     }
     public int getId() {return id;}
+
+    public String getContrasenia() {
+        return contrasenia;
+    }
+
+    public void setContrasenia(String contrasenia) {
+        this.contrasenia = contrasenia;
+    }
 
     @Override
     public boolean equals(Object o) {

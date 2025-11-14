@@ -3,6 +3,10 @@ package Productos;
 import Exceptions.ProductoNoEncontradoException;
 import Exceptions.UsuarioExistenteException;
 import Exceptions.UsuarioNoEncontradoException;
+import Usuarios.Cliente;
+import Usuarios.Usuario;
+
+import Productos.Juego;
 
 import java.util.Map;
 import java.util.Scanner;
@@ -61,10 +65,11 @@ public class Tienda {
         String contrasenia;
         String nombre;
         String telefono;
+Cliente nuevo = new Cliente();
 
         System.out.println("Ingrese su e-mail");
         email = sc.nextLine();
-        for (Usuario aux : listaUsuarios) {
+        for (Usuario aux : nuevo.getListaUsuarios()) {
             if (aux.getEmail().equals(email)){
                 throw new UsuarioExistenteException("El mail ya se encuentra registrado");
             }
@@ -77,7 +82,7 @@ public class Tienda {
         telefono = sc.nextLine();
         Cliente aux = new Cliente(nombre, email, telefono, contrasenia);
 
-        Usuario.listaUsuarios.add(aux);
+        aux.getListaUsuarios().add(aux);
 
         System.out.println("Usuario registrado");
         try {
@@ -91,15 +96,16 @@ public class Tienda {
     public void ingresar(int tipoUsuario) throws UsuarioNoEncontradoException {
         String email;
         String contrasenia;
+        Usuario aux2=new Cliente();
 
         System.out.println("Ingrese su e-mail");
         email = sc.nextLine();
         System.out.println("Ingrese su contraseña");
         contrasenia = sc.nextLine();
 
-        for (Usuario aux : listaUsuarios) {
+        for (Usuario aux : aux2.getListaUsuarios()) {
             if (aux.getEmail().equals(email) && aux.getContrasenia().equals(contrasenia)) {
-                System.out.println("Bienvenido" + aux.getNombre);
+                System.out.println("Bienvenido" + aux.getNombre());
                 if(tipoUsuario==1) { menuCliente();
                 }else menuAdmin();
 
@@ -114,7 +120,7 @@ public class Tienda {
         int opcion;
         Map<Integer, Producto> peliculas = catalogo.filtrarPorTipo(Pelicula.class);
         Map<Integer, Producto> series = catalogo.filtrarPorTipo(Series.class);
-        Map<Integer, Producto> juegos = catalogo.filtrarPorTipo(Juegos.class);
+        Map<Integer, Producto> juegos = catalogo.filtrarPorTipo(Juego.class);
         Map<Integer, Producto> ebooks = catalogo.filtrarPorTipo(Ebook.class);
 
         System.out.println(
@@ -152,14 +158,9 @@ public class Tienda {
                 String nombre = "";
                 System.out.println("Ingrese el nombre:");
                 nombre = sc.nextLine();
-                try {
-                    Producto buscado = catalogo.buscarPorNombre(nombre);
-
-                }catch (ProductoNoEncontradoException e){
-                    e.printStackTrace();
-                }
+                Producto buscado = catalogo.buscarPorNombre(nombre);
 
 
         }
-    }
+    }}
 

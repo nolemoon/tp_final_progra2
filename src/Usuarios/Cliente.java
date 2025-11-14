@@ -138,8 +138,8 @@ if (!(o instanceof Cliente cliente)) return false;
     }
 
     /// CONSTRUCTOR - INICIO
-    public Cliente(String nombre, String email, String telefono) {
-        super(nombre, email, telefono);
+    public Cliente(String nombre, String email, String telefono, String contrasenia) {
+        super(nombre, email, telefono, contrasenia);
 
         biblioteca=new HashSet<>();
     }
