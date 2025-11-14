@@ -2,6 +2,7 @@ package Usuarios;
 
 
 
+import Exceptions.ProductoNoEncontradoException;
 import Interfaces.ABMCL;
 import Productos.CatalogoProducto;
 import Productos.Producto;
@@ -13,8 +14,9 @@ import java.util.Scanner;
 
 public class Administrador extends Usuario implements ABMCL {
 
-    public Administrador(String nombre, String email, String telefono) {
-        super(nombre, email, telefono);
+    public Administrador(String nombre, String email, String telefono, String password) {
+
+        super(nombre, email, telefono,password);
     }
 
     public Administrador() {
@@ -37,7 +39,7 @@ CatalogoProducto catalogo=new CatalogoProducto();
 
 
     @Override
-    public boolean baja(int id) {
+    public boolean baja(int id) throws ProductoNoEncontradoException {
 // TODO: crear atributo altaProducto en Producto
 CatalogoProducto catalogo=new CatalogoProducto();
 
@@ -109,7 +111,7 @@ switch (opcion){
     }
 
     @Override
-    public Object consultar(String nombreProducto) {
+    public Object consultar(String nombreProducto) throws ProductoNoEncontradoException {
         CatalogoProducto catalogo=new CatalogoProducto();
 
 

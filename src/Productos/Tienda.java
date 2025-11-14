@@ -6,7 +6,7 @@ import Exceptions.UsuarioNoEncontradoException;
 import Usuarios.Cliente;
 import Usuarios.Usuario;
 
-import Productos.Juego;
+
 
 import java.util.Map;
 import java.util.Scanner;
@@ -31,6 +31,8 @@ public class Tienda {
                 ingresar(2);
             } catch (UsuarioNoEncontradoException e) {
                 e.printStackTrace();
+            } catch (ProductoNoEncontradoException e) {
+                throw new RuntimeException(e);
             }
         } else {
             System.out.println("1)Ya tengo cuenta\n2)Registrarme");
@@ -43,6 +45,8 @@ public class Tienda {
                         ingresar(1);
                     } catch (UsuarioNoEncontradoException e) {
                         e.printStackTrace();
+                    } catch (ProductoNoEncontradoException e) {
+                        throw new RuntimeException(e);
                     }
                     break;
                 //if(tipoUsuario==1){ buscarenlalista}
@@ -87,13 +91,13 @@ Cliente nuevo = new Cliente();
         System.out.println("Usuario registrado");
         try {
             ingresar(1);
-        } catch (UsuarioNoEncontradoException e) {
+        } catch (UsuarioNoEncontradoException | ProductoNoEncontradoException e) {
             e.printStackTrace();
         }
 
     }
 
-    public void ingresar(int tipoUsuario) throws UsuarioNoEncontradoException {
+    public void ingresar(int tipoUsuario) throws UsuarioNoEncontradoException, ProductoNoEncontradoException {
         String email;
         String contrasenia;
         Usuario aux2=new Cliente();
@@ -116,7 +120,7 @@ Cliente nuevo = new Cliente();
     }
 
 
-    public void menuCliente(){
+    public void menuCliente() throws ProductoNoEncontradoException {
         int opcion;
         Map<Integer, Producto> peliculas = catalogo.filtrarPorTipo(Pelicula.class);
         Map<Integer, Producto> series = catalogo.filtrarPorTipo(Series.class);
@@ -133,10 +137,12 @@ Cliente nuevo = new Cliente();
 
         switch (opcion) {
             case 1:
-                System.out.println("1-Peliculas\n" +
-                        "2-Series\n" +
-                        "3-Juegos \n" +
-                        "4-E-books\n");
+                System.out.println("""
+                        1-Peliculas
+                        2-Series
+                        3-Juegos\s
+                        4-E-books
+                        """);
                 opcion = sc.nextInt();
                 sc.nextLine();
                 switch (opcion) {
@@ -155,7 +161,7 @@ Cliente nuevo = new Cliente();
                 }
                 //buscar por nombre
             case 2:
-                String nombre = "";
+                String nombre;
                 System.out.println("Ingrese el nombre:");
                 nombre = sc.nextLine();
                 Producto buscado = catalogo.buscarPorNombre(nombre);

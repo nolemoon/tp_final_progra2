@@ -1,10 +1,10 @@
 
 package Productos;
 
-import java.util.ArrayList;
-import java.util.List;
 
-import Productos.Producto;
+
+import Exceptions.ProductoNoEncontradoException;
+
 import java.util.*;
 
 
@@ -16,7 +16,7 @@ import java.util.*;
  * @author Renata
  */
 public class CatalogoProducto {
-    private Map<Integer, Producto> productos;
+    private final Map<Integer, Producto> productos;
 
     /**
      * Constructor vacío que inicializa el mapa de productos.
