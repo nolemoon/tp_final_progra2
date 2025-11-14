@@ -140,10 +140,11 @@ public class Tienda {
         Map<Integer, Producto> juegos = catalogo.filtrarPorTipo(Juego.class);
         Map<Integer, Producto> ebooks = catalogo.filtrarPorTipo(Ebook.class);
 
-        System.out.println(
-                "1-Ver disponibles." +
-                        "2-Buscar" +
-                        "3-Ver biblioteca ");
+        System.out.println("""
+                        1 - Ver disponibles.
+                        2 - Buscar.
+                        3 - Ver biblioteca.
+                        """);
 
         opcion = sc.nextInt();
         sc.nextLine();
