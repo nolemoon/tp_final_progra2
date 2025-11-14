@@ -10,7 +10,7 @@ import Enum.Suscripcion;
  * Es decir, contiene toda la info. general heredada de Producto, sumando datos propios.
  * @author Agustino
  */
-public final class Series extends Producto{
+public final class Serie extends Producto{
 
 
     private int temporadas;
@@ -19,7 +19,7 @@ public final class Series extends Producto{
     /**
      * Constructor que llama al super() vacío.
      */
-    public Series() {
+    public Serie() {
         super();
     }
 
@@ -36,7 +36,7 @@ public final class Series extends Producto{
      * @param temporadas cantidad total de temporadas
      * @param capitulos cantidad total de capítulos
      */
-    public Series(String nombre, Genero genero, double precio, int anioPublicado, String creador, String descripcion,
+    public Serie(String nombre, Genero genero, double precio, int anioPublicado, String creador, String descripcion,
                   Suscripcion tipoSuscripcion, int temporadas, int capitulos) {
         super(nombre, genero, precio, anioPublicado, creador, descripcion, tipoSuscripcion);
         this.temporadas = temporadas;
