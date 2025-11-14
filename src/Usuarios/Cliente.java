@@ -105,11 +105,15 @@ if (!(o instanceof Cliente cliente)) return false;
 
         for(int i=0; i<super.getListaUsuarios().size(); i++){
 
-            Cliente aux = (Cliente) super.getListaUsuarios().get(i);
-            System.out.println("cliente numero "+ i +
+            Usuario aux = super.getListaUsuarios().get(i);
+            System.out.println("usuario numero "+ i +
                                 aux.toString());
+            if(aux instanceof Cliente) {
+                System.out.println("Suscripcion: " + ((Cliente) aux).getTipoSuscripcion());
+            }
+            }
         }
-    }
+
 
     public void agregarProducto(Producto producto){
         biblioteca.add(producto);

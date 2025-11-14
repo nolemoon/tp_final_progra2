@@ -12,9 +12,10 @@ import java.util.Map;
 
 public final class GestorJSONProductos {
     private final String aJson  = "productos.json";
-
+private static final JSONArray json=new JSONArray();
     // Constructores
     public GestorJSONProductos() {
+
     }
 
     // Productos - Archivo intercambio.
@@ -23,7 +24,10 @@ public final class GestorJSONProductos {
      * @param p objeto Producto a grabar.
      */
     public void productoaArchivo(Producto p){
-        OperacionesArchivos.grabarArchivo(serializarProducto(p),aJson);
+
+
+        json.put(serializarProducto(p));
+        OperacionesArchivos.grabarArchivo(json,aJson);
     }
 
     /**
@@ -315,7 +319,7 @@ public final class GestorJSONProductos {
 
             JSONObject jo = new JSONObject();
             jo.put("productos", ja);
-            OperacionesArchivos.grabarArchivo(jo, aJson);
+            OperacionesArchivos.grabarArchivo(ja, aJson);
         }
         catch (JSONException e){
             e.printStackTrace();

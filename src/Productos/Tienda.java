@@ -111,7 +111,8 @@ Cliente nuevo = new Cliente();
             if (aux.getEmail().equals(email) && aux.getContrasenia().equals(contrasenia)) {
                 System.out.println("Bienvenido" + aux.getNombre());
                 if(tipoUsuario==1) { menuCliente();
-                }else menuAdmin();
+                }else;
+                    //menuAdmin();
 
             } else throw new UsuarioNoEncontradoException("No se encontró usuario con los datos ingresados.");
         }

@@ -33,6 +33,7 @@ CatalogoProducto catalogo=new CatalogoProducto();
 
         Producto producto = (Producto) o;
 
+        catalogo.agregarProducto(producto);
 
         return true;
     }
@@ -120,9 +121,11 @@ switch (opcion){
 
     @Override
     public void lista() {
-        //TODO: hacer clase catalogo.
 
-       // Catalogo.showAll();
+CatalogoProducto catalogo=new CatalogoProducto();
+
+catalogo.mostrarCatalogo();
+
     }
 
 

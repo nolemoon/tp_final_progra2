@@ -4,7 +4,7 @@ package Interfaces;
 import Exceptions.ProductoNoEncontradoException;
 
 /**
- * Interfaz genérica que define las operaciones básicas alta, baja, modificación, consulta y listado (Interfaces.ABMCL)
+ * Interfaz genérica que define las operaciones básicas alta, baja, modificación, consulta y listado (Interfaces. ABMCL)
  * para ser implementadas en las clases {@code Usuario} y {@code Producto} y sus respectivas hijas.
  * @param <T> tipo genérico
  * @author Renata, Franco

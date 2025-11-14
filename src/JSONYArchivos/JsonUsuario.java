@@ -2,27 +2,29 @@ package JSONYArchivos;
 
 import Usuarios.Cliente;
 import Usuarios.Usuario;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import Enum.Suscripcion;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
+
+import java.util.ArrayList;
 
 public class JsonUsuario {
+public String nombreArchivo="Usuarios.json";
+public static final JSONArray json=new JSONArray();
 
     public JsonUsuario() {
     }
 
     public JSONObject serializarUsuario(Usuario aux) throws JSONException {
-        JSONObject jsonUsuario=null;
-        File archi= new File("clientes.json");
-      try{
-        PrintWriter pw = new PrintWriter(archi);
+        JSONObject jsonUsuario = null;
+        File archi = new File("clientes.json");
+
         try {
 
-             jsonUsuario = new JSONObject();
-             jsonUsuario.put("tipoUsuario", aux.getClass().getSimpleName());
+            jsonUsuario = new JSONObject();
+            jsonUsuario.put("tipoUsuario", aux.getClass().getSimpleName());
             jsonUsuario.put("nombre", aux.getNombre());
             jsonUsuario.put("email", aux.getEmail());
             jsonUsuario.put("telefono", aux.getTelefono());
@@ -30,19 +32,15 @@ public class JsonUsuario {
             jsonUsuario.put("fechaRegistro", aux.getFechaRegistro().toString());
             jsonUsuario.put("id", aux.getId());
 
-            if(aux instanceof Cliente) {
+            if (aux instanceof Cliente) {
 
                 jsonUsuario.put("Suscripcion", ((Cliente) aux).getTipoSuscripcion().toString());
             }
-            pw.println(jsonUsuario);
-            pw.flush();
-            pw.close();
-        }catch (JSONException e) {
+        } catch (JSONException e) {
             e.printStackTrace();
 
-        }}catch(FileNotFoundException e)
-      {e.printStackTrace();}
-
+            return jsonUsuario;
+        }
         return jsonUsuario;
     }
 
@@ -77,5 +75,24 @@ public class JsonUsuario {
         }
     }
 
+    public ArrayList<Usuario> deserializarArrayUsuarios(JSONArray json) throws JSONException {
+        ArrayList<Usuario> aux = new ArrayList<>();
+        for(int i=0; i<json.length(); i++){
+            aux.add(deserializarCliente(json.getJSONObject(i)));
+        }
+        return aux;
+    }
 
-}
+    public void serializarArrayUsuarios(ArrayList<Usuario> usuarios) throws JSONException {
+
+
+        for(int i=0; i<usuarios.size(); i++)
+        {
+            if(usuarios.get(i)!=null) {
+            json.put(serializarUsuario(usuarios.get(i)));
+        }
+
+
+
+    }OperacionesArchivos.grabarArchivo(json, nombreArchivo);
+}}
