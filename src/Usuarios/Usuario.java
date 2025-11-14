@@ -9,7 +9,7 @@ import java.util.Objects;
  * Además, tiene como atributo 'usuarioActivo' para controlar su estado de actividad.
  * Cuenta con un constructor vacío y otro con los atributos nombre, email, teléfono y contraseña.
  * Métodos: setters y getters de cada atributo, toString para devolver sus datos, equals y hashcode.
- * @author Renata
+ * @author Renata, Franco
  */
 public abstract class Usuario  {
     protected String nombre;
