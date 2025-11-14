@@ -7,6 +7,8 @@ import org.json.JSONObject;
 import org.json.JSONTokener;
 import Enum.Suscripcion;
 import Enum.Genero;
+
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -52,7 +54,7 @@ private static final JSONArray json=new JSONArray();
      * @param p objeto Producto a serializar
      * @return objeto JSON con los datos básicos del producto
      */
-    public JSONObject serializarProductoABS(Producto p) {
+    private JSONObject serializarProductoABS(Producto p) {
         JSONObject jsonTemp = null;
         try{
             jsonTemp = new JSONObject();
@@ -76,7 +78,7 @@ private static final JSONArray json=new JSONArray();
      * @param j objeto Juego a serializar
      * @return objeto JSON con los datos completos del juego.
      */
-    public JSONObject serializarJuego(Juego j){
+    private JSONObject serializarJuego(Juego j){
         JSONObject jsonTemp = null;
 
         try{
@@ -117,7 +119,7 @@ private static final JSONArray json=new JSONArray();
      * @param e objeto Ebook a serializar
      * @return objeto JSON con los datos completos del eBook.
      */
-    public JSONObject serializarEbook(Ebook e){
+    private JSONObject serializarEbook(Ebook e){
         JSONObject jsonTemp = null;
 
         try {
@@ -139,7 +141,7 @@ private static final JSONArray json=new JSONArray();
      * @param s objeto Series a serializar
      * @return objeto JSON con los datos completos de la serie.
      */
-    public JSONObject serializarSerie(Series s){
+    private JSONObject serializarSerie(Series s){
         JSONObject jsonTemp = null;
 
         try {
@@ -161,26 +163,28 @@ private static final JSONArray json=new JSONArray();
      * @return objeto JSON con los datos completos del producto.
      */
     public JSONObject serializarProducto(Producto pd) {
-        JSONObject json = null;
+        JSONObject jsono = null;
         try {
             if (pd instanceof Juego j) {
-                json = serializarJuego(j);
+                jsono = serializarJuego(j);
             } else if (pd instanceof Pelicula p) {
-                json = serializarPelicula(p);
+                jsono = serializarPelicula(p);
             } else if (pd instanceof Ebook e) {
-                json = serializarEbook(e);
+                jsono = serializarEbook(e);
             } else if (pd instanceof Series s) {
-                json = serializarSerie(s);
+                jsono = serializarSerie(s);
             }
 
-            if (json != null) {
-                json.put("tipo", pd.getClass().getSimpleName());
+            if (jsono != null) {
+                jsono.put("tipo: ", pd.getClass().getSimpleName());
             }
+            json.put(jsono);
+OperacionesArchivos.grabarArchivo(json, aJson);
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return json;
+        return jsono;
     }
 
     // Metodos Deserializacion.
@@ -189,7 +193,7 @@ private static final JSONArray json=new JSONArray();
      * @param json objeto JSON con los datos básicos del producto.
      * @param p producto donde se cargan los datos deserializados.
      */
-    public void deserializarProductoABS(JSONObject json, Producto p) {
+    private void deserializarProductoABS(JSONObject json, Producto p) {
         try {
             p.setNombre(json.getString("nombre"));
             p.setGenero(Genero.valueOf(json.getString("genero")));
@@ -207,7 +211,7 @@ private static final JSONArray json=new JSONArray();
      * Deserializa un juego que extienda de producto, deserializando tambien sus atributos heredados.
      * @param json objeto JSON con los datos del juego.
      */
-    public Juego deserializarJuego(JSONObject json) {
+    private Juego deserializarJuego(JSONObject json) {
         Juego j = null;
         try {
             j = new Juego();
@@ -241,7 +245,7 @@ private static final JSONArray json=new JSONArray();
      * Deserializa un eBook que extienda de producto, deserializando tambien sus atributos heredados.
      * @param json objeto JSON con los datos del Ebook.
      */
-    public Ebook deserializarEbook(JSONObject json) {
+    private Ebook deserializarEbook(JSONObject json) {
         Ebook e = null;
         try {
             e = new Ebook();
@@ -259,7 +263,7 @@ private static final JSONArray json=new JSONArray();
      * Deserializa una Serie que extienda de producto, deserializando tambien sus atributos heredados.
      * @param json objeto JSON con los datos de la serie.
      */
-    public Series deserializarSerie(JSONObject json) {
+    private Series deserializarSerie(JSONObject json) {
         Series s = null;
         try {
             s = new Series();
@@ -275,23 +279,25 @@ private static final JSONArray json=new JSONArray();
     /**
      * Deserializa cualquier tipo que extienda de producto, llamando a los deserializadores de cada tipo de producto,
      * deserializando tambien sus atributos heredados.
-     * @param json objeto JSON con los datos completos del producto.
+     * @param jsono objeto JSON con los datos completos del producto.
      */
-    public Producto deserializarProducto(JSONObject json) {
+    public Producto deserializarProducto(JSONObject jsono) {
         try {
-            String tipo = json.getString("tipo");
+
+
+            String tipo = jsono.getString("tipo");
 
             if (tipo.equals(Juego.class.getSimpleName())) {
-                return deserializarJuego(json);
+                return deserializarJuego(jsono);
             }
             else if (tipo.equals(Pelicula.class.getSimpleName())) {
-                return deserializarPelicula(json);
+                return deserializarPelicula(jsono);
             }
             else if (tipo.equals(Ebook.class.getSimpleName())) {
-                return deserializarEbook(json);
+                return deserializarEbook(jsono);
             }
             else if (tipo.equals(Series.class.getSimpleName())) {
-                return deserializarSerie(json);
+                return deserializarSerie(jsono);
             }
             else {
                 return null;
@@ -350,4 +356,22 @@ private static final JSONArray json=new JSONArray();
         }
         return mapa;
     }
+
+    public ArrayList<Producto> archiToArrayListProductos(){
+        ArrayList<Producto> lista = new ArrayList<>();
+        JSONTokener tk = OperacionesArchivos.leerArchivo(aJson);
+        try{
+            JSONObject jo = new JSONObject(tk);
+            JSONArray ja = jo.getJSONArray("productos");
+            for(int i = 0; i < ja.length(); i++){
+                JSONObject obj = ja.getJSONObject(i);
+                lista.add(deserializarProducto(obj.getJSONObject("producto")));
+            }
+        }
+        catch(JSONException e){
+            e.printStackTrace();
+        }
+        return lista;
+    }
+
 }

@@ -36,6 +36,8 @@ public final class OperacionesArchivos {
 
         try{
             token = new JSONTokener(new FileReader(file));
+
+
         }
         catch (FileNotFoundException e){
             e.printStackTrace();
