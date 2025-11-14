@@ -3,6 +3,7 @@ package Productos;
 import Exceptions.ProductoNoEncontradoException;
 import Exceptions.UsuarioExistenteException;
 import Exceptions.UsuarioNoEncontradoException;
+import Usuarios.Administrador;
 import Usuarios.Cliente;
 import Usuarios.Usuario;
 
@@ -13,13 +14,14 @@ import java.util.Scanner;
 
 
 public class Tienda {
-    CatalogoProducto catalogo;
-    Scanner sc = new Scanner(System.in);
+    protected CatalogoProducto catalogo;
+    protected Scanner sc = new Scanner(System.in);
+    protected Cliente clienteActual;
+    protected Administrador adminAux = new Administrador();
 
     public Tienda() {
         catalogo = new CatalogoProducto();
     }
-
 
 
     public void iniciar() {
@@ -49,7 +51,6 @@ public class Tienda {
                         throw new RuntimeException(e);
                     }
                     break;
-                //if(tipoUsuario==1){ buscarenlalista}
                 case 2:
                     try {
                         registrarse();
@@ -69,12 +70,12 @@ public class Tienda {
         String contrasenia;
         String nombre;
         String telefono;
-Cliente nuevo = new Cliente();
+        Cliente nuevo = new Cliente();
 
         System.out.println("Ingrese su e-mail");
         email = sc.nextLine();
         for (Usuario aux : nuevo.getListaUsuarios()) {
-            if (aux.getEmail().equals(email)){
+            if (aux.getEmail().equals(email)) {
                 throw new UsuarioExistenteException("El mail ya se encuentra registrado");
             }
         }
@@ -100,8 +101,7 @@ Cliente nuevo = new Cliente();
     public void ingresar(int tipoUsuario) throws UsuarioNoEncontradoException, ProductoNoEncontradoException {
         String email;
         String contrasenia;
-        Usuario aux2=new Cliente();
-
+        Usuario aux2 = new Cliente();
         System.out.println("Ingrese su e-mail");
         email = sc.nextLine();
         System.out.println("Ingrese su contraseña");
@@ -110,13 +110,17 @@ Cliente nuevo = new Cliente();
         for (Usuario aux : aux2.getListaUsuarios()) {
             if (aux.getEmail().equals(email) && aux.getContrasenia().equals(contrasenia)) {
                 System.out.println("Bienvenido" + aux.getNombre());
-                if(tipoUsuario==1) { menuCliente();
-                }else menuAdmin();
+                clienteActual = (Cliente) aux;
+                if (tipoUsuario == 1) {
+                    menuCliente();
+                } else {
+                    menuAdmin();
+                }
 
-            } else throw new UsuarioNoEncontradoException("No se encontró usuario con los datos ingresados.");
+
+                break;
+            }
         }
-
-
     }
 
 
@@ -128,11 +132,11 @@ Cliente nuevo = new Cliente();
         Map<Integer, Producto> ebooks = catalogo.filtrarPorTipo(Ebook.class);
 
         System.out.println(
-                "1-Ver disponibles."+
-                        "2-Buscar"+
+                "1-Ver disponibles." +
+                        "2-Buscar" +
                         "3-Ver biblioteca ");
 
-        opcion =sc.nextInt();
+        opcion = sc.nextInt();
         sc.nextLine();
 
         switch (opcion) {
@@ -140,7 +144,7 @@ Cliente nuevo = new Cliente();
                 System.out.println("""
                         1-Peliculas
                         2-Series
-                        3-Juegos\s
+                        3-Juegos
                         4-E-books
                         """);
                 opcion = sc.nextInt();
@@ -164,9 +168,97 @@ Cliente nuevo = new Cliente();
                 String nombre;
                 System.out.println("Ingrese el nombre:");
                 nombre = sc.nextLine();
-                Producto buscado = catalogo.buscarPorNombre(nombre);
+                try {
+                    Producto buscado = catalogo.buscarPorNombre(nombre);
+                    VerComprar(buscado);
 
+                } catch (ProductoNoEncontradoException e) {
+                    e.printStackTrace();
+                }
+            case 3: clienteActual.mostrarBiblioteca();
+        }
+    }
+
+
+        public void VerComprar(Producto p) {
+            System.out.println(
+                    "1-Ver descripcion"+
+                    "2-Comprar"+
+                    "3-Volver"
+            );
+
+            int opcion= sc.nextInt();sc.nextLine();
+            switch (opcion) {
+                case 1:
+                    System.out.println(p.toString());
+                    break;
+                case 2:
+                    if (clienteActual != null) {
+                        clienteActual.agregarProducto(p);
+                        System.out.println("Compraste: " + p.getNombre());
+                    } else {
+                        System.out.println("No hay cliente logueado.");
+                    }
+                    break;
+                case 3: try{ menuCliente();
+                        }catch ( ProductoNoEncontradoException e)
+                        {e.printStackTrace();}
+
+                default:
+                    System.out.println("Opcion incorrecta");
+            }
 
         }
-    }}
+
+
+        public void menuAdmin(){
+            int opcion;
+            Producto aux;
+            System.out.println("1-Ver catalogo"+
+                            "2-Buscar producto"
+
+
+            );
+            opcion=sc.nextInt(); sc.nextLine();
+
+            switch (opcion) {
+                case 1:
+                    catalogo.mostrarCatalogo();
+                    break;
+                case 2:
+                    System.out.println("Ingrese el id del producto");
+                    int id  = sc.nextInt(); sc.nextLine();
+                   try{
+                       aux = catalogo.buscarPorId(id);
+                       System.out.println("Encontrado:" +aux.getNombre());
+                       System.out.println("1-Ver"+
+                                            "2-Eliminar"+
+                                            "3-Modificar+"+
+                                              "4-Atras");
+                       opcion= sc.nextInt();sc.nextLine();
+                       switch (opcion){
+                           case 1:  System.out.println(aux.toString());break;
+                           case 2: catalogo.getProductos().remove(id);break;
+                           case 3: adminAux.modificar(aux);break;
+                           case 4: menuAdmin(); break;
+                           default:
+                               System.out.println("Opción incorrecta.");
+                       }
+
+                   }catch (ProductoNoEncontradoException e){e.printStackTrace();}
+                    break;
+                default:
+                    System.out.println("Opcion incorrecta.");
+            }
+
+        }
+
+
+
+
+
+    }
+
+
+
 
