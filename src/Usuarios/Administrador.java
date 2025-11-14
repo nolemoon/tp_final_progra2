@@ -1,7 +1,7 @@
 package Usuarios;
 
 
-import Exceptions.ProductoNoEncontradoException;
+
 import Interfaces.ABMCL;
 import Productos.CatalogoProducto;
 import Productos.Producto;
@@ -37,7 +37,7 @@ CatalogoProducto catalogo=new CatalogoProducto();
 
 
     @Override
-    public boolean baja(int id) throws ProductoNoEncontradoException {
+    public boolean baja(int id) {
 // TODO: crear atributo altaProducto en Producto
 CatalogoProducto catalogo=new CatalogoProducto();
 
@@ -109,9 +109,9 @@ switch (opcion){
     }
 
     @Override
-    public Object consultar(String nombreProducto) throws ProductoNoEncontradoException {
+    public Object consultar(String nombreProducto) {
+        CatalogoProducto catalogo=new CatalogoProducto();
 
-       CatalogoProducto catalogo=new CatalogoProducto();
 
         return catalogo.buscarPorNombre(nombreProducto);
     }

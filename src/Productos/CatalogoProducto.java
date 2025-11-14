@@ -9,7 +9,7 @@ import java.util.*;
 
 
 /**
- * La clase CatalogoProductos representa un catálogo de productos disponible en {@code Tienda}.
+ * La clase CatalogoProductos representa un catálogo de productos disponible en {@code Productos.Tienda}.
  * Los productos se almacenan en un {@code LinkedHashMap} para mantener el orden de inserción
  * y realizar búsquedas rápidas.
  * Métodos: filtrarPorTipo, filtrarPorGenero, mostrarCatalogo, agregarProducto, buscarPorNombre y buscarPorId.

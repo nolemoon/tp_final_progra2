@@ -5,7 +5,7 @@ import Enum.Suscripcion;
 
 public abstract class Producto {
 
-    private int id_Producto ;
+    private final int id_Producto ;
     private static int contador =0;
     private String nombre;
     private Genero genero;
@@ -14,6 +14,7 @@ public abstract class Producto {
     private String creador;
     private String descripcion;
     private Suscripcion tipoSuscripcion ;
+    private boolean altaProducto;
     //calificacion DOUBLE;
 
 
@@ -31,6 +32,7 @@ public abstract class Producto {
         this.creador = creador;
         this.descripcion = descripcion;
         this.tipoSuscripcion = tipoSuscripcion;
+        this.altaProducto = true;
     }
 
     public int getId_Producto() {
@@ -78,6 +80,9 @@ public abstract class Producto {
     public void setTipoSuscripcion(Suscripcion tipoSuscripcion) {
         this.tipoSuscripcion = tipoSuscripcion;
     }
+    public boolean isAltaProducto() {return altaProducto;}
+
+    public void setAltaProducto(boolean altaProducto) {this.altaProducto = altaProducto;}
 
     @Override
     public String toString() {

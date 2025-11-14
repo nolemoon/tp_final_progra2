@@ -28,7 +28,7 @@ public class JsonUsuario {
             jsonUsuario.put("telefono", aux.getTelefono());
             jsonUsuario.put("usuarioActivo", aux.isUsuarioActivo());
             jsonUsuario.put("fechaRegistro", aux.getFechaRegistro().toString());
-            jsonUsuario.put("idCliente", aux.getIdCliente());
+            jsonUsuario.put("idCliente", aux.getId());
             jsonUsuario.put("Suscripcion",aux.getTipoSuscripcion().toString());
 
             pw.println(jsonUsuario);
