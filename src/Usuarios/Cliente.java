@@ -23,7 +23,7 @@ private static HashSet<Producto> biblioteca=null;
     public boolean alta(Object o) {
 
         if (!(o instanceof Cliente cliente)) return false;
-        cliente.getListaUsuarios().add(this);
+        getListaUsuarios().add(this);
         return true;
 
     }
@@ -32,9 +32,9 @@ private static HashSet<Producto> biblioteca=null;
     public boolean baja(int id) {
 Cliente aux=buscarUsuario(id);
 
-aux.getListaUsuarios().remove(aux);
+getListaUsuarios().remove(aux);
 aux.setUsuarioActivo(false);
-aux.getListaUsuarios().add(aux);
+getListaUsuarios().add(aux);
 
 
 return true;
@@ -89,10 +89,10 @@ if (!(o instanceof Cliente cliente)) return false;
 
     @Override
     public Usuario consultar(String email) {
-              for(int i=0; i<super.getListaUsuarios().size(); i++){
+              for(int i = 0; i< getListaUsuarios().size(); i++){
 
-            if(super.getListaUsuarios().get(i).getEmail().equals(email)){
-                return super.getListaUsuarios().get(i);
+            if(getListaUsuarios().get(i).getEmail().equals(email)){
+                return getListaUsuarios().get(i);
 
             }
         }
@@ -101,11 +101,11 @@ if (!(o instanceof Cliente cliente)) return false;
     }
 
     @Override
-    public void lista() {
+    public void listar() {
 
-        for(int i=0; i<super.getListaUsuarios().size(); i++){
+        for(int i = 0; i< getListaUsuarios().size(); i++){
 
-            Usuario aux = super.getListaUsuarios().get(i);
+            Usuario aux = getListaUsuarios().get(i);
             System.out.println("usuario numero "+ i +
                                 aux.toString());
             if(aux instanceof Cliente) {
@@ -124,9 +124,9 @@ if (!(o instanceof Cliente cliente)) return false;
     }
 
     public Cliente buscarUsuario(int id) {
-        for(int i=0; i<super.getListaUsuarios().size(); i++){
-            if(super.getListaUsuarios().get(i).getId()==id){
-                return (Cliente) super.getListaUsuarios().get(i);
+        for(int i = 0; i< getListaUsuarios().size(); i++){
+            if(getListaUsuarios().get(i).getId()==id){
+                return (Cliente) getListaUsuarios().get(i);
             }
         }
 

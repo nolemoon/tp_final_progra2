@@ -26,7 +26,7 @@ public class Administrador extends Usuario implements ABMCL {
 
     @Override
     public boolean alta(Object o) {
-// TODO: crear atributo altaProducto en Producto
+
 CatalogoProducto catalogo=new CatalogoProducto();
 
 
@@ -150,11 +150,11 @@ switch (opcion){
             case 32: if(o instanceof Pelicula){
                 ((Pelicula) o).setDuracion(sc.nextInt());
             }
-    case 41: if(o instanceof Series){
-        ((Series) o).setTemporadas(sc.nextInt());
+    case 41: if(o instanceof Serie){
+        ((Serie) o).setTemporadas(sc.nextInt());
     }
-    case 42: if (o instanceof Series){
-        ((Series) o).setCapitulos(sc.nextInt());
+    case 42: if (o instanceof Serie){
+        ((Serie) o).setCapitulos(sc.nextInt());
     }
 
 
@@ -172,7 +172,7 @@ switch (opcion){
     }
 
     @Override
-    public void lista() {
+    public void listar() {
 
 CatalogoProducto catalogo=new CatalogoProducto();
 

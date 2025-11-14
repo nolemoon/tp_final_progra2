@@ -17,7 +17,7 @@ public abstract class Usuario  {
     protected String telefono;
     protected boolean usuarioActivo;
     private final LocalDateTime fechaRegistro;
-    private static ArrayList<Usuario> listaUsuarios= new ArrayList<>();
+    private static final ArrayList<Usuario> listaUsuarios= new ArrayList<>();
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yy HH:mm:ss");
     protected int id=contador;
     private static int contador=0;

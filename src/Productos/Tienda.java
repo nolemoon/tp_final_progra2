@@ -73,7 +73,7 @@ Cliente nuevo = new Cliente();
 
         System.out.println("Ingrese su e-mail");
         email = sc.nextLine();
-        for (Usuario aux : nuevo.getListaUsuarios()) {
+        for (Usuario aux : Usuario.getListaUsuarios()) {
             if (aux.getEmail().equals(email)){
                 throw new UsuarioExistenteException("El mail ya se encuentra registrado");
             }
@@ -86,7 +86,7 @@ Cliente nuevo = new Cliente();
         telefono = sc.nextLine();
         Cliente aux = new Cliente(nombre, email, telefono, contrasenia);
 
-        aux.getListaUsuarios().add(aux);
+        Usuario.getListaUsuarios().add(aux);
 
         System.out.println("Usuario registrado");
         try {
@@ -107,7 +107,7 @@ Cliente nuevo = new Cliente();
         System.out.println("Ingrese su contraseña");
         contrasenia = sc.nextLine();
 
-        for (Usuario aux : aux2.getListaUsuarios()) {
+        for (Usuario aux : Usuario.getListaUsuarios()) {
             if (aux.getEmail().equals(email) && aux.getContrasenia().equals(contrasenia)) {
                 System.out.println("Bienvenido" + aux.getNombre());
                 if(tipoUsuario==1) { menuCliente();
@@ -124,7 +124,7 @@ Cliente nuevo = new Cliente();
     public void menuCliente() throws ProductoNoEncontradoException {
         int opcion;
         Map<Integer, Producto> peliculas = catalogo.filtrarPorTipo(Pelicula.class);
-        Map<Integer, Producto> series = catalogo.filtrarPorTipo(Series.class);
+        Map<Integer, Producto> series = catalogo.filtrarPorTipo(Serie.class);
         Map<Integer, Producto> juegos = catalogo.filtrarPorTipo(Juego.class);
         Map<Integer, Producto> ebooks = catalogo.filtrarPorTipo(Ebook.class);
 
