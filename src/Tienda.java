@@ -151,7 +151,7 @@ public class Tienda {
                 nombre = sc.nextLine();
                 try {
                     Producto buscado = catalogo.buscarPorNombre(nombre);
-                    
+
                 }catch (ProductoNoEncontradoException e){
                     e.printStackTrace();
                 }
