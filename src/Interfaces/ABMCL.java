@@ -41,8 +41,7 @@ public interface ABMCL<T> {
 
     /**
      * Devuelve listado con los objetos registrados
-     * @return cadena con los datos de los objetos
      */
-    void lista();
+    void listar();
 }
 

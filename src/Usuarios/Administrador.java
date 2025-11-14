@@ -102,7 +102,7 @@ switch (opcion){
     }
 
     @Override
-    public void lista() {
+    public void listar() {
         //TODO: hacer clase catalogo.
         CatalogoProducto catalogo = new CatalogoProducto();
         catalogo.mostrarCatalogo();
