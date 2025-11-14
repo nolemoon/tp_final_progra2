@@ -6,8 +6,14 @@ import java.util.Scanner;
 
 
 public class Tienda {
-
+    CatalogoProducto catalogo;
     Scanner sc = new Scanner(System.in);
+
+    public Tienda() {
+        catalogo = new CatalogoProducto();
+    }
+
+
 
     public void iniciar() {
         System.out.println(" Ingresar como: \n1)CLIENTE\n2)ADMINISTRADOR");
@@ -103,27 +109,38 @@ public class Tienda {
 
     public void menuCliente(){
         int opcion;
-        CatalogoProducto aux = new CatalogoProducto();
 
-        System.out.println("1-Ver peliculas disponibles.\n"+
-                "2-Ver series disponibles.\n"+
-                "3-Ver juegos disponibles.\n"+
-                "4-Ver e-books disponibles.\n");
+        System.out.println(
+                "1-Ver disponibles."+
+                "2-Buscar"+
+                "3-Ver biblioteca ");
+
         opcion =sc.nextInt();
         sc.nextLine();
 
-        switch (opcion){
-            case 1 :  Map<Integer, Producto> peliculas = aux.filtrarPorTipo(Pelicula.class);
-            aux.mostrarCatalogo(peliculas);
-            case 2 :  Map<Integer, Producto> series = aux.filtrarPorTipo(Series.class);
-            aux.mostrarCatalogo(series);
-            case 3 :  Map<Integer, Producto> juegos = aux.filtrarPorTipo(Juegos.class);
-                aux.mostrarCatalogo(juegos);
-            case 4 : Map<Integer, Producto> ebooks = aux.filtrarPorTipo(Ebook.class);
-                aux.mostrarCatalogo(ebooks);
+        switch (opcion) {
+            case 1:
+                System.out.println("1-Peliculas\n" +
+                        "2-Series\n" +
+                        "3-Juegos \n" +
+                        "4-E-books\n");
+                opcion = sc.nextInt();
+                sc.nextLine();
+                switch (opcion){
+                    case 1 :  Map<Integer, Producto> peliculas = catalogo.filtrarPorTipo(Pelicula.class);
+                        catalogo.mostrarCatalogo(peliculas);  break;
+                    case 2 :  Map<Integer, Producto> series = catalogo.filtrarPorTipo(Series.class);
+                        catalogo.mostrarCatalogo(series);  break;
+                    case 3 :  Map<Integer, Producto> juegos = catalogo.filtrarPorTipo(Juegos.class);
+                        catalogo.mostrarCatalogo(juegos);  break;
+                    case 4 : Map<Integer, Producto> ebooks = catalogo.filtrarPorTipo(Ebook.class);
+                        catalogo.mostrarCatalogo(ebooks);  break;
 
 
+                }
         }
+
+
 
     }
 
