@@ -491,21 +491,21 @@ public class Main {
         admin15.alta(serie15);
 
         /// Administradores
-        admin1.getListaUsuarios().add(admin1);
-        admin2.getListaUsuarios().add(admin2);
-        admin3.getListaUsuarios().add(admin3);
-        admin4.getListaUsuarios().add(admin4);
-        admin5.getListaUsuarios().add(admin5);
-        admin6.getListaUsuarios().add(admin6);
-        admin7.getListaUsuarios().add(admin7);
-        admin8.getListaUsuarios().add(admin8);
-        admin9.getListaUsuarios().add(admin9);
-        admin10.getListaUsuarios().add(admin10);
-        admin11.getListaUsuarios().add(admin11);
-        admin12.getListaUsuarios().add(admin12);
-        admin13.getListaUsuarios().add(admin13);
-        admin14.getListaUsuarios().add(admin14);
-        admin15.getListaUsuarios().add(admin15);
+        Usuario.getListaUsuarios().add(admin1);
+        Usuario.getListaUsuarios().add(admin2);
+        Usuario.getListaUsuarios().add(admin3);
+        Usuario.getListaUsuarios().add(admin4);
+        Usuario.getListaUsuarios().add(admin5);
+        Usuario.getListaUsuarios().add(admin6);
+        Usuario.getListaUsuarios().add(admin7);
+        Usuario.getListaUsuarios().add(admin8);
+        Usuario.getListaUsuarios().add(admin9);
+        Usuario.getListaUsuarios().add(admin10);
+        Usuario.getListaUsuarios().add(admin11);
+        Usuario.getListaUsuarios().add(admin12);
+        Usuario.getListaUsuarios().add(admin13);
+        Usuario.getListaUsuarios().add(admin14);
+        Usuario.getListaUsuarios().add(admin15);
 
         /// Clientes
         Usuario.getListaUsuarios().add(cliente1);

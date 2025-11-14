@@ -120,15 +120,20 @@ public class Tienda {
 
         for (Usuario aux : Usuario.getListaUsuarios()) {
             if (aux.getEmail().equals(email) && aux.getContrasenia().equals(contrasenia)) {
+                encontrado= true;
                 System.out.println("Bienvenido " + aux.getNombre());
 
-                if (aux instanceof Cliente && tipoUsuario == 1) {
-                    clienteActual = (Cliente) aux;
+                if (aux instanceof Cliente cliente && tipoUsuario == 1) {
+                    clienteActual = cliente;
                     menuCliente();
-                } else {
+                } else if (tipoUsuario == 2 && aux instanceof Administrador admin) {
+                    adminAux = admin;
                     menuAdmin();
+
+                }else  {
+                    System.out.println("El tipo de usuario no coincide con la cuenta ingresada.");
                 }
-                encontrado= true;
+
                 break;
             }
 
