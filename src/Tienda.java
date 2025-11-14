@@ -4,6 +4,7 @@ import Exceptions.UsuarioNoEncontradoException;
 import java.util.Map;
 import java.util.Scanner;
 
+
 public class Tienda {
 
     Scanner sc = new Scanner(System.in);
@@ -65,7 +66,7 @@ public class Tienda {
         nombre = sc.nextLine();
         System.out.println("Ingrese su telefono");
         telefono = sc.nextLine();
-        Usuario aux = new Usuario(nombre, email, telefono, contrasenia);
+        Cliente aux = new Cliente(nombre, email, telefono, contrasenia);
 
         Usuario.listaUsuarios.add(aux);
 
@@ -102,6 +103,8 @@ public class Tienda {
 
     public void menuCliente(){
         int opcion;
+        CatalogoProducto aux = new CatalogoProducto();
+
         System.out.println("1-Ver peliculas disponibles.\n"+
                 "2-Ver series disponibles.\n"+
                 "3-Ver juegos disponibles.\n"+
@@ -110,8 +113,10 @@ public class Tienda {
         sc.nextLine();
 
         switch (opcion){
-            case 1:  CatalogoProductos.mostrarCatalogo();
-            case 2 :
+            case 1 :  Map<Integer, Producto> peliculas = aux.filtrarPorTipo(Pelicula.class);
+            case 2 :  Map<Integer, Producto> series = aux.filtrarPorTipo(Series.class);
+            case 3 :  Map<Integer, Producto> juegos = aux.filtrarPorTipo(Juegos.class);
+            case 4 : Map<Integer, Producto> ebooks = aux.filtrarPorTipo(Ebook.class);
 
 
         }
