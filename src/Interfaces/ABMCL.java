@@ -16,7 +16,7 @@ public interface ABMCL<T> {
      * @param obj objeto a registrar
      * @return {@code true} si el alta fue exitoso, {@code false} en caso contrario
      */
-     <T> boolean alta(T obj);
+     boolean alta(T obj);
 
     /**
      * Da de baja un objeto en el sistema por su id
@@ -43,5 +43,6 @@ public interface ABMCL<T> {
      * Devuelve listado con los objetos registrados
      * @return cadena con los datos de los objetos
      */
-    void lista();}
+    void lista();
+}
 
