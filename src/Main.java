@@ -4,6 +4,7 @@ import Usuarios.Administrador;
 import Usuarios.Cliente;
 import Enum.Genero;
 import Enum.Suscripcion;
+import Usuarios.Usuario;
 
 public class Main {
     public static void main(String[] args) {
@@ -507,21 +508,21 @@ public class Main {
         admin15.getListaUsuarios().add(admin15);
 
         /// Clientes
-        cliente1.getListaUsuarios().add(cliente1);
-        cliente2.getListaUsuarios().add(cliente2);
-        cliente3.getListaUsuarios().add(cliente3);
-        cliente4.getListaUsuarios().add(cliente4);
-        cliente5.getListaUsuarios().add(cliente5);
-        cliente6.getListaUsuarios().add(cliente6);
-        cliente7.getListaUsuarios().add(cliente7);
-        cliente8.getListaUsuarios().add(cliente8);
-        cliente9.getListaUsuarios().add(cliente9);
-        cliente10.getListaUsuarios().add(cliente10);
-        cliente11.getListaUsuarios().add(cliente11);
-        cliente12.getListaUsuarios().add(cliente12);
-        cliente13.getListaUsuarios().add(cliente13);
-        cliente14.getListaUsuarios().add(cliente14);
-        cliente15.getListaUsuarios().add(cliente15);
+        Usuario.getListaUsuarios().add(cliente1);
+        Usuario.getListaUsuarios().add(cliente2);
+        Usuario.getListaUsuarios().add(cliente3);
+        Usuario.getListaUsuarios().add(cliente4);
+        Usuario.getListaUsuarios().add(cliente5);
+        Usuario.getListaUsuarios().add(cliente6);
+        Usuario.getListaUsuarios().add(cliente7);
+        Usuario.getListaUsuarios().add(cliente8);
+        Usuario.getListaUsuarios().add(cliente9);
+        Usuario.getListaUsuarios().add(cliente10);
+        Usuario.getListaUsuarios().add(cliente11);
+        Usuario.getListaUsuarios().add(cliente12);
+        Usuario.getListaUsuarios().add(cliente13);
+        Usuario.getListaUsuarios().add(cliente14);
+        Usuario.getListaUsuarios().add(cliente15);
 
         GestorJSONProductos g= new GestorJSONProductos();
 
