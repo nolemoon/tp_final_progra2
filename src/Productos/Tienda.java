@@ -1,3 +1,6 @@
+package Productos;
+
+import Exceptions.ProductoNoEncontradoException;
 import Exceptions.UsuarioExistenteException;
 import Exceptions.UsuarioNoEncontradoException;
 

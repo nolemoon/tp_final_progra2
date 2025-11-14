@@ -1,6 +1,7 @@
 package Interfaces;
 
 
+import Exceptions.ProductoNoEncontradoException;
 
 /**
  * Interfaz genérica que define las operaciones básicas alta, baja, modificación, consulta y listado (Interfaces.ABMCL)
@@ -22,7 +23,7 @@ public interface ABMCL<T> {
      * @param id identificador del objeto a dar de baja
      * @return {@code true} si la baja fue exitosa, {@code false} en caso contrario
      */
-    boolean baja(int id);
+    boolean baja(int id) throws ProductoNoEncontradoException;
 
     /**
      * Modifica un objeto existente en el sistema
@@ -36,7 +37,7 @@ public interface ABMCL<T> {
      * @param nombre nombre del objeto a buscar
      * @return objeto encontrado
      */
-    T consultar(String nombre);
+    T consultar(String nombre) throws ProductoNoEncontradoException;
 
     /**
      * Devuelve listado con los objetos registrados
