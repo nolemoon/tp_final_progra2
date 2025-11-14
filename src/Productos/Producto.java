@@ -3,6 +3,15 @@ package Productos;
 import Enum.Genero;
 import Enum.Suscripcion;
 
+import java.util.Objects;
+
+/**
+ * La clase abstracta PRODUCTO posee como campos nombre, género, precio, año de publicación,
+ * creador, descripcion, tipo de suscripción con la que se puede acceder al producto.
+ * Funciona como base para productos específicos (Pelicula, Serie, Ebook, Juego) que la extienden.
+ * Métodos: setters y getters de cada atributo, toString para devolver sus datos, equals y hashcode.
+ * @author Noel
+ */
 public abstract class Producto {
 
     private final int id_Producto ;
@@ -15,14 +24,27 @@ public abstract class Producto {
     private String descripcion;
     private Suscripcion tipoSuscripcion ;
     private boolean altaProducto;
-    //calificacion DOUBLE;
 
 
+    /**
+     * Constructor vacío que asigna automáticamente un ID único.
+     */
     public Producto() {
-    this.id_Producto = contador++;
+         this.id_Producto = contador++;
+         this.altaProducto = true;
 
     }
 
+    /**
+     * Constructor con todos los atributos
+     * @param nombre nombre del producto
+     * @param genero genero al que pertenece
+     * @param precio precio del producto
+     * @param anioPublicado año en el que se publicó
+     * @param creador autor o desarrollador
+     * @param descripcion breve descripción del producto
+     * @param tipoSuscripcion suscripción requerida para acceder al producto
+     */
     public Producto(String nombre, Genero genero, double precio, int anioPublicado, String creador, String descripcion,  Suscripcion tipoSuscripcion) {
         this.id_Producto = contador ++;
         this.nombre = nombre;
@@ -96,6 +118,17 @@ public abstract class Producto {
                 ", descripcion='" + descripcion + '\'' +
                 ", tipoSuscripcion=" + tipoSuscripcion +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Producto producto)) return false;
+        return id_Producto == producto.id_Producto;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id_Producto);
     }
 }
 

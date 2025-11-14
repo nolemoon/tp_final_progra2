@@ -1,26 +1,36 @@
 package Usuarios;
-
-
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Objects;
 
-
+/**
+ * La clase abstracta USUARIO tiene como campos su nombre, email, telefono, contraseña y fecha de registro.
+ * Además, tiene como atributo 'usuarioActivo' para controlar su estado de actividad.
+ * Cuenta con un constructor vacío y otro con los atributos nombre, email, teléfono y contraseña.
+ * Métodos: setters y getters de cada atributo, toString para devolver sus datos, equals y hashcode.
+ * @author Renata, Franco
+ */
 public abstract class Usuario  {
     protected String nombre;
     protected String email;
     protected String telefono;
     protected boolean usuarioActivo;
     private final LocalDateTime fechaRegistro;
-    private ArrayList<Usuario> listaUsuarios=null;
+    private static ArrayList<Usuario> listaUsuarios= new ArrayList<>();
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yy HH:mm:ss");
     protected int id=contador;
     private static int contador=0;
     private String contrasenia;
 
 
+    /**
+     * Constructor que inicializa un usuario con los datos indicados
+     * @param nombre nombre de usuario
+     * @param email correo electrónico del usuario
+     * @param telefono número de teléfono del usuario
+     * @param contrasenia contraseña de la cuenta del usuario
+     */
     public Usuario(String nombre, String email, String telefono, String contrasenia) {
         this.id=contador++;
         this.nombre = nombre;
@@ -28,10 +38,12 @@ public abstract class Usuario  {
         this.telefono = telefono;
         this.usuarioActivo = true;
         this.fechaRegistro = LocalDateTime.now();
-        this.listaUsuarios=new ArrayList<>();
         this.contrasenia=contrasenia;
     }
 
+    /**
+     * Constructor vacío que inicializa un usuario con su estado activo y fecha de registro
+     */
     public Usuario() {
         this.usuarioActivo = true;
         this.fechaRegistro = LocalDateTime.now();
@@ -66,7 +78,7 @@ public abstract class Usuario  {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    public ArrayList<Usuario> getListaUsuarios() {
+    public static ArrayList<Usuario> getListaUsuarios() {
         return listaUsuarios;
     }
     public int getId() {return id;}
@@ -78,6 +90,7 @@ public abstract class Usuario  {
     public void setContrasenia(String contrasenia) {
         this.contrasenia = contrasenia;
     }
+    /// FIN GETTER AND SETTER
 
     @Override
     public boolean equals(Object o) {
@@ -89,10 +102,6 @@ public abstract class Usuario  {
     public int hashCode() {
         return Objects.hashCode(id);
     }
-
-    /// FIN GETTER AND SETTER
-
-
 
     @Override
     public String toString() {
