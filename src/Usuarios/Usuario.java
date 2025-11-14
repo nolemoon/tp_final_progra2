@@ -1,6 +1,6 @@
 package Usuarios;
 
-import Exceptions.OpcionInvalidaException;
+
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -33,6 +33,8 @@ public abstract class Usuario  {
     public LocalDateTime getFechaRegistro() {
         return fechaRegistro;
     }
+
+    public void setFechaRegistro(LocalDateTime fechaRegistro) {}
 
     public boolean isUsuarioActivo() {
         return usuarioActivo;
@@ -69,17 +71,6 @@ public abstract class Usuario  {
         return listaUsuarios;
     }
 
-    public abstract boolean alta(Object o);
-
-
-    public abstract boolean baja(Object o);
-
-
-    public abstract Object modificar(int opcion, Object o) throws OpcionInvalidaException;
-
-    public abstract Object consultar(String string);
-
-    public abstract void lista();
 
 
 

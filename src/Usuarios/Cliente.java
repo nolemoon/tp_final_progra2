@@ -1,22 +1,22 @@
 package Usuarios;
 
 import Enum.Suscripcion;
-import Exceptions.OpcionInvalidaException;
-import Exceptions.UsuarioNoEncontradoException;
+
+import Interfaces.ABMCL;
 import Productos.Producto;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Objects;
+import java.util.*;
 
-public class Cliente extends Usuario{
+public class Cliente extends Usuario implements ABMCL {
 
 
     private static int contadorId = 0;
     private final int idCliente;
     private Suscripcion tipoSuscripcion;
+private static HashSet<Producto> biblioteca=null;
 
-    //private static Biblioteca productosAdquiridos;
+
+
 
     /// METODOS
 
@@ -24,46 +24,74 @@ public class Cliente extends Usuario{
     public boolean alta(Object o) {
 
         if (!(o instanceof Cliente cliente)) return false;
-        return super.usuarioActivo = true;
+        cliente.getListaUsuarios().add(this);
+        return true;
 
     }
 
     @Override
-    public boolean baja(Object o) {
+    public boolean baja(int id) {
 
-if (!(o instanceof Cliente cliente)) return false;
+
 
 return super.usuarioActivo=false;
     }
 
-    @Override
-    public Object modificar(int opcion, Object o) throws OpcionInvalidaException {
 
+    @Override
+    public boolean modificar( Object o) {
+Scanner sc=new Scanner(System.in);
+
+if (!(o instanceof Cliente cliente)) return false;
+        System.out.println("""
+                Ingrese el numero de la opcion que desea modificar\
+                
+                1. Nombre\
+                
+                2. email\
+                
+                3. telefono\
+                
+                4. tipoSuscripcion\
+                
+                5. salir""");
+ int opcion=sc.nextInt();
+ sc.nextLine();
 
             return switch (opcion) {
 
+
                 case 1 -> {
-                    this.tipoSuscripcion = Suscripcion.BASICA;
+                    cliente.nombre= sc.nextLine();
                     yield true;
                 }
                 case 2 -> {
-                    this.tipoSuscripcion = Suscripcion.PREMIUM;
+                    cliente.email = sc.nextLine();
                     yield true;
                 }
-                default -> throw new OpcionInvalidaException("Opcion invalida");
+                case 3 -> {
+                    cliente.telefono = sc.nextLine();
+                    yield true;
+
+                }
+                case 4 -> {
+                    cliente.tipoSuscripcion=Suscripcion.valueOf(sc.nextLine().toUpperCase());
+                    yield true;
+                }
+                default -> false;
 
             };
 
         }
 
     @Override
-    public Usuario consultar(String email)throws UsuarioNoEncontradoException {
+    public Usuario consultar(String email) {
               for(int i=0; i<super.getListaUsuarios().size(); i++){
 
             if(super.getListaUsuarios().get(i).getEmail().equals(email)){
                 return super.getListaUsuarios().get(i);
 
-            }throw new UsuarioNoEncontradoException("Usuario no encontrado");
+            }
         }
 
         return null;
@@ -80,24 +108,15 @@ return super.usuarioActivo=false;
         }
     }
 
-
-
-public boolean comprarProducto(String nombreProducto){
-
-ArrayList<Producto> productos = new ArrayList<>();
-HashMap<String,Producto> productosHashMap = new HashMap<>();
-
-    for (Producto producto : productos) {
-
-        if (producto.getNombre().equals(nombreProducto)) {
-            productosHashMap.put(nombreProducto, producto);
-
-            return true;
-        }
+    public void agregarProducto(Producto producto){
+        biblioteca.add(producto);
     }
 
-return false;
-}
+    public void mostrarBiblioteca(){
+        System.out.println(biblioteca);
+    }
+
+
 
     @Override
     public String toString() {
@@ -114,7 +133,7 @@ return false;
     public Cliente(String nombre, String email, String telefono) {
         super(nombre, email, telefono);
         this.idCliente = contadorId++;
-
+        biblioteca=new HashSet<>();
     }
 
     public Cliente() {
@@ -136,6 +155,9 @@ return false;
         this.tipoSuscripcion = tipoSuscripcion;
     }
 
+    /// GETTER AND SETTER - FINAL
+    ///
+    /// EQUALS AND HASHCODE
     @Override
     public boolean equals(Object o) {
         if (!(o instanceof Cliente cliente)) return false;
@@ -147,13 +169,5 @@ return false;
         return Objects.hashCode(idCliente);
     }
 
-/*
-    public Biblioteca getProductosAdquiridos() {
-        return productosAdquiridos;
-    }
-    public static void setProductosAdquiridos(int productosAdquiridos) {
-        Usuarios.Cliente.productosAdquiridos = productosAdquiridos;
-    }
-    */
-/// GETTER AND SETTER - FINAL
+
 }
