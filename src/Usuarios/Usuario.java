@@ -17,7 +17,7 @@ public abstract class Usuario  {
     protected String telefono;
     protected boolean usuarioActivo;
     private final LocalDateTime fechaRegistro;
-    private ArrayList<Usuario> listaUsuarios=null;
+    private static ArrayList<Usuario> listaUsuarios;
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yy HH:mm:ss");
     protected int id=contador;
     private static int contador=0;
@@ -38,7 +38,7 @@ public abstract class Usuario  {
         this.telefono = telefono;
         this.usuarioActivo = true;
         this.fechaRegistro = LocalDateTime.now();
-        this.listaUsuarios=new ArrayList<>();
+        listaUsuarios =new ArrayList<>();
         this.contrasenia=contrasenia;
     }
 
