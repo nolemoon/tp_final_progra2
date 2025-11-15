@@ -6,9 +6,9 @@ import Exceptions.UsuarioNoEncontradoException;
 import Usuarios.Administrador;
 import Usuarios.Cliente;
 import Usuarios.Usuario;
+import Enum.Genero;
 
-
-
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -149,10 +149,7 @@ public class Tienda {
 
     public void menuCliente() throws ProductoNoEncontradoException {
         int opcion;
-        Map<Integer, Producto> peliculas = catalogo.filtrarPorTipo(Pelicula.class);
-        Map<Integer, Producto> series = catalogo.filtrarPorTipo(Serie.class);
-        Map<Integer, Producto> juegos = catalogo.filtrarPorTipo(Juego.class);
-        Map<Integer, Producto> ebooks = catalogo.filtrarPorTipo(Ebook.class);
+        Map<Integer, Producto> catalogoFiltrado = new LinkedHashMap<>();
 
         System.out.println("""
                         1 - Ver disponibles.
@@ -166,10 +163,10 @@ public class Tienda {
         switch (opcion) {
             case 1:
                 System.out.println("""
-                        1-Peliculas
-                        2-Series
-                        3-Juegos
-                        4-E-books
+                        1 - Peliculas
+                        2 - Series
+                        3 - Juegos
+                        4 - E-books
                         """);
                 opcion = sc.nextInt();
                 sc.nextLine();
@@ -177,35 +174,57 @@ public class Tienda {
 
                 switch (opcion) {
                     case 1:
-                        catalogo.mostrarCatalogo(peliculas);
+                        catalogoFiltrado = catalogo.filtrarPorTipo(Pelicula.class);
                         break;
                     case 2:
-                        catalogo.mostrarCatalogo(series);
+                        catalogoFiltrado = catalogo.filtrarPorTipo(Serie.class);
                         break;
                     case 3:
-                        catalogo.mostrarCatalogo(juegos);
+                        catalogoFiltrado = catalogo.filtrarPorTipo(Juego.class);
                         break;
                     case 4:
-                        catalogo.mostrarCatalogo(ebooks);
+                        catalogoFiltrado = catalogo.filtrarPorTipo(Ebook.class);
                         break;
+                    default:
+                        System.out.println("\nOpción inválida.");
+                        return;
 
                 }
-                //buscar por nombre
+                System.out.println("\nDesea filtrar por género? (s/n)= ");
+                String generoOpcion = sc.nextLine();
+
+                if(generoOpcion.equalsIgnoreCase("s")){
+                    for (Genero g : Genero.values()) {
+                        System.out.println("- " + g);
+                    }
+
+                    System.out.println("\nIndique el género que desea ver: ");
+                    String generoIngresado = sc.nextLine();
+                    catalogoFiltrado = catalogo.filtrarPorGenero(catalogoFiltrado, generoIngresado);
+                    catalogo.mostrarCatalogo(catalogoFiltrado);
+                }
+                else{
+                    catalogo.mostrarCatalogo(catalogoFiltrado);
+                }
+
                 break;
             case 2:
-                String nombre;
-                System.out.println("Ingrese el nombre:");
-                nombre = sc.nextLine();
+                System.out.println("\nIngrese el nombre del producto:");
+                String nombre = sc.nextLine();
                 try {
                     Producto buscado = catalogo.buscarPorNombre(nombre);
                     VerComprar(buscado);
 
                 } catch (ProductoNoEncontradoException e) {
-                    e.printStackTrace();
+                    System.out.println("Error: " + e.getMessage());
                 }
                 break;
-            case 3: clienteActual.mostrarBiblioteca();
-            break;
+            case 3:
+                clienteActual.mostrarBiblioteca();
+                break;
+
+            default:
+                System.out.println("\nOpción inválida.");
         }
     }
 
@@ -230,9 +249,12 @@ public class Tienda {
                         System.out.println("No hay cliente logueado.");
                     }
                     break;
-                case 3: try{ menuCliente();
-                        }catch ( ProductoNoEncontradoException e)
-                        {e.printStackTrace();}
+                case 3:
+                    try{
+                        menuCliente();
+                    } catch ( ProductoNoEncontradoException e) {
+                        System.out.println("Error: " + e.getMessage());
+                    }
 
                 default:
                     System.out.println("Opcion incorrecta");
