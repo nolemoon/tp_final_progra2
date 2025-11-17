@@ -12,15 +12,15 @@ import java.util.Objects;
  * @author Renata, Franco
  */
 public abstract class Usuario  {
-    protected String nombre;
-    protected String email;
-    protected String telefono;
-    protected boolean usuarioActivo;
+    private String nombre;
+    private String email;
+    private String telefono;
+    private boolean usuarioActivo;
     private final LocalDateTime fechaRegistro;
-    private static ArrayList<Usuario> listaUsuarios= new ArrayList<>();
+    private static final ArrayList<Usuario> listaUsuarios = new ArrayList<>();
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yy HH:mm:ss");
-    protected int id;
-    private static int contador=0;
+    private final int id;
+    private static int contador = 0;
     private String contrasenia;
 
 
@@ -32,7 +32,7 @@ public abstract class Usuario  {
      * @param contrasenia contraseña de la cuenta del usuario
      */
     public Usuario(String nombre, String email, String telefono, String contrasenia) {
-        this.id=contador++;
+        this.id = contador++;
         this.nombre = nombre;
         this.email = email;
         this.telefono = telefono;
@@ -46,6 +46,7 @@ public abstract class Usuario  {
      * Constructor vacío que inicializa un usuario con su estado activo y fecha de registro
      */
     public Usuario() {
+        this.id = contador++;
         this.usuarioActivo = true;
         this.fechaRegistro = LocalDateTime.now();
     }
