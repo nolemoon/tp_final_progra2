@@ -561,7 +561,7 @@
         "precio": 15,
         "creador": "Showrunners Épicos",
         "temporadas": 3,
-        "tipo: ": "Series",
+        "tipo: ": "Serie",
         "genero": "FANTASIA",
         "tipoSuscripcion": "PREMIUM",
         "nombre": "Los Anillos del Destino"
@@ -573,7 +573,7 @@
         "precio": 9.99,
         "creador": "Stunt Productions",
         "temporadas": 1,
-        "tipo: ": "Series",
+        "tipo: ": "Serie",
         "genero": "ACCION",
         "tipoSuscripcion": "BASICA",
         "nombre": "Agentes 47"
@@ -585,7 +585,7 @@
         "precio": 7.5,
         "creador": "Sitcom Factory",
         "temporadas": 5,
-        "tipo: ": "Series",
+        "tipo: ": "Serie",
         "genero": "COMEDIA",
         "tipoSuscripcion": "BASICA",
         "nombre": "Vida de Vecinos"
@@ -597,7 +597,7 @@
         "precio": 12,
         "creador": "Legal Dramas",
         "temporadas": 2,
-        "tipo: ": "Series",
+        "tipo: ": "Serie",
         "genero": "DRAMA",
         "tipoSuscripcion": "PREMIUM",
         "nombre": "El Bufete Central"
@@ -609,7 +609,7 @@
         "precio": 14.99,
         "creador": "Future Tech TV",
         "temporadas": 4,
-        "tipo: ": "Series",
+        "tipo: ": "Serie",
         "genero": "CIENCIA_FICCION",
         "tipoSuscripcion": "PREMIUM",
         "nombre": "Viajeros del Tiempo 3000"
@@ -621,7 +621,7 @@
         "precio": 10.5,
         "creador": "Horror Stream",
         "temporadas": 1,
-        "tipo: ": "Series",
+        "tipo: ": "Serie",
         "genero": "TERROR",
         "tipoSuscripcion": "BASICA",
         "nombre": "El Pueblo Olvidado"
@@ -633,7 +633,7 @@
         "precio": 6.99,
         "creador": "Heart Series",
         "temporadas": 1,
-        "tipo: ": "Series",
+        "tipo: ": "Serie",
         "genero": "ROMANCE",
         "tipoSuscripcion": "BASICA",
         "nombre": "Siempre en Invierno"
@@ -645,7 +645,7 @@
         "precio": 11.99,
         "creador": "Wilderness Films",
         "temporadas": 3,
-        "tipo: ": "Series",
+        "tipo: ": "Serie",
         "genero": "AVENTURA",
         "tipoSuscripcion": "PREMIUM",
         "nombre": "Expedición Cobre"
@@ -657,7 +657,7 @@
         "precio": 13,
         "creador": "Urban Magic Inc.",
         "temporadas": 1,
-        "tipo: ": "Series",
+        "tipo: ": "Serie",
         "genero": "FANTASIA",
         "tipoSuscripcion": "PREMIUM",
         "nombre": "Magos de la Ciudad"
@@ -669,7 +669,7 @@
         "precio": 8.5,
         "creador": "Misión Studios",
         "temporadas": 5,
-        "tipo: ": "Series",
+        "tipo: ": "Serie",
         "genero": "ACCION",
         "tipoSuscripcion": "BASICA",
         "nombre": "Rescate de Élite"
@@ -681,7 +681,7 @@
         "precio": 5,
         "creador": "Laugh Out Loud",
         "temporadas": 2,
-        "tipo: ": "Series",
+        "tipo: ": "Serie",
         "genero": "COMEDIA",
         "tipoSuscripcion": "BASICA",
         "nombre": "El Trabajo Soñado"
@@ -693,7 +693,7 @@
         "precio": 11.5,
         "creador": "Medical Dramas",
         "temporadas": 1,
-        "tipo: ": "Series",
+        "tipo: ": "Serie",
         "genero": "DRAMA",
         "tipoSuscripcion": "PREMIUM",
         "nombre": "Hospital Central 'B'"
@@ -705,7 +705,7 @@
         "precio": 16,
         "creador": "Mind Bender Studios",
         "temporadas": 2,
-        "tipo: ": "Series",
+        "tipo: ": "Serie",
         "genero": "CIENCIA_FICCION",
         "tipoSuscripcion": "PREMIUM",
         "nombre": "La Realidad Simulada"
@@ -717,7 +717,7 @@
         "precio": 9,
         "creador": "Dark Tales",
         "temporadas": 3,
-        "tipo: ": "Series",
+        "tipo: ": "Serie",
         "genero": "TERROR",
         "tipoSuscripcion": "BASICA",
         "nombre": "Rituales Nocturnos"
@@ -729,7 +729,7 @@
         "precio": 7,
         "creador": "Romance Stream",
         "temporadas": 1,
-        "tipo: ": "Series",
+        "tipo: ": "Serie",
         "genero": "ROMANCE",
         "tipoSuscripcion": "BASICA",
         "nombre": "Primavera Tardía"
