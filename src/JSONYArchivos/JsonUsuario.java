@@ -6,6 +6,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import Enum.Suscripcion;
+import org.json.JSONTokener;
+
 import java.io.File;
 
 import java.util.ArrayList;
@@ -44,6 +46,20 @@ public static final JSONArray json=new JSONArray();
         return jsonUsuario;
     }
 
+    public void serializarListaUsuarios(ArrayList<Usuario> usuarios) throws JSONException {
+
+
+        for(int i=0; i<usuarios.size(); i++)
+        {
+            if(usuarios.get(i)!=null) {
+                json.put(serializarUsuario(usuarios.get(i)));
+            }
+
+
+
+        }
+    }
+
     public void deserializarUsuario(JSONObject json, Usuario s) throws JSONException {
        try{
            System.out.println(json.getString("tipoUsuario"));
@@ -75,24 +91,38 @@ public static final JSONArray json=new JSONArray();
         }
     }
 
-    public ArrayList<Usuario> deserializarArrayUsuarios(JSONArray json) throws JSONException {
+    public ArrayList<Usuario> deserializarListaUsuarios(JSONArray json) throws JSONException {
         ArrayList<Usuario> aux = new ArrayList<>();
+
         for(int i=0; i<json.length(); i++){
+
+            if(json.getJSONObject(i)==null){
+                continue;
+            }
+
             aux.add(deserializarCliente(json.getJSONObject(i)));
         }
         return aux;
     }
 
-    public void serializarArrayUsuarios(ArrayList<Usuario> usuarios) throws JSONException {
+    public void ListaToArchivo() throws JSONException {
+        File archivo = new File(nombreArchivo);
 
+        OperacionesArchivos.grabarArchivo(json,nombreArchivo);
 
-        for(int i=0; i<usuarios.size(); i++)
-        {
-            if(usuarios.get(i)!=null) {
-            json.put(serializarUsuario(usuarios.get(i)));
+    }
+
+    public ArrayList<Usuario> ArchivoToLista(){
+
+        ArrayList<Usuario> lista = new ArrayList<>();
+        JSONTokener token = OperacionesArchivos.leerArchivo(nombreArchivo);
+
+        try{
+            lista = deserializarListaUsuarios(new JSONArray(token));
         }
-
-
-
-    }OperacionesArchivos.grabarArchivo(json, nombreArchivo);
-}}
+        catch(JSONException e){
+            e.printStackTrace();
+        }
+        return lista;
+    }
+    }
