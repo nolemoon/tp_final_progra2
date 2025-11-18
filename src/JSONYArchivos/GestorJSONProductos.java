@@ -141,7 +141,7 @@ private static final JSONArray json=new JSONArray();
      * @param s objeto Series a serializar
      * @return objeto JSON con los datos completos de la serie.
      */
-    private JSONObject serializarSerie(Series s){
+    private JSONObject serializarSerie(Serie s){
         JSONObject jsonTemp = null;
 
         try {
@@ -171,7 +171,7 @@ private static final JSONArray json=new JSONArray();
                 jsono = serializarPelicula(p);
             } else if (pd instanceof Ebook e) {
                 jsono = serializarEbook(e);
-            } else if (pd instanceof Series s) {
+            } else if (pd instanceof Serie s) {
                 jsono = serializarSerie(s);
             }
 
@@ -263,10 +263,10 @@ OperacionesArchivos.grabarArchivo(json, aJson);
      * Deserializa una Serie que extienda de producto, deserializando tambien sus atributos heredados.
      * @param json objeto JSON con los datos de la serie.
      */
-    private Series deserializarSerie(JSONObject json) {
-        Series s = null;
+    private Serie deserializarSerie(JSONObject json) {
+        Serie s = null;
         try {
-            s = new Series();
+            s = new Serie();
             deserializarProductoABS(json, s);
             s.setTemporadas(json.getInt("temporadas"));
             s.setCapitulos(json.getInt("capitulos"));
@@ -296,7 +296,7 @@ OperacionesArchivos.grabarArchivo(json, aJson);
             else if (tipo.equals(Ebook.class.getSimpleName())) {
                 return deserializarEbook(jsono);
             }
-            else if (tipo.equals(Series.class.getSimpleName())) {
+            else if (tipo.equals(Serie.class.getSimpleName())) {
                 return deserializarSerie(jsono);
             }
             else {

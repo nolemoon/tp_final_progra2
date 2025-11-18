@@ -1,5 +1,6 @@
 
 import JSONYArchivos.GestorJSONProductos;
+import JSONYArchivos.JsonUsuario;
 import Productos.*;
 import Usuarios.Administrador;
 import Usuarios.Cliente;
@@ -101,7 +102,7 @@ public class Main {
         Administrador admin9 = new Administrador("Esteban Polo", "esteban.p@adminweb.es", "555-889900", "Est3banPolo!");
 
 // Administrador 10
-        Administrador admin10 = new Administrador("Valeria Soto", "valeria.s@adminpro.org", "555-990011", "ValeriaSoto*");
+        Administrador admin10 = new Administrador("Valeria Soto", "valeria.s@adminpro.org", "555-990011", "1");
 
 // Administrador 11
         Administrador admin11 = new Administrador("Hugo Luna", "hugo.l@adminpro.info", "555-001100", "HugoLuna$");
@@ -592,5 +593,12 @@ admin15.alta(serie15);
         g.serializarProducto(serie14);
         g.serializarProducto(serie15);
 
+        JsonUsuario j= new JsonUsuario();
+
+    j.serializarListaUsuarios(Usuario.getListaUsuarios());
+
+    j.ListaToArchivo();
+
+        tienda.iniciar();
     }
 }

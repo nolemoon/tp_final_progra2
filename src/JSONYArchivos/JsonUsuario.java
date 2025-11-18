@@ -36,13 +36,31 @@ public static final JSONArray json=new JSONArray();
 
             if (aux instanceof Cliente) {
 
-                jsonUsuario.put("Suscripcion", ((Cliente) aux).getTipoSuscripcion().toString());
+                Cliente aux2= new Cliente();
+
+                aux2.setUsuarioActivo(aux.isUsuarioActivo());
+                aux2.setEmail(aux.getEmail());
+                aux2.setNombre(aux.getNombre());
+                aux2.setTelefono(aux.getTelefono());
+                aux2.setTipoSuscripcion(((Cliente) aux).getTipoSuscripcion());
+
+                jsonUsuario= serializarCliente( aux2, jsonUsuario);
             }
         } catch (JSONException e) {
             e.printStackTrace();
 
             return jsonUsuario;
         }
+        return jsonUsuario;
+    }
+
+    public JSONObject serializarCliente(Cliente aux, JSONObject jsonUsuario) throws JSONException {
+
+        try {
+            jsonUsuario.put("Suscripcion ", aux.getTipoSuscripcion().toString());
+        }catch (JSONException e){e.printStackTrace();}
+        catch (NullPointerException e){e.printStackTrace();}
+
         return jsonUsuario;
     }
 
