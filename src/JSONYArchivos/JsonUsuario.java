@@ -13,13 +13,13 @@ import java.io.File;
 import java.util.ArrayList;
 
 public class JsonUsuario {
-public String nombreArchivo="Usuarios.json";
+public static String nombreArchivo="Usuarios.json";
 public static final JSONArray json=new JSONArray();
 
     public JsonUsuario() {
     }
 
-    public JSONObject serializarUsuario(Usuario aux) throws JSONException {
+    public static JSONObject serializarUsuario(Usuario aux) throws JSONException {
         JSONObject jsonUsuario = null;
         File archi = new File("clientes.json");
 
@@ -54,7 +54,7 @@ public static final JSONArray json=new JSONArray();
         return jsonUsuario;
     }
 
-    public JSONObject serializarCliente(Cliente aux, JSONObject jsonUsuario) throws JSONException {
+    private static JSONObject serializarCliente(Cliente aux, JSONObject jsonUsuario) throws JSONException {
 
         try {
             jsonUsuario.put("Suscripcion ", aux.getTipoSuscripcion().toString());
@@ -64,7 +64,7 @@ public static final JSONArray json=new JSONArray();
         return jsonUsuario;
     }
 
-    public void serializarListaUsuarios(ArrayList<Usuario> usuarios) throws JSONException {
+    private static void serializarListaUsuarios(ArrayList<Usuario> usuarios) throws JSONException {
 
 
         for(int i=0; i<usuarios.size(); i++)
@@ -78,7 +78,7 @@ public static final JSONArray json=new JSONArray();
         }
     }
 
-    public void deserializarUsuario(JSONObject json, Usuario s) throws JSONException {
+    private void deserializarUsuario(JSONObject json, Usuario s) throws JSONException {
        try{
            System.out.println(json.getString("tipoUsuario"));
         s.setNombre(json.getString("nombre"));
@@ -91,7 +91,7 @@ public static final JSONArray json=new JSONArray();
 
 
 
-    public Cliente deserializarCliente(JSONObject json) throws JSONException {
+    private Cliente deserializarCliente(JSONObject json) throws JSONException {
         Cliente aux;
 
         try{
@@ -109,7 +109,7 @@ public static final JSONArray json=new JSONArray();
         }
     }
 
-    public ArrayList<Usuario> deserializarListaUsuarios(JSONArray json) throws JSONException {
+    private ArrayList<Usuario> deserializarListaUsuarios(JSONArray json) throws JSONException {
         ArrayList<Usuario> aux = new ArrayList<>();
 
         for(int i=0; i<json.length(); i++){
@@ -123,9 +123,10 @@ public static final JSONArray json=new JSONArray();
         return aux;
     }
 
-    public void ListaToArchivo() throws JSONException {
+    public static void ListaToArchivo() throws JSONException {
         File archivo = new File(nombreArchivo);
 
+        serializarListaUsuarios(Usuario.getListaUsuarios());
         OperacionesArchivos.grabarArchivo(json,nombreArchivo);
 
     }

@@ -3,6 +3,7 @@ package Productos;
 import Exceptions.ProductoNoEncontradoException;
 import Exceptions.UsuarioExistenteException;
 import Exceptions.UsuarioNoEncontradoException;
+import JSONYArchivos.JsonUsuario;
 import Usuarios.Administrador;
 import Usuarios.Cliente;
 import Usuarios.Usuario;
@@ -97,6 +98,9 @@ public class Tienda {
         Cliente nuevo = new Cliente(nombre, email, telefono, contrasenia);
 
         Usuario.getListaUsuarios().add(nuevo);
+
+        JsonUsuario j = new JsonUsuario();
+        j.ListaToArchivo();
 
         System.out.println("Usuario registrado");
         try {
