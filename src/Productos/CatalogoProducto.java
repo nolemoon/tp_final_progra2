@@ -12,13 +12,13 @@ import java.util.*;
  * @author Renata
  */
 public class CatalogoProducto {
-    private final Map<Integer, Producto> productos;
+    private static  Map<Integer, Producto> productos;
 
     /**
      * Constructor vacío que inicializa el mapa de productos.
      */
     public CatalogoProducto() {
-        this.productos = new LinkedHashMap<>();  //se cargan los datos al deserializar desde json
+        productos = new LinkedHashMap<>();  //se cargan los datos al deserializar desde json
     }
 
     /**
@@ -75,7 +75,7 @@ public class CatalogoProducto {
      * Muestra el catálogo completo sin filtrar por ningún tipo.
      */
     public void mostrarCatalogo(){
-        mostrarCatalogo(this.productos);  //muestra el catalogo completo, SIN filtrar.
+        mostrarCatalogo(productos);  //muestra el catálogo completo, SIN filtrar.
     }
 
     /**

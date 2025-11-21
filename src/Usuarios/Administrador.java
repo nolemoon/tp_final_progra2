@@ -1,80 +1,66 @@
 package Usuarios;
+
+
+
 import Exceptions.ProductoNoEncontradoException;
 import Interfaces.ABMCL;
-import Productos.CatalogoProducto;
-import Productos.Producto;
+import Productos.*;
 import Enum.Suscripcion;
 import Enum.Genero;
+
+
 import java.util.Scanner;
 
-/**
- * Clase que representa a un administrador, extiende de la clase abstracta {@code Usuario}.
- * Es un tipo de usuario con privilegios avanzados. Dentro de sus capacidades se encuentran:
- * dar de alta, baja, modificar, consultar y listar productos del catálogo.
- *
- * Implementa la interfaz {@link ABMCL}, aplicando sus operaciones sobre objetos de
- * tipo {@code Producto}.
- * @author Franco
- */
-public class Administrador extends Usuario implements ABMCL<Producto> {
+public class Administrador extends Usuario implements ABMCL {
 
-    /**
-     * Constructor con todos los atributos.
-     *
-     * @param nombre nombre del administrador
-     * @param email correo electrónico
-     * @param telefono teléfono de contacto
-     * @param contrasenia contraseña de acceso
-     */
-    public Administrador(String nombre, String email, String telefono, String contrasenia) {
-        super(nombre, email, telefono, contrasenia);
+    public Administrador(String nombre, String email, String telefono, String password) {
+
+        super(nombre, email, telefono,password);
     }
 
-    /**
-     * Constructor vacío. Crea un administrador sin inicializar sus atributos.
-     */
     public Administrador() {
     }
 
 
     /// Metodos
-    /**
-     * Da de alta un producto en el catálogo.
-     * @param p producto a dar de alta
-     * @return {@code true} si la operación fue exitosa
-     */
+
     @Override
-    public boolean alta(Producto p) {
-        CatalogoProducto catalogo = new CatalogoProducto();
-        catalogo.agregarProducto(p);
+    public boolean alta(Object o) {
+
+CatalogoProducto catalogo=new CatalogoProducto();
+
+
+        Producto producto = (Producto) o;
+
+        catalogo.agregarProducto(producto);
 
         return true;
     }
 
-    /**
-     * Da de baja lógica un producto, cambiando su atributo {@code altaProducto} a {@code false}
-     * @param id identificador del objeto a dar de baja
-     * @return {@code true} si la operación fue exitosa
-     * @throws ProductoNoEncontradoException si el producto no existe en el catálogo
-     */
+
     @Override
     public boolean baja(int id) throws ProductoNoEncontradoException {
-        CatalogoProducto catalogo = new CatalogoProducto();
-        Producto p = catalogo.buscarPorId(id);
-        p.setAltaProducto(false);
+// TODO: crear atributo altaProducto en Producto
+CatalogoProducto catalogo=new CatalogoProducto();
 
-        return true;
+Producto p=catalogo.buscarPorId(id);
+
+       p.setAltaProducto(false);
+
+
+        return false;
     }
 
 
-    /**
-     * Modifica los atributos de un producto según la opción elegida por consola
-     * @param producto producto a modificar
-     * @return {@code true} si la operación fue exitosa
-     */
+
     @Override
-    public boolean modificar(Producto producto) {
+    public boolean modificar(Object o) {
         Scanner sc=new Scanner(System.in);
+
+
+if (!(o instanceof Producto producto)) return false;
+
+
 
         System.out.println("""
                 Ingrese el numero de la opcion que desea modificar\\
@@ -87,7 +73,28 @@ public class Administrador extends Usuario implements ABMCL<Producto> {
                                \s
                                 4. tipoSuscripcion\\
                                \s
-                                5. salir""\");""");
+                                5. salir""\");\\
+                                \s
+                                Juegos\\
+                                \s
+                                11. requisitosMinimos\\
+                                12. multiplayer\\
+                                \s
+                                E-books\\
+                                \s
+                                21. formato\\
+                                22. idioma\\
+                                23. numPaginas\\
+                                \s
+                                Peliculas\\
+                                \s
+                                31. clasificacion\\
+                                32. duracion\\
+                                \s
+                                Series\\
+                                \s
+                                41. temporadas\\
+                                42. capitulos\\""");
        int opcion= sc.nextInt();
         sc.nextLine();
         String aux;
@@ -98,7 +105,7 @@ switch (opcion){
                 producto.setNombre(sc.nextLine());
 
             case 2: aux=sc.nextLine();
-                aux=aux.toUpperCase();
+            aux=aux.toUpperCase();
 
                 switch (aux) {
                     case "ACCION" -> producto.setGenero(Genero.ACCION);
@@ -120,29 +127,56 @@ switch (opcion){
             if (aux.equals("PREMIUM")){producto.setTipoSuscripcion(Suscripcion.PREMIUM);}
             else if(aux.equals("BASICA")|| aux.equals("BASICO")){producto.setTipoSuscripcion(Suscripcion.BASICA);}
 
-            return true;
-        }
+            case 11: if(o instanceof Juego) {
+            ((Juego) o).setRequisitosMinimos(sc.nextLine());
+            }
+            case 12: if(o instanceof Juego) {
+                ((Juego) o).setMultiplayer(sc.nextBoolean());
+            }
+            case 21: if(o instanceof Ebook) {
+                ((Ebook) o).setFormato(sc.nextLine());
+
+            }
+            case 22: if(o instanceof Ebook) {
+                ((Ebook) o).setIdioma(sc.nextLine());
+            }
+            case 23: if(o instanceof Ebook) {
+                ((Ebook) o).setNumPaginas(sc.nextInt());
+            }
+            case 31: if(o instanceof Pelicula){
+                ((Pelicula) o).setClasificacion(sc.nextLine());
+
+            }
+            case 32: if(o instanceof Pelicula){
+                ((Pelicula) o).setDuracion(sc.nextInt());
+            }
+    case 41: if(o instanceof Serie){
+        ((Serie) o).setTemporadas(sc.nextInt());
+    }
+    case 42: if (o instanceof Serie){
+        ((Serie) o).setCapitulos(sc.nextInt());
     }
 
-    /**
-     * Consulta un producto por su nombre dentro del catálogo.
-     * @param nombreProducto nombre del objeto a buscar
-     * @return producto encontrado
-     * @throws ProductoNoEncontradoException si no existe un producto con ese nombre
-     */
+
+            }
+            return true;
+        }
+
+
     @Override
-    public Producto consultar(String nombreProducto) throws ProductoNoEncontradoException {
-        CatalogoProducto catalogo = new CatalogoProducto();
+    public Object consultar(String nombreProducto) throws ProductoNoEncontradoException {
+        CatalogoProducto catalogo=new CatalogoProducto();
+
+
         return catalogo.buscarPorNombre(nombreProducto);
     }
 
-    /**
-     * Lista todos los productos del catálogo.
-     */
     @Override
     public void listar() {
-        CatalogoProducto catalogo = new CatalogoProducto();
-        catalogo.mostrarCatalogo();
+
+CatalogoProducto catalogo=new CatalogoProducto();
+
+catalogo.mostrarCatalogo();
 
     }
 

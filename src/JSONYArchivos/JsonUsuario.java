@@ -2,27 +2,31 @@ package JSONYArchivos;
 
 import Usuarios.Cliente;
 import Usuarios.Usuario;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import Enum.Suscripcion;
+import org.json.JSONTokener;
+
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
+
+import java.util.ArrayList;
 
 public class JsonUsuario {
+public static String nombreArchivo="Usuarios.json";
+public static final JSONArray json=new JSONArray();
 
     public JsonUsuario() {
     }
 
-    public JSONObject serializarUsuario(Usuario aux) throws JSONException {
-        JSONObject jsonUsuario=null;
-        File archi= new File("clientes.json");
-      try{
-        PrintWriter pw = new PrintWriter(archi);
+    public static JSONObject serializarUsuario(Usuario aux) throws JSONException {
+        JSONObject jsonUsuario = null;
+        File archi = new File("clientes.json");
+
         try {
 
-             jsonUsuario = new JSONObject();
-             jsonUsuario.put("tipoUsuario", aux.getClass().getSimpleName());
+            jsonUsuario = new JSONObject();
+            jsonUsuario.put("tipoUsuario", aux.getClass().getSimpleName());
             jsonUsuario.put("nombre", aux.getNombre());
             jsonUsuario.put("email", aux.getEmail());
             jsonUsuario.put("telefono", aux.getTelefono());
@@ -30,23 +34,51 @@ public class JsonUsuario {
             jsonUsuario.put("fechaRegistro", aux.getFechaRegistro().toString());
             jsonUsuario.put("id", aux.getId());
 
-            if(aux instanceof Cliente) {
+            if (aux instanceof Cliente) {
 
-                jsonUsuario.put("Suscripcion", ((Cliente) aux).getTipoSuscripcion().toString());
+                Cliente aux2= new Cliente();
+
+                aux2.setUsuarioActivo(aux.isUsuarioActivo());
+                aux2.setEmail(aux.getEmail());
+                aux2.setNombre(aux.getNombre());
+                aux2.setTelefono(aux.getTelefono());
+                aux2.setTipoSuscripcion(((Cliente) aux).getTipoSuscripcion());
+
+                jsonUsuario= serializarCliente( aux2, jsonUsuario);
             }
-            pw.println(jsonUsuario);
-            pw.flush();
-            pw.close();
-        }catch (JSONException e) {
+        } catch (JSONException e) {
             e.printStackTrace();
 
-        }}catch(FileNotFoundException e)
-      {e.printStackTrace();}
+            return jsonUsuario;
+        }
+        return jsonUsuario;
+    }
+
+    private static JSONObject serializarCliente(Cliente aux, JSONObject jsonUsuario) throws JSONException {
+
+        try {
+            jsonUsuario.put("Suscripcion ", aux.getTipoSuscripcion().toString());
+        }catch (JSONException e){e.printStackTrace();}
+        catch (NullPointerException e){e.printStackTrace();}
 
         return jsonUsuario;
     }
 
-    public void deserializarUsuario(JSONObject json, Usuario s) throws JSONException {
+    private static void serializarListaUsuarios(ArrayList<Usuario> usuarios) throws JSONException {
+
+
+        for(int i=0; i<usuarios.size(); i++)
+        {
+            if(usuarios.get(i)!=null) {
+                json.put(serializarUsuario(usuarios.get(i)));
+            }
+
+
+
+        }
+    }
+
+    private void deserializarUsuario(JSONObject json, Usuario s) throws JSONException {
        try{
            System.out.println(json.getString("tipoUsuario"));
         s.setNombre(json.getString("nombre"));
@@ -59,7 +91,7 @@ public class JsonUsuario {
 
 
 
-    public Cliente deserializarCliente(JSONObject json) throws JSONException {
+    private Cliente deserializarCliente(JSONObject json) throws JSONException {
         Cliente aux;
 
         try{
@@ -77,5 +109,39 @@ public class JsonUsuario {
         }
     }
 
+    private ArrayList<Usuario> deserializarListaUsuarios(JSONArray json) throws JSONException {
+        ArrayList<Usuario> aux = new ArrayList<>();
 
-}
+        for(int i=0; i<json.length(); i++){
+
+            if(json.getJSONObject(i)==null){
+                continue;
+            }
+
+            aux.add(deserializarCliente(json.getJSONObject(i)));
+        }
+        return aux;
+    }
+
+    public static void ListaToArchivo() throws JSONException {
+        File archivo = new File(nombreArchivo);
+
+        serializarListaUsuarios(Usuario.getListaUsuarios());
+        OperacionesArchivos.grabarArchivo(json,nombreArchivo);
+
+    }
+
+    public ArrayList<Usuario> ArchivoToLista(){
+
+        ArrayList<Usuario> lista = new ArrayList<>();
+        JSONTokener token = OperacionesArchivos.leerArchivo(nombreArchivo);
+
+        try{
+            lista = deserializarListaUsuarios(new JSONArray(token));
+        }
+        catch(JSONException e){
+            e.printStackTrace();
+        }
+        return lista;
+    }
+    }

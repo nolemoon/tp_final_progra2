@@ -3,6 +3,7 @@ package Productos;
 import Exceptions.ProductoNoEncontradoException;
 import Exceptions.UsuarioExistenteException;
 import Exceptions.UsuarioNoEncontradoException;
+import JSONYArchivos.JsonUsuario;
 import Usuarios.Administrador;
 import Usuarios.Cliente;
 import Usuarios.Usuario;
@@ -98,6 +99,9 @@ public class Tienda {
 
         Usuario.getListaUsuarios().add(nuevo);
 
+        JsonUsuario j = new JsonUsuario();
+        j.ListaToArchivo();
+
         System.out.println("Usuario registrado");
         try {
             ingresar(1);
@@ -154,7 +158,8 @@ public class Tienda {
         System.out.println("""
                         1 - Ver disponibles.
                         2 - Buscar.
-                        3 - Ver biblioteca.
+                        3 - Ver biblioteca
+                        4 - Modificar perfil.
                         """);
 
         opcion = sc.nextInt();
@@ -221,6 +226,9 @@ public class Tienda {
                 break;
             case 3:
                 clienteActual.mostrarBiblioteca();
+                break;
+            case 4:
+                clienteActual.modificar(clienteActual);  //revisarlo dsp
                 break;
 
             default:

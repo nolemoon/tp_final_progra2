@@ -1,4 +1,6 @@
+
 import JSONYArchivos.GestorJSONProductos;
+import JSONYArchivos.JsonUsuario;
 import Productos.*;
 import Usuarios.Administrador;
 import Usuarios.Cliente;
@@ -9,19 +11,20 @@ import Usuarios.Usuario;
 public class Main {
     public static void main(String[] args) {
         Tienda tienda = new Tienda();
-        tienda.iniciar();
+
 
         System.out.println
-                (
-                        """
-                                ╲┏━┳━━━━━━━━┓╲╲
-                                ╲┃◯┃╭┻┻╮╭┻┻╮┃╲╲
-                                ╲┃╮┃┃╭╮┃┃╭╮┃┃╲╲
-                                ╲┃╯┃┗┻┻┛┗┻┻┻┻╮╲
-                                ╲┃◯┃╭╮╰╯┏━━━┳╯╲
-                                ╲┃╭┃╰┏┳┳┳┳┓◯┃╲╲
-                                ╲┃╰┃◯╰┗┛┗┛╯╭┃╲╲"""
-                );
+        (
+            //Nole
+                """
+                        ╲┏━┳━━━━━━━━┓╲╲
+                        ╲┃◯┃╭┻┻╮╭┻┻╮┃╲╲
+                        ╲┃╮┃┃╭╮┃┃╭╮┃┃╲╲
+                        ╲┃╯┃┗┻┻┛┗┻┻┻┻╮╲
+                        ╲┃◯┃╭╮╰╯┏━━━┳╯╲
+                        ╲┃╭┃╰┏┳┳┳┳┓◯┃╲╲
+                        ╲┃╰┃◯╰┗┛┗┛╯╭┃╲╲"""
+        );
 
 
         // Cliente 1
@@ -99,7 +102,7 @@ public class Main {
         Administrador admin9 = new Administrador("Esteban Polo", "esteban.p@adminweb.es", "555-889900", "Est3banPolo!");
 
 // Administrador 10
-        Administrador admin10 = new Administrador("Valeria Soto", "valeria.s@adminpro.org", "555-990011", "ValeriaSoto*");
+        Administrador admin10 = new Administrador("Valeria Soto", "valeria.s@adminpro.org", "555-990011", "1");
 
 // Administrador 11
         Administrador admin11 = new Administrador("Hugo Luna", "hugo.l@adminpro.info", "555-001100", "HugoLuna$");
@@ -474,21 +477,21 @@ public class Main {
         admin15.alta(peli15);
 
         /// series
-        admin1.alta(serie1);
-        admin2.alta(serie2);
-        admin3.alta(serie3);
-        admin4.alta(serie4);
-        admin5.alta(serie5);
-        admin6.alta(serie6);
-        admin7.alta(serie7);
-        admin8.alta(serie8);
-        admin9.alta(serie9);
-        admin10.alta(serie10);
-        admin11.alta(serie11);
-        admin12.alta(serie12);
-        admin13.alta(serie13);
-        admin14.alta(serie14);
-        admin15.alta(serie15);
+admin1.alta(serie1);
+admin2.alta(serie2);
+admin3.alta(serie3);
+admin4.alta(serie4);
+admin5.alta(serie5);
+admin6.alta(serie6);
+admin7.alta(serie7);
+admin8.alta(serie8);
+admin9.alta(serie9);
+admin10.alta(serie10);
+admin11.alta(serie11);
+admin12.alta(serie12);
+admin13.alta(serie13);
+admin14.alta(serie14);
+admin15.alta(serie15);
 
         /// Administradores
         Usuario.getListaUsuarios().add(admin1);
@@ -590,5 +593,12 @@ public class Main {
         g.serializarProducto(serie14);
         g.serializarProducto(serie15);
 
+        JsonUsuario j= new JsonUsuario();
+
+    j.serializarListaUsuarios(Usuario.getListaUsuarios());
+
+    j.ListaToArchivo();
+
+        tienda.iniciar();
     }
 }

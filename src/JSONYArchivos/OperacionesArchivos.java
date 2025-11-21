@@ -1,24 +1,23 @@
 package JSONYArchivos;
 
-import org.json.JSONObject;
+import org.json.JSONArray;
+
+import org.json.JSONException;
 import org.json.JSONTokener;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 
 public final class OperacionesArchivos {
 
     /**
      * Graba un objeto JSON en un archivo.
-     * @param j objeto JSON a grabar.
+     * @param jsonArray objeto JSON a grabar.
      * @param nombreArchivo nombre del archivo donde se va a grabar.
      */
-    public static void grabarArchivo(JSONObject j, String nombreArchivo){
+    public static void grabarArchivo(JSONArray jsonArray, String nombreArchivo){
         try{
-            FileWriter fw = new FileWriter(nombreArchivo);
-            fw.write(j.toString(4));
+            PrintWriter fw = new PrintWriter(new FileWriter(nombreArchivo));
+            fw.println(jsonArray.toString(4));
             fw.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -35,8 +34,12 @@ public final class OperacionesArchivos {
 
         try{
             token = new JSONTokener(new FileReader(file));
+
         }
         catch (FileNotFoundException e){
+            e.printStackTrace();
+        }
+        catch(JSONException e){
             e.printStackTrace();
         }
 

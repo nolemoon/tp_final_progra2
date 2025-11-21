@@ -7,89 +7,75 @@ import Productos.Producto;
 
 import java.util.*;
 
-/**
- * Clase que representa a un cliente, extiende de la clase abstracta {@code Usuario}.
- * Posee una suscripción y una biblioteca personal donde almacena sus productos adquiridos.
- *
- * Implementa la interfaz {@link ABMCL} para realizar las operaciones CRUD sobre clientes.
- * @author Franco
- */
-public class Cliente extends Usuario implements ABMCL<Cliente> {
+public class Cliente extends Usuario implements ABMCL {
+
+
 
     private Suscripcion tipoSuscripcion;
-    private HashSet<Producto> biblioteca;
+    private static HashSet<Producto> biblioteca=null;
+
+
 
 
     /// METODOS
-    /**
-     * Da de alta un cliente.
-     * @param c cliente a agregar a usuarios
-     * @return {@code true} si la operación fue exitosa
-     */
+
     @Override
-    public boolean alta(Cliente c) {
-        getListaUsuarios().add(c);
+    public boolean alta(Object o) {
+
+        if (!(o instanceof Cliente cliente)) return false;
+        getListaUsuarios().add(this);
         return true;
 
     }
 
-    /**
-     * Da de baja lógica un cliente.
-     * @param id identificador del objeto a dar de baja
-     * @return {@code true} si la operación fue exitosa
-     */
     @Override
     public boolean baja(int id) {
-       Cliente aux=buscarUsuario(id);
-       if(aux == null) return false;
+Cliente aux=buscarUsuario(id);
 
-       aux.setUsuarioActivo(false);
-       return true;
+getListaUsuarios().remove(aux);
+aux.setUsuarioActivo(false);
+getListaUsuarios().add(aux);
+
+
+return true;
     }
 
-    /**
-     * Modifica atributos de un cliente según la opción que se elige
-     * @param c cliente a modificar
-     * @return {@code true} si la operación fue exitosa
-     */
+
     @Override
-    public boolean modificar(Cliente c) {
-        Scanner sc = new Scanner(System.in);
+    public boolean modificar(Object o) {
+        Scanner sc=new Scanner(System.in);
 
         System.out.println("""
                 Ingrese el numero de la opcion que desea modificar\
                 
                 1. Nombre\
                 
-                2. email\
+                2. Email\
                 
-                3. telefono\
+                3. Telefono\
                 
-                4. tipoSuscripcion\
+                4. Tipo de suscripción\
                 
-                5. salir""");
-
-        int opcion = sc.nextInt();
+                5. Salir""");
+        int opcion=sc.nextInt();
         sc.nextLine();
 
-            return switch (opcion) {
-
-
+        return switch (opcion) {
                 case 1 -> {
-                    c.setNombre(sc.nextLine());
+                    this.setNombre(sc.nextLine());
                     yield true;
                 }
                 case 2 -> {
-                    c.setEmail(sc.nextLine());
+                    this.setEmail(sc.nextLine());
                     yield true;
                 }
                 case 3 -> {
-                    c.setTelefono(sc.nextLine());
+                    this.setTelefono(sc.nextLine());
                     yield true;
 
                 }
                 case 4 -> {
-                    c.setTipoSuscripcion(Suscripcion.valueOf(sc.nextLine().toUpperCase()));
+                    this.setTipoSuscripcion(Suscripcion.valueOf(sc.nextLine().toUpperCase()));
                     yield true;
                 }
                 default -> false;
@@ -98,61 +84,50 @@ public class Cliente extends Usuario implements ABMCL<Cliente> {
 
         }
 
-    /**
-     * Consulta un cliente según su email.
-      * @param email email del cliente a buscar
-     * @return cliente encontrado o null si no existe
-     */
     @Override
-    public Cliente consultar(String email) {
+    public Usuario consultar(String email) {
+              for(int i = 0; i< getListaUsuarios().size(); i++){
 
-        for(int i=0; i < super.getListaUsuarios().size(); i++) {
-            if(super.getListaUsuarios().get(i).getEmail().equals(email)){
-                return (Cliente) super.getListaUsuarios().get(i);
+            if(getListaUsuarios().get(i).getEmail().equals(email)){
+                return getListaUsuarios().get(i);
+
             }
         }
+
         return null;
     }
 
-    /**
-     * Lista todos los clientes registrados.
-     */
     @Override
     public void listar() {
 
-        for(int i=0; i < super.getListaUsuarios().size(); i++){
+        for(int i = 0; i< getListaUsuarios().size(); i++){
 
-            Cliente aux = (Cliente) super.getListaUsuarios().get(i);
-            System.out.println("Cliente número "+ i + aux.toString());
+            Usuario aux = getListaUsuarios().get(i);
+            System.out.println("usuario numero "+ i +
+                                aux.toString());
+            if(aux instanceof Cliente) {
+                System.out.println("Suscripcion: " + ((Cliente) aux).getTipoSuscripcion());
+            }
+            }
         }
-    }
 
-    /**
-     * Agrega un producto a la biblioteca del cliente.
-     * @param producto producto a agregar
-     */
+
     public void agregarProducto(Producto producto){
         biblioteca.add(producto);
     }
 
-    /**
-     * Muestra la biblioteca del cliente.
-     */
     public void mostrarBiblioteca(){
         System.out.println(biblioteca);
     }
 
-    /**
-     * Busca un cliente dentro de la lista de usuarios por su id.
-     * @param id id del cliente
-     * @return cliente encontrado o null
-     */
     public Cliente buscarUsuario(int id) {
-        for(int i=0; i < super.getListaUsuarios().size(); i++){
-            if(super.getListaUsuarios().get(i).getId() == id){
-                return (Cliente) super.getListaUsuarios().get(i);
+        for(int i = 0; i< getListaUsuarios().size(); i++){
+            if(getListaUsuarios().get(i).getId()==id){
+                return (Cliente) getListaUsuarios().get(i);
             }
         }
+
+
         return null;
     }
 
@@ -166,10 +141,13 @@ public class Cliente extends Usuario implements ABMCL<Cliente> {
     /// CONSTRUCTOR - INICIO
     public Cliente(String nombre, String email, String telefono, String contrasenia) {
         super(nombre, email, telefono, contrasenia);
-        biblioteca = new HashSet<>();
+
+        biblioteca=new HashSet<>();
     }
 
-    public Cliente() {}
+    public Cliente() {
+
+        }
 
    /// CONSTRUCTOR - FINAL
 
