@@ -28,6 +28,21 @@ public class CatalogoProducto {
 
     /**
      * Filtra los productos del catálogo por su clase.
+     * @param tipoProducto clase del tipo de producto a filtrar
+     * @return {@code Map} con productos del tipo indicado
+     */
+    public static Map<Integer, Producto> filtrarPorTipo(Class<? extends Producto> tipoProducto) {
+        Map<Integer, Producto> filtrados = new LinkedHashMap<>();
+        for (Map.Entry<Integer, Producto> entry : productos.entrySet()) {
+            if (tipoProducto.isInstance(entry.getValue())) {
+                filtrados.put(entry.getKey(), entry.getValue());
+            }
+        }
+        return filtrados;
+    }
+
+    /**
+     * Filtra los productos del catálogo por su clase.
      * @param listaFiltrada mapa de productos a filtrar
      * @param tipoProducto clase del tipo de producto a filtrar
      * @return {@code Map} con productos del tipo indicado
