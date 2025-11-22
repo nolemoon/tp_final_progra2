@@ -130,7 +130,7 @@ public class Tienda {
                     clienteActual = cliente;
                     menuCliente();
                 } else if (tipoUsuario == 2 && aux instanceof Administrador admin) {
-                    adminAux = admin;
+                   adminAux = admin;
                     menuAdmin();
 
                 }else  {
@@ -217,6 +217,7 @@ public class Tienda {
                 String nombre = sc.nextLine();
                 try {
                     Producto buscado = CatalogoProducto.buscarPorNombre(nombre);
+                    System.out.println(nombre.toUpperCase());
                     VerComprar(buscado);
 
                 } catch (ProductoNoEncontradoException e) {
@@ -227,7 +228,7 @@ public class Tienda {
                 clienteActual.mostrarBiblioteca();
                 break;
             case 4:
-                //clienteActual.modificar(clienteActual);
+                clienteActual.modificar(clienteActual);
                 break;
 
             default:
@@ -267,13 +268,22 @@ public class Tienda {
             }
 
         }
-
+    /**
+     * Simula facturación de compra solicitando datos básicos de pago
+     + agregando el producto a la biblioteca deñ cliente.
+     * @param p El producto que el cliente está comprando.
+     *  @author Noel
+     */
     private void gestionfacturacion(Producto p) {
-        String aux ="";
+        String aux =""; int numAux =0;
         System.out.println("Ingrese el metodo de pago"+
                 "1-DEBITO"+
                 "2-CREDITO");
+        numAux= sc.nextInt(); sc.nextLine();
+        System.out.println("Ingrese el numero de tarjeta.");
         aux= sc.nextLine();
+        System.out.println("Ingrese el codigo de seguridad");
+        numAux=sc.nextInt(); sc.nextLine();
         clienteActual.agregarProducto(p);
         System.out.println("Compraste: " + p.getNombre());
     }
