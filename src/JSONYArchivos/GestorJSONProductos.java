@@ -176,10 +176,9 @@ private static final JSONArray json=new JSONArray();
             }
 
             if (jsono != null) {
-                jsono.put("tipo: ", pd.getClass().getSimpleName());
+                jsono.put("tipo", pd.getClass().getSimpleName());
             }
-            json.put(jsono);
-OperacionesArchivos.grabarArchivo(json, aJson);
+
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -323,8 +322,6 @@ OperacionesArchivos.grabarArchivo(json, aJson);
                 ja.put(jo);
             }
 
-            JSONObject jo = new JSONObject();
-            jo.put("productos", ja);
             OperacionesArchivos.grabarArchivo(ja, aJson);
         }
         catch (JSONException e){
@@ -341,8 +338,7 @@ OperacionesArchivos.grabarArchivo(json, aJson);
         JSONTokener tk = OperacionesArchivos.leerArchivo(aJson);
 
         try{
-            JSONObject jo = new JSONObject(tk);
-            JSONArray ja = jo.getJSONArray("productos");
+            JSONArray ja = new JSONArray(tk);
 
             for(int i = 0; i < ja.length(); i++){
                 JSONObject obj = ja.getJSONObject(i);

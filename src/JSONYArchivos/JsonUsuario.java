@@ -13,8 +13,8 @@ import java.io.File;
 import java.util.ArrayList;
 
 public class JsonUsuario {
-public static String nombreArchivo="Usuarios.json";
-public static final JSONArray json=new JSONArray();
+    public static String nombreArchivo="Usuarios.json";
+    public static final JSONArray json=new JSONArray();
 
     public JsonUsuario() {
     }
@@ -35,16 +35,7 @@ public static final JSONArray json=new JSONArray();
             jsonUsuario.put("id", aux.getId());
 
             if (aux instanceof Cliente) {
-
-                Cliente aux2= new Cliente();
-
-                aux2.setUsuarioActivo(aux.isUsuarioActivo());
-                aux2.setEmail(aux.getEmail());
-                aux2.setNombre(aux.getNombre());
-                aux2.setTelefono(aux.getTelefono());
-                aux2.setTipoSuscripcion(((Cliente) aux).getTipoSuscripcion());
-
-                jsonUsuario= serializarCliente( aux2, jsonUsuario);
+                jsonUsuario = serializarCliente((Cliente)aux, jsonUsuario);
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -57,14 +48,14 @@ public static final JSONArray json=new JSONArray();
     private static JSONObject serializarCliente(Cliente aux, JSONObject jsonUsuario) throws JSONException {
 
         try {
-            jsonUsuario.put("Suscripcion ", aux.getTipoSuscripcion().toString());
+            jsonUsuario.put("Suscripcion", aux.getTipoSuscripcion().name());
         }catch (JSONException e){e.printStackTrace();}
         catch (NullPointerException e){e.printStackTrace();}
 
         return jsonUsuario;
     }
 
-    private static void serializarListaUsuarios(ArrayList<Usuario> usuarios) throws JSONException {
+    public static void serializarListaUsuarios(ArrayList<Usuario> usuarios) throws JSONException {
 
 
         for(int i=0; i<usuarios.size(); i++)
@@ -99,8 +90,6 @@ public static final JSONArray json=new JSONArray();
         deserializarUsuario(json,aux);
         String x=(json.getString("Suscripcion"));
         aux.setTipoSuscripcion(Suscripcion.valueOf(x));
-
-
 
         return aux;
     }catch (JSONException e) {
@@ -144,4 +133,4 @@ public static final JSONArray json=new JSONArray();
         }
         return lista;
     }
-    }
+}

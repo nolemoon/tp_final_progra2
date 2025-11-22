@@ -12,6 +12,7 @@ public class Cliente extends Usuario implements ABMCL {
     private Suscripcion tipoSuscripcion;
     private static HashSet<Producto> biblioteca=null;
 
+
     /// METODOS
 
     @Override
@@ -133,17 +134,18 @@ public class Cliente extends Usuario implements ABMCL {
     }
 
     /// CONSTRUCTOR - INICIO
-    public Cliente(String nombre, String email, String telefono, String contrasenia) {
+    public Cliente(String nombre, String email, String telefono, String contrasenia, Suscripcion tipoSuscripcion) {
         super(nombre, email, telefono, contrasenia);
-
+        this.tipoSuscripcion = tipoSuscripcion;
         biblioteca=new HashSet<>();
     }
 
     public Cliente() {
+        this.tipoSuscripcion = Suscripcion.BASICA;
+    }
 
-        }
 
-   /// CONSTRUCTOR - FINAL
+    /// CONSTRUCTOR - FINAL
 
     /// GETTER AND SETTER - INICIO
 

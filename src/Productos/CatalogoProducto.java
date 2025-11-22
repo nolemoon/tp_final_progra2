@@ -12,7 +12,7 @@ import java.util.*;
  * @author Renata
  */
 public class CatalogoProducto {
-    private static LinkedHashMap<Integer, Producto> productos;
+    private static LinkedHashMap<Integer, Producto> productos = new LinkedHashMap<>();
 
     public CatalogoProducto() {
     }
@@ -23,6 +23,10 @@ public class CatalogoProducto {
      */
     public static Map<Integer, Producto> getProductos() {
         return productos;
+    }
+
+    public static void setProductos(LinkedHashMap<Integer, Producto> productos) {
+        CatalogoProducto.productos = productos;
     }
 
     /**

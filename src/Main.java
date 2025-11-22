@@ -8,6 +8,8 @@ import Enum.Genero;
 import Enum.Suscripcion;
 import Usuarios.Usuario;
 
+import java.util.LinkedHashMap;
+
 public class Main {
     public static void main(String[] args) {
         Tienda tienda = new Tienda();
@@ -28,49 +30,49 @@ public class Main {
 
 
         // Cliente 1
-        Cliente cliente1 = new Cliente("Ana Torres", "ana.t@email.com", "555-123456", "ClaveSegura1");
+        Cliente cliente1 = new Cliente("Ana Torres", "ana.t@email.com", "555-123456", "ClaveSegura1", Suscripcion.BASICA);
 
 // Cliente 2
-        Cliente cliente2 = new Cliente("Luis Gómez", "luis.g@otrodominio.es", "555-654321", "Password2025");
+        Cliente cliente2 = new Cliente("Luis Gómez", "luis.g@otrodominio.es", "555-654321", "Password2025", Suscripcion.BASICA);
 
 // Cliente 3
-        Cliente cliente3 = new Cliente("Marta Ruiz", "marta.r@ejemplo.net", "555-987654", "MartaKey$1");
+        Cliente cliente3 = new Cliente("Marta Ruiz", "marta.r@ejemplo.net", "555-987654", "MartaKey$1", Suscripcion.PREMIUM);
 
 // Cliente 4
-        Cliente cliente4 = new Cliente("Javier Pérez", "javi.p@web.com", "555-234567", "Jav!erP3r");
+        Cliente cliente4 = new Cliente("Javier Pérez", "javi.p@web.com", "555-234567", "Jav!erP3r", Suscripcion.BASICA);
 
 // Cliente 5
-        Cliente cliente5 = new Cliente("Sofía Castro", "sofia.c@mail.org", "555-876543", "S0f1aC@st");
+        Cliente cliente5 = new Cliente("Sofía Castro", "sofia.c@mail.org", "555-876543", "S0f1aC@st", Suscripcion.PREMIUM);
 
 // Cliente 6
-        Cliente cliente6 = new Cliente("Ricardo Diaz", "ricardo.d@buzon.info", "555-345678", "Ric4rd0_D");
+        Cliente cliente6 = new Cliente("Ricardo Diaz", "ricardo.d@buzon.info", "555-345678", "Ric4rd0_D", Suscripcion.PREMIUM);
 
 // Cliente 7
-        Cliente cliente7 = new Cliente("Elena Flores", "elena.f@cuenta.io", "555-765432", "ElenaFlores*");
+        Cliente cliente7 = new Cliente("Elena Flores", "elena.f@cuenta.io", "555-765432", "ElenaFlores*", Suscripcion.PREMIUM);
 
 // Cliente 8
-        Cliente cliente8 = new Cliente("Pedro Moya", "pedro.m@servidor.com", "555-456789", "P3droMoya#");
+        Cliente cliente8 = new Cliente("Pedro Moya", "pedro.m@servidor.com", "555-456789", "P3droMoya#", Suscripcion.PREMIUM);
 
 // Cliente 9
-        Cliente cliente9 = new Cliente("Carmen Vidal", "carmen.v@correo.es", "555-678901", "C4rm3nVid");
+        Cliente cliente9 = new Cliente("Carmen Vidal", "carmen.v@correo.es", "555-678901", "C4rm3nVid", Suscripcion.BASICA);
 
 // Cliente 10
-        Cliente cliente10 = new Cliente("Andrés León", "andres.l@dominio.net", "555-012345", "AndresLe0n");
+        Cliente cliente10 = new Cliente("Andrés León", "andres.l@dominio.net", "555-012345", "AndresLe0n", Suscripcion.PREMIUM);
 
 // Cliente 11
-        Cliente cliente11 = new Cliente("Laura Ramos", "laura.r@ejemplo.com", "555-112233", "LauraR4m0s");
+        Cliente cliente11 = new Cliente("Laura Ramos", "laura.r@ejemplo.com", "555-112233", "LauraR4m0s", Suscripcion.PREMIUM);
 
 // Cliente 12
-        Cliente cliente12 = new Cliente("Jorge Sanz", "jorge.s@mail.com", "555-445566", "J0rg3Sanz!");
+        Cliente cliente12 = new Cliente("Jorge Sanz", "jorge.s@mail.com", "555-445566", "J0rg3Sanz!", Suscripcion.PREMIUM);
 
 // Cliente 13
-        Cliente cliente13 = new Cliente("Paula Gil", "paula.g@webmail.info", "555-778899", "P4ul4Gil#");
+        Cliente cliente13 = new Cliente("Paula Gil", "paula.g@webmail.info", "555-778899", "P4ul4Gil#", Suscripcion.BASICA);
 
 // Cliente 14
-        Cliente cliente14 = new Cliente("Héctor Vega", "hector.v@servicioweb.org", "555-009988", "HectorV3ga");
+        Cliente cliente14 = new Cliente("Héctor Vega", "hector.v@servicioweb.org", "555-009988", "HectorV3ga", Suscripcion.PREMIUM);
 
 // Cliente 15
-        Cliente cliente15 = new Cliente("Nuria Blanco", "nuria.b@mi-email.io", "555-332211", "NuriaB1anc0");
+        Cliente cliente15 = new Cliente("Nuria Blanco", "nuria.b@mi-email.io", "555-332211", "NuriaB1anc0", Suscripcion.BASICA);
 
 
 
@@ -118,6 +120,9 @@ public class Main {
 
 // Administrador 15
         Administrador admin15 = new Administrador("Félix Cano", "felix.c@admincorp.es", "555-440044", "FelixCano!");
+
+
+
 
         // Ebook 1: FANTASIA
         Ebook ebook1 = new Ebook("El Gremio de los Magos", Genero.FANTASIA, 12.99, 2022,
@@ -422,76 +427,80 @@ public class Main {
                 "Romance Stream", "Un romance maduro que florece en la edad adulta.",
                 Suscripcion.BASICA, 1, 7);
 
-/// Ebook
-        admin1.alta(ebook1);
-        admin2.alta(ebook2);
-        admin3.alta(ebook3);
-        admin4.alta(ebook4);
-        admin5.alta(ebook5);
-        admin6.alta(ebook6);
-        admin7.alta(ebook7);
-        admin8.alta(ebook8);
-        admin9.alta(ebook9);
-        admin10.alta(ebook10);
-        admin11.alta(ebook11);
-        admin12.alta(ebook12);
-        admin13.alta(ebook13);
-        admin14.alta(ebook14);
-        admin15.alta(ebook15);
 
-        /// Juegos
+        LinkedHashMap<Integer, Producto> productos = new LinkedHashMap<>();
+        //GUARDO EBOOKS
+        productos.put(ebook1.getId_Producto(), ebook1);
+        productos.put(ebook2.getId_Producto(), ebook2);
+        productos.put(ebook3.getId_Producto(), ebook3);
+        productos.put(ebook4.getId_Producto(), ebook4);
+        productos.put(ebook5.getId_Producto(), ebook5);
+        productos.put(ebook6.getId_Producto(), ebook6);
+        productos.put(ebook7.getId_Producto(), ebook7);
+        productos.put(ebook8.getId_Producto(), ebook8);
+        productos.put(ebook9.getId_Producto(), ebook9);
+        productos.put(ebook10.getId_Producto(), ebook10);
+        productos.put(ebook11.getId_Producto(), ebook11);
+        productos.put(ebook12.getId_Producto(), ebook12);
+        productos.put(ebook13.getId_Producto(), ebook13);
+        productos.put(ebook14.getId_Producto(), ebook14);
+        productos.put(ebook15.getId_Producto(), ebook15);
 
-        admin1.alta(juego1);
-        admin2.alta(juego2);
-        admin3.alta(juego3);
-        admin4.alta(juego4);
-        admin5.alta(juego5);
-        admin6.alta(juego6);
-        admin7.alta(juego7);
-        admin8.alta(juego8);
-        admin9.alta(juego9);
-        admin10.alta(juego10);
-        admin11.alta(juego11);
-        admin12.alta(juego12);
-        admin13.alta(juego13);
-        admin14.alta(juego14);
-        admin15.alta(juego15);
+        //GUARDO PELICULAS
+        productos.put(peli1.getId_Producto(), peli1);
+        productos.put(peli2.getId_Producto(), peli2);
+        productos.put(peli3.getId_Producto(), peli3);
+        productos.put(peli4.getId_Producto(), peli4);
+        productos.put(peli5.getId_Producto(), peli5);
+        productos.put(peli6.getId_Producto(), peli6);
+        productos.put(peli7.getId_Producto(), peli7);
+        productos.put(peli8.getId_Producto(), peli8);
+        productos.put(peli9.getId_Producto(), peli9);
+        productos.put(peli10.getId_Producto(), peli10);
+        productos.put(peli11.getId_Producto(), peli11);
+        productos.put(peli12.getId_Producto(), peli12);
+        productos.put(peli13.getId_Producto(), peli13);
+        productos.put(peli14.getId_Producto(), peli14);
+        productos.put(peli15.getId_Producto(), peli15);
 
+        //GUARDO JUEGOS
+        productos.put(juego1.getId_Producto(), juego1);
+        productos.put(juego2.getId_Producto(), juego2);
+        productos.put(juego3.getId_Producto(), juego3);
+        productos.put(juego4.getId_Producto(), juego4);
+        productos.put(juego5.getId_Producto(), juego5);
+        productos.put(juego6.getId_Producto(), juego6);
+        productos.put(juego7.getId_Producto(), juego7);
+        productos.put(juego8.getId_Producto(), juego8);
+        productos.put(juego9.getId_Producto(), juego9);
+        productos.put(juego10.getId_Producto(), juego10);
+        productos.put(juego11.getId_Producto(), juego11);
+        productos.put(juego12.getId_Producto(), juego12);
+        productos.put(juego13.getId_Producto(), juego13);
+        productos.put(juego14.getId_Producto(), juego14);
+        productos.put(juego15.getId_Producto(), juego15);
 
-        /// peliculas
+        //GUARDO SERIES
+        productos.put(serie1.getId_Producto(), serie1);
+        productos.put(serie2.getId_Producto(), serie2);
+        productos.put(serie3.getId_Producto(), serie3);
+        productos.put(serie4.getId_Producto(), serie4);
+        productos.put(serie5.getId_Producto(), serie5);
+        productos.put(serie6.getId_Producto(), serie6);
+        productos.put(serie7.getId_Producto(), serie7);
+        productos.put(serie8.getId_Producto(), serie8);
+        productos.put(serie9.getId_Producto(), serie9);
+        productos.put(serie10.getId_Producto(), serie10);
+        productos.put(serie11.getId_Producto(), serie11);
+        productos.put(serie12.getId_Producto(), serie12);
+        productos.put(serie13.getId_Producto(), serie13);
+        productos.put(serie14.getId_Producto(), serie14);
+        productos.put(serie15.getId_Producto(), serie15);
 
-        admin1.alta(peli1);
-        admin2.alta(peli2);
-        admin3.alta(peli3);
-        admin4.alta(peli4);
-        admin5.alta(peli5);
-        admin6.alta(peli6);
-        admin7.alta(peli7);
-        admin8.alta(peli8);
-        admin9.alta(peli9);
-        admin10.alta(peli10);
-        admin11.alta(peli11);
-        admin12.alta(peli12);
-        admin13.alta(peli13);
-        admin14.alta(peli14);
-        admin15.alta(peli15);
+        GestorJSONProductos gestorProductos = new GestorJSONProductos();
+        gestorProductos.mapaProductosToArchi(productos);
 
-        /// series
-admin1.alta(serie1);
-admin2.alta(serie2);
-admin3.alta(serie3);
-admin4.alta(serie4);
-admin5.alta(serie5);
-admin6.alta(serie6);
-admin7.alta(serie7);
-admin8.alta(serie8);
-admin9.alta(serie9);
-admin10.alta(serie10);
-admin11.alta(serie11);
-admin12.alta(serie12);
-admin13.alta(serie13);
-admin14.alta(serie14);
-admin15.alta(serie15);
+        CatalogoProducto.setProductos(productos);
 
         /// Administradores
         Usuario.getListaUsuarios().add(admin1);
@@ -527,77 +536,13 @@ admin15.alta(serie15);
         Usuario.getListaUsuarios().add(cliente14);
         Usuario.getListaUsuarios().add(cliente15);
 
-        GestorJSONProductos g= new GestorJSONProductos();
 
-        g.serializarProducto(ebook1);
-        g.serializarProducto(ebook2);
-        g.serializarProducto(ebook3);
-        g.serializarProducto(ebook4);
-        g.serializarProducto(ebook5);
-        g.serializarProducto(ebook6);
-        g.serializarProducto(ebook7);
-        g.serializarProducto(ebook8);
-        g.serializarProducto(ebook9);
-        g.serializarProducto(ebook10);
-        g.serializarProducto(ebook11);
-        g.serializarProducto(ebook12);
-        g.serializarProducto(ebook13);
-        g.serializarProducto(ebook14);
-        g.serializarProducto(ebook15);
-
-        g.serializarProducto(juego1);
-        g.serializarProducto(juego2);
-        g.serializarProducto(juego3);
-        g.serializarProducto(juego4);
-        g.serializarProducto(juego5);
-        g.serializarProducto(juego6);
-        g.serializarProducto(juego7);
-        g.serializarProducto(juego8);
-        g.serializarProducto(juego9);
-        g.serializarProducto(juego10);
-        g.serializarProducto(juego11);
-        g.serializarProducto(juego12);
-        g.serializarProducto(juego13);
-        g.serializarProducto(juego14);
-        g.serializarProducto(juego15);
-
-        g.serializarProducto(peli1);
-        g.serializarProducto(peli2);
-        g.serializarProducto(peli3);
-        g.serializarProducto(peli4);
-        g.serializarProducto(peli5);
-        g.serializarProducto(peli6);
-        g.serializarProducto(peli7);
-        g.serializarProducto(peli8);
-        g.serializarProducto(peli9);
-        g.serializarProducto(peli10);
-        g.serializarProducto(peli11);
-        g.serializarProducto(peli12);
-        g.serializarProducto(peli13);
-        g.serializarProducto(peli14);
-        g.serializarProducto(peli15);
-
-        g.serializarProducto(serie1);
-        g.serializarProducto(serie2);
-        g.serializarProducto(serie3);
-        g.serializarProducto(serie4);
-        g.serializarProducto(serie5);
-        g.serializarProducto(serie6);
-        g.serializarProducto(serie7);
-        g.serializarProducto(serie8);
-        g.serializarProducto(serie9);
-        g.serializarProducto(serie10);
-        g.serializarProducto(serie11);
-        g.serializarProducto(serie12);
-        g.serializarProducto(serie13);
-        g.serializarProducto(serie14);
-        g.serializarProducto(serie15);
 
         JsonUsuario j= new JsonUsuario();
 
-    j.serializarListaUsuarios(Usuario.getListaUsuarios());
+        j.serializarListaUsuarios(Usuario.getListaUsuarios());
 
-    j.ListaToArchivo();
+        j.ListaToArchivo();
 
         tienda.iniciar();
     }

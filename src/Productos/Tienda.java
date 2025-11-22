@@ -8,7 +8,7 @@ import Usuarios.Administrador;
 import Usuarios.Cliente;
 import Usuarios.Usuario;
 import Enum.Genero;
-
+import Enum.Suscripcion;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -94,7 +94,7 @@ public class Tienda {
         System.out.println("Ingrese su telefono");
         telefono = sc.nextLine();
 
-        Cliente nuevo = new Cliente(nombre, email, telefono, contrasenia);
+        Cliente nuevo = new Cliente(nombre, email, telefono, contrasenia, Suscripcion.BASICA);
 
         Usuario.getListaUsuarios().add(nuevo);
 
