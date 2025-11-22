@@ -152,6 +152,8 @@ public class Tienda {
 
     public void menuCliente() throws ProductoNoEncontradoException {
         int opcion;
+        //se crea un maps segun la suscripcion del cliente
+        Map<Integer, Producto> catalogoSuscripcion = CatalogoProducto.filtrarPorSuscripcion(clienteActual.getTipoSuscripcion());
         Map<Integer, Producto> catalogoFiltrado = new LinkedHashMap<>();
 
         System.out.println("""
@@ -178,22 +180,25 @@ public class Tienda {
 
                 switch (opcion) {
                     case 1:
-                        catalogoFiltrado = CatalogoProducto.filtrarPorTipo(Pelicula.class);
+                        catalogoFiltrado = CatalogoProducto.filtrarPorTipo(catalogoSuscripcion, Pelicula.class);
                         break;
                     case 2:
-                        catalogoFiltrado = CatalogoProducto.filtrarPorTipo(Serie.class);
+                        catalogoFiltrado = CatalogoProducto.filtrarPorTipo(catalogoSuscripcion , Serie.class);
                         break;
                     case 3:
-                        catalogoFiltrado = CatalogoProducto.filtrarPorTipo(Juego.class);
+                        catalogoFiltrado = CatalogoProducto.filtrarPorTipo(catalogoSuscripcion ,Juego.class);
                         break;
                     case 4:
-                        catalogoFiltrado = CatalogoProducto.filtrarPorTipo(Ebook.class);
+                        catalogoFiltrado = CatalogoProducto.filtrarPorTipo(catalogoSuscripcion, Ebook.class);
                         break;
                     default:
                         System.out.println("\nOpción inválida.");
                         return;
 
                 }
+
+
+
                 System.out.println("\nDesea filtrar por género? (s/n)= ");
                 String generoOpcion = sc.nextLine();
 
@@ -207,11 +212,10 @@ public class Tienda {
                     catalogoFiltrado = CatalogoProducto.filtrarPorGenero(catalogoFiltrado, generoIngresado);
                     CatalogoProducto.mostrarCatalogo(catalogoFiltrado);
                 }
-                else{
-                    CatalogoProducto.mostrarCatalogo(catalogoFiltrado);
-                }
 
-                break;
+                    CatalogoProducto.mostrarCatalogo(catalogoFiltrado);
+
+                    break;
             case 2:
                 System.out.println("\nIngrese el nombre del producto:");
                 String nombre = sc.nextLine();

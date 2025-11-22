@@ -1,5 +1,6 @@
 
 package Productos;
+import Enum.Suscripcion;
 import Exceptions.ProductoNoEncontradoException;
 import java.util.*;
 
@@ -27,16 +28,36 @@ public class CatalogoProducto {
 
     /**
      * Filtra los productos del catálogo por su clase.
+     * @param listaFiltrada mapa de productos a filtrar
      * @param tipoProducto clase del tipo de producto a filtrar
      * @return {@code Map} con productos del tipo indicado
      */
-    public static Map<Integer, Producto> filtrarPorTipo(Class<? extends Producto> tipoProducto){
+    public static Map<Integer, Producto> filtrarPorTipo(Map<Integer, Producto> listaFiltrada, Class<? extends Producto> tipoProducto){
         Map<Integer, Producto> filtrados = new LinkedHashMap<>();
-        for(Map.Entry<Integer, Producto> entry : productos.entrySet()){
+        for(Map.Entry<Integer, Producto> entry : listaFiltrada.entrySet()){
             if(tipoProducto.isInstance(entry.getValue())){
                 filtrados.put(entry.getKey(), entry.getValue());
             }
         }
+        return filtrados;
+    }
+
+    /**
+     * Filtra los productos del catálogo por el tipo de Suscripcion.
+     *  @param tipoSuscripcion tipo de suscripción por el cual se desea filtrar (BASICA o PREMIUM)
+     * @return {@code Map} con los productos que coinciden con la suscripción indicada
+     * @author Noel
+     */
+    public static Map<Integer, Producto> filtrarPorSuscripcion(Suscripcion tipoSuscripcion){
+        Map<Integer, Producto> filtrados = new LinkedHashMap<>();
+        for(Map.Entry<Integer, Producto> entry : productos.entrySet()){
+            Producto p = entry.getValue();
+
+            if (p.getTipoSuscripcion() == tipoSuscripcion) {
+                filtrados.put(entry.getKey(), p);
+            }
+        }
+
         return filtrados;
     }
 
