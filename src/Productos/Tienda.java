@@ -273,12 +273,13 @@ public class Tienda {
         public void menuAdmin(){
             int opcion;
             Producto aux;
-            System.out.println("1-Ver catalogo"+
-                            "2-Buscar producto"
-
-
-            );
-            opcion=sc.nextInt(); sc.nextLine();
+            System.out.println("""
+                    1. Ver catálogo
+                    2. Buscar producto
+                    3. Salir
+                    """);
+            opcion=sc.nextInt();
+            sc.nextLine();
 
             switch (opcion) {
                 case 1:
@@ -286,26 +287,32 @@ public class Tienda {
                     break;
                 case 2:
                     System.out.println("Ingrese el id del producto");
-                    int id  = sc.nextInt(); sc.nextLine();
-                   try{
+                    int id  = sc.nextInt();
+                    sc.nextLine();
+
+                    try{
                        aux = CatalogoProducto.buscarPorId(id);
-                       System.out.println("Encontrado:" +aux.getNombre());
-                       System.out.println("1-Ver"+
-                                            "2-Eliminar"+
-                                            "3-Modificar+"+
-                                              "4-Atras");
+                       System.out.println("Encontrado: " + aux.getNombre());
+                       System.out.println("""
+                               1. Ver
+                               2. Eliminar
+                               3. Modificar
+                               4. Atrás
+                               """);
                        opcion= sc.nextInt();sc.nextLine();
                        switch (opcion){
-                           case 1:  System.out.println(aux);break;
-                           case 2: CatalogoProducto.getProductos().remove(id);break;
-                           case 3: adminAux.modificar(aux);break;
+                           case 1:  System.out.println(aux); break;
+                           case 2: adminAux.baja(id); break;
+                           case 3: adminAux.modificar(aux); break;
                            case 4: menuAdmin(); break;
                            default:
                                System.out.println("Opción incorrecta.");
                        }
 
-                   }catch (ProductoNoEncontradoException e){e.printStackTrace();}
+                   }catch (ProductoNoEncontradoException e){e.getMessage();}
                     break;
+                case 3:
+                    return;
                 default:
                     System.out.println("Opcion incorrecta.");
             }
