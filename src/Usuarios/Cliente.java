@@ -9,13 +9,8 @@ import java.util.*;
 
 public class Cliente extends Usuario implements ABMCL {
 
-
-
     private Suscripcion tipoSuscripcion;
     private static HashSet<Producto> biblioteca=null;
-
-
-
 
     /// METODOS
 
@@ -30,15 +25,14 @@ public class Cliente extends Usuario implements ABMCL {
 
     @Override
     public boolean baja(int id) {
-Cliente aux=buscarUsuario(id);
+        Cliente aux=buscarUsuario(id);
 
-getListaUsuarios().remove(aux);
-aux.setUsuarioActivo(false);
-getListaUsuarios().add(aux);
+        getListaUsuarios().remove(aux);
+        aux.setUsuarioActivo(false);
+        getListaUsuarios().add(aux);
 
-
-return true;
-    }
+        return true;
+            }
 
 
     @Override

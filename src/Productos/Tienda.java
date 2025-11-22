@@ -250,8 +250,7 @@ public class Tienda {
                     break;
                 case 2:
                     if (clienteActual != null) {
-                        clienteActual.agregarProducto(p);
-                        System.out.println("Compraste: " + p.getNombre());
+                        gestionfacturacion(p);
                     } else {
                         System.out.println("No hay cliente logueado.");
                     }
@@ -269,8 +268,18 @@ public class Tienda {
 
         }
 
+    private void gestionfacturacion(Producto p) {
+        String aux ="";
+        System.out.println("Ingrese el metodo de pago"+
+                "1-DEBITO"+
+                "2-CREDITO");
+        aux= sc.nextLine();
+        clienteActual.agregarProducto(p);
+        System.out.println("Compraste: " + p.getNombre());
+    }
 
-        public void menuAdmin(){
+
+    public void menuAdmin(){
             int opcion;
             Producto aux;
             System.out.println("""
