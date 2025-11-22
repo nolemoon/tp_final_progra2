@@ -15,13 +15,15 @@ public class GestorJuego implements ABMCL<Juego> {
     }
 
     @Override
-    public boolean baja(int id) throws ProductoNoEncontradoException {
-        Juego j = (Juego) CatalogoProducto.buscarPorId(id);
-        if(j == null)
-            throw new ProductoNoEncontradoException("\nNo se ha encontrado un juego con ese ID.");
-
-        j.setAltaProducto(false);
-        return true;
+    public boolean baja(int id) {
+        try{
+            Juego j = (Juego) CatalogoProducto.buscarPorId(id);
+            j.setAltaProducto(false);
+            return true;
+        } catch (ProductoNoEncontradoException e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
     }
 
     @Override
@@ -55,13 +57,15 @@ public class GestorJuego implements ABMCL<Juego> {
     }
 
     @Override
-    public Juego consultar(String nombre) throws ProductoNoEncontradoException {
-        Juego j = (Juego) CatalogoProducto.buscarPorNombre(nombre);
-        if(j == null)
-            throw new ProductoNoEncontradoException("\nNo se ha encontrado un juego con ese nombre.");
-
-        j.setAltaProducto(false);
-        return j;
+    public Juego consultar(String nombre){
+        try{
+            Juego j = (Juego) CatalogoProducto.buscarPorNombre(nombre);
+            j.setAltaProducto(false);
+            return j;
+        } catch (ProductoNoEncontradoException e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
     }
 
     @Override

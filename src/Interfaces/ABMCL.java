@@ -23,7 +23,7 @@ public interface ABMCL<T> {
      * @param id identificador del objeto a dar de baja
      * @return {@code true} si la baja fue exitosa, {@code false} en caso contrario
      */
-    boolean baja(int id) throws ProductoNoEncontradoException;
+    boolean baja(int id);
 
     /**
      * Modifica un objeto existente en el sistema
@@ -37,7 +37,7 @@ public interface ABMCL<T> {
      * @param nombre nombre del objeto a buscar
      * @return objeto encontrado
      */
-    T consultar(String nombre) throws ProductoNoEncontradoException;
+    T consultar(String nombre);
 
     /**
      * Devuelve listado con los objetos registrados

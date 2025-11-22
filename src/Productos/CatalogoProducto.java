@@ -12,7 +12,10 @@ import java.util.*;
  * @author Renata
  */
 public class CatalogoProducto {
-    private static  Map<Integer, Producto> productos;
+    private static LinkedHashMap<Integer, Producto> productos;
+
+    public CatalogoProducto() {
+    }
 
     /**
      * Devuelve el mapa completo de productos.

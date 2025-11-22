@@ -15,13 +15,16 @@ public class GestorEbook implements ABMCL<Ebook> {
     }
 
     @Override
-    public boolean baja(int id) throws ProductoNoEncontradoException {
-        Ebook e = (Ebook) CatalogoProducto.buscarPorId(id);
-        if(e == null)
-            throw new ProductoNoEncontradoException("\nNo se ha encontrado un eBook con ese ID.");
+    public boolean baja(int id) {
+        try{
+            Ebook e = (Ebook) CatalogoProducto.buscarPorId(id);
+            e.setAltaProducto(false);
+            return true;
+        } catch (ProductoNoEncontradoException e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
 
-        e.setAltaProducto(false);
-        return true;
     }
 
     @Override
@@ -61,13 +64,16 @@ public class GestorEbook implements ABMCL<Ebook> {
     }
 
     @Override
-    public Ebook consultar(String nombre) throws ProductoNoEncontradoException {
-        Ebook e = (Ebook) CatalogoProducto.buscarPorNombre(nombre);
-        if(e == null)
-            throw new ProductoNoEncontradoException("\nNo se ha encontrado una pelicula con ese nombre.");
+    public Ebook consultar(String nombre) {
+        try{
+            Ebook e = (Ebook) CatalogoProducto.buscarPorNombre(nombre);
+            e.setAltaProducto(false);
+            return e;
+        } catch (ProductoNoEncontradoException e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
 
-        e.setAltaProducto(false);
-        return e;
     }
 
     @Override

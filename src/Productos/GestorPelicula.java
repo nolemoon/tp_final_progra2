@@ -16,13 +16,15 @@ public class GestorPelicula implements ABMCL<Pelicula> {
     }
 
     @Override
-    public boolean baja(int id) throws ProductoNoEncontradoException {
-        Pelicula p = (Pelicula) CatalogoProducto.buscarPorId(id);
-        if(p == null)
-            throw new ProductoNoEncontradoException("\nNo se ha encontrado una pelicula con ese ID.");
-
-        p.setAltaProducto(false);
-        return true;
+    public boolean baja(int id) {
+        try{
+            Pelicula p = (Pelicula) CatalogoProducto.buscarPorId(id);
+            p.setAltaProducto(false);
+            return true;
+        } catch (ProductoNoEncontradoException e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
     }
 
     @Override
@@ -57,13 +59,16 @@ public class GestorPelicula implements ABMCL<Pelicula> {
     }
 
     @Override
-    public Pelicula consultar(String nombre) throws ProductoNoEncontradoException {
-        Pelicula p = (Pelicula) CatalogoProducto.buscarPorNombre(nombre);
-        if(p == null)
-            throw new ProductoNoEncontradoException("\nNo se ha encontrado una pelicula con ese nombre.");
+    public Pelicula consultar(String nombre){
+        try{
+            Pelicula p = (Pelicula) CatalogoProducto.buscarPorNombre(nombre);
+            p.setAltaProducto(false);
+            return p;
+        } catch (ProductoNoEncontradoException e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
 
-        p.setAltaProducto(false);
-        return p;
     }
 
     @Override

@@ -15,13 +15,16 @@ public class GestorSerie implements ABMCL<Serie> {
     }
 
     @Override
-    public boolean baja(int id) throws ProductoNoEncontradoException {
-        Serie s = (Serie) CatalogoProducto.buscarPorId(id);
-        if(s == null)
-            throw new ProductoNoEncontradoException("\nNo se ha encontrado una serie con ese ID.");
+    public boolean baja(int id) {
+        try{
+            Serie s = (Serie) CatalogoProducto.buscarPorId(id);
+            s.setAltaProducto(false);
+            return true;
+        } catch (ProductoNoEncontradoException e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
 
-        s.setAltaProducto(false);
-        return true;
     }
 
     @Override
@@ -57,13 +60,16 @@ public class GestorSerie implements ABMCL<Serie> {
     }
 
     @Override
-    public Serie consultar(String nombre) throws ProductoNoEncontradoException {
-        Serie s = (Serie) CatalogoProducto.buscarPorNombre(nombre);
-        if(s == null)
-            throw new ProductoNoEncontradoException("\nNo se ha encontrado una serie con ese nombre.");
+    public Serie consultar(String nombre) {
+        try{
+            Serie s = (Serie) CatalogoProducto.buscarPorNombre(nombre);
+            s.setAltaProducto(false);
+            return s;
+        } catch (ProductoNoEncontradoException e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
 
-        s.setAltaProducto(false);
-        return s;
     }
 
     @Override

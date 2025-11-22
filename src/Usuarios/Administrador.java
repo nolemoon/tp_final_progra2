@@ -47,23 +47,28 @@ public class Administrador extends Usuario implements ABMCL<Producto> {
 
 
     @Override
-    public boolean baja(int id) throws ProductoNoEncontradoException {
-        Producto p = CatalogoProducto.buscarPorId(id);
+    public boolean baja(int id) {
+        try{
+            Producto p = CatalogoProducto.buscarPorId(id);
 
-        if(p instanceof Pelicula)
-            return gestorPeliculas.baja(id);
+            if(p instanceof Pelicula)
+                return gestorPeliculas.baja(id);
 
-        if(p instanceof Serie)
-            return gestorSeries.baja(id);
+            if(p instanceof Serie)
+                return gestorSeries.baja(id);
 
-        if(p instanceof Ebook)
-            return gestorEbooks.baja(id);
+            if(p instanceof Ebook)
+                return gestorEbooks.baja(id);
 
-        if(p instanceof Juego)
-            return gestorJuegos.baja(id);
+            if(p instanceof Juego)
+                return gestorJuegos.baja(id);
 
+            return false;
+        } catch (ProductoNoEncontradoException e){
+            System.out.println(e.getMessage());
+            return false;
+        }
 
-        throw new ProductoNoEncontradoException("\nNo se ha encontrado el producto.");
     }
 
 
@@ -141,23 +146,28 @@ public class Administrador extends Usuario implements ABMCL<Producto> {
 
 
     @Override
-    public Producto consultar(String nombreProducto) throws ProductoNoEncontradoException {
-        Producto p = CatalogoProducto.buscarPorNombre(nombreProducto);
+    public Producto consultar(String nombreProducto) {
+        try{
+            Producto p = CatalogoProducto.buscarPorNombre(nombreProducto);
 
-        if(p instanceof Pelicula)
-            return gestorPeliculas.consultar(nombreProducto);
+            if(p instanceof Pelicula)
+                return gestorPeliculas.consultar(nombreProducto);
 
-        if(p instanceof Serie)
-            return gestorSeries.consultar(nombreProducto);
+            if(p instanceof Serie)
+                return gestorSeries.consultar(nombreProducto);
 
-        if(p instanceof Ebook)
-            return gestorEbooks.consultar(nombreProducto);
+            if(p instanceof Ebook)
+                return gestorEbooks.consultar(nombreProducto);
 
-        if(p instanceof Juego)
-            return gestorJuegos.consultar(nombreProducto);
+            if(p instanceof Juego)
+                return gestorJuegos.consultar(nombreProducto);
 
+            return null;
+        } catch (ProductoNoEncontradoException e){
+            System.out.println(e.getMessage());
+            return null;
+        }
 
-        throw new ProductoNoEncontradoException("\nNo se ha encontrado el producto.");
     }
 
     @Override
