@@ -27,13 +27,12 @@ import java.util.Scanner;
  */
 
 public class Tienda {
-    protected CatalogoProducto catalogo;
     protected Scanner sc = new Scanner(System.in);
     protected Cliente clienteActual;
     protected Administrador adminAux = new Administrador();
 
     public Tienda() {
-        catalogo = new CatalogoProducto();
+
     }
 
 
@@ -179,16 +178,16 @@ public class Tienda {
 
                 switch (opcion) {
                     case 1:
-                        catalogoFiltrado = catalogo.filtrarPorTipo(Pelicula.class);
+                        catalogoFiltrado = CatalogoProducto.filtrarPorTipo(Pelicula.class);
                         break;
                     case 2:
-                        catalogoFiltrado = catalogo.filtrarPorTipo(Serie.class);
+                        catalogoFiltrado = CatalogoProducto.filtrarPorTipo(Serie.class);
                         break;
                     case 3:
-                        catalogoFiltrado = catalogo.filtrarPorTipo(Juego.class);
+                        catalogoFiltrado = CatalogoProducto.filtrarPorTipo(Juego.class);
                         break;
                     case 4:
-                        catalogoFiltrado = catalogo.filtrarPorTipo(Ebook.class);
+                        catalogoFiltrado = CatalogoProducto.filtrarPorTipo(Ebook.class);
                         break;
                     default:
                         System.out.println("\nOpción inválida.");
@@ -205,11 +204,11 @@ public class Tienda {
 
                     System.out.println("\nIndique el género que desea ver: ");
                     String generoIngresado = sc.nextLine();
-                    catalogoFiltrado = catalogo.filtrarPorGenero(catalogoFiltrado, generoIngresado);
-                    catalogo.mostrarCatalogo(catalogoFiltrado);
+                    catalogoFiltrado = CatalogoProducto.filtrarPorGenero(catalogoFiltrado, generoIngresado);
+                    CatalogoProducto.mostrarCatalogo(catalogoFiltrado);
                 }
                 else{
-                    catalogo.mostrarCatalogo(catalogoFiltrado);
+                    CatalogoProducto.mostrarCatalogo(catalogoFiltrado);
                 }
 
                 break;
@@ -217,7 +216,7 @@ public class Tienda {
                 System.out.println("\nIngrese el nombre del producto:");
                 String nombre = sc.nextLine();
                 try {
-                    Producto buscado = catalogo.buscarPorNombre(nombre);
+                    Producto buscado = CatalogoProducto.buscarPorNombre(nombre);
                     VerComprar(buscado);
 
                 } catch (ProductoNoEncontradoException e) {
@@ -228,7 +227,7 @@ public class Tienda {
                 clienteActual.mostrarBiblioteca();
                 break;
             case 4:
-                clienteActual.modificar(clienteActual);  //revisarlo dsp
+                //clienteActual.modificar(clienteActual);
                 break;
 
             default:
@@ -283,13 +282,13 @@ public class Tienda {
 
             switch (opcion) {
                 case 1:
-                    catalogo.mostrarCatalogo();
+                    CatalogoProducto.mostrarCatalogo();
                     break;
                 case 2:
                     System.out.println("Ingrese el id del producto");
                     int id  = sc.nextInt(); sc.nextLine();
                    try{
-                       aux = catalogo.buscarPorId(id);
+                       aux = CatalogoProducto.buscarPorId(id);
                        System.out.println("Encontrado:" +aux.getNombre());
                        System.out.println("1-Ver"+
                                             "2-Eliminar"+
@@ -298,7 +297,7 @@ public class Tienda {
                        opcion= sc.nextInt();sc.nextLine();
                        switch (opcion){
                            case 1:  System.out.println(aux);break;
-                           case 2: catalogo.getProductos().remove(id);break;
+                           case 2: CatalogoProducto.getProductos().remove(id);break;
                            case 3: adminAux.modificar(aux);break;
                            case 4: menuAdmin(); break;
                            default:

@@ -11,7 +11,11 @@ import Enum.Genero;
 
 import java.util.Scanner;
 
-public class Administrador extends Usuario implements ABMCL {
+public class Administrador extends Usuario implements ABMCL<Producto> {
+    private GestorPelicula gestorPeliculas = new GestorPelicula();
+    private GestorSerie gestorSeries = new GestorSerie();
+    private GestorEbook gestorEbooks = new GestorEbook();
+    private GestorJuego gestorJuegos = new GestorJuego();
 
     public Administrador(String nombre, String email, String telefono, String password) {
 
@@ -25,158 +29,170 @@ public class Administrador extends Usuario implements ABMCL {
     /// Metodos
 
     @Override
-    public boolean alta(Object o) {
+    public boolean alta(Producto p) {
+        if(p instanceof Pelicula pelicula)
+            return gestorPeliculas.alta(pelicula);
 
-CatalogoProducto catalogo=new CatalogoProducto();
+        if(p instanceof Serie serie)
+            return gestorSeries.alta(serie);
 
+        if(p instanceof Ebook ebook)
+            return gestorEbooks.alta(ebook);
 
-        Producto producto = (Producto) o;
-
-        catalogo.agregarProducto(producto);
-
-        return true;
-    }
-
-
-    @Override
-    public boolean baja(int id) throws ProductoNoEncontradoException {
-// TODO: crear atributo altaProducto en Producto
-CatalogoProducto catalogo=new CatalogoProducto();
-
-Producto p=catalogo.buscarPorId(id);
-
-       p.setAltaProducto(false);
-
+        if(p instanceof Juego juego)
+            return gestorJuegos.alta(juego);
 
         return false;
     }
 
 
+    @Override
+    public boolean baja(int id) throws ProductoNoEncontradoException {
+        Producto p = CatalogoProducto.buscarPorId(id);
+
+        if(p instanceof Pelicula)
+            return gestorPeliculas.baja(id);
+
+        if(p instanceof Serie)
+            return gestorSeries.baja(id);
+
+        if(p instanceof Ebook)
+            return gestorEbooks.baja(id);
+
+        if(p instanceof Juego)
+            return gestorJuegos.baja(id);
+
+
+        throw new ProductoNoEncontradoException("\nNo se ha encontrado el producto.");
+    }
+
+
 
     @Override
-    public boolean modificar(Object o) {
+    public boolean modificar(Producto p) {
         Scanner sc=new Scanner(System.in);
 
-
-if (!(o instanceof Producto producto)) return false;
-
-
-
         System.out.println("""
-                Ingrese el numero de la opcion que desea modificar\\
-                               \s
-                                1. Nombre\\
-                               \s
-                                2. genero\\
-                               \s
-                                3. precio\\
-                               \s
-                                4. tipoSuscripcion\\
-                               \s
-                                5. salir""\");\\
-                                \s
-                                Juegos\\
-                                \s
-                                11. requisitosMinimos\\
-                                12. multiplayer\\
-                                \s
-                                E-books\\
-                                \s
-                                21. formato\\
-                                22. idioma\\
-                                23. numPaginas\\
-                                \s
-                                Peliculas\\
-                                \s
-                                31. clasificacion\\
-                                32. duracion\\
-                                \s
-                                Series\\
-                                \s
-                                41. temporadas\\
-                                42. capitulos\\""");
-       int opcion= sc.nextInt();
+                --- MODIFICAR PRODUCTO ---
+                Ingrese el numero de la opcion que desea modificar:\\
+                \s
+                1. Nombre
+                2. Genero
+                3. Precio
+                4. Tipo de suscripcion
+                5. Atributos especificos
+                6. Salir
+                """);
+
+        int opcion= sc.nextInt();
         sc.nextLine();
-        String aux;
 
-switch (opcion){
-
-            case 1:
-                producto.setNombre(sc.nextLine());
-
-            case 2: aux=sc.nextLine();
-            aux=aux.toUpperCase();
-
-                switch (aux) {
-                    case "ACCION" -> producto.setGenero(Genero.ACCION);
-                    case "AVENTURA" -> producto.setGenero(Genero.AVENTURA);
-                    case "COMEDIA" -> producto.setGenero(Genero.COMEDIA);
-                    case "DRAMA" -> producto.setGenero(Genero.DRAMA);
-                    case "FANTASIA" -> producto.setGenero(Genero.FANTASIA) ;
-                    case "TERROR" -> producto.setGenero(Genero.TERROR);
-                    case "ROMANCE" -> producto.setGenero(Genero.ROMANCE) ;
-                    case "CIENCIA_FICCION" -> producto.setGenero(Genero.CIENCIA_FICCION);
-                } default:
-
-
-            case 3: producto.setPrecio(sc.nextDouble());
-
-            case 4: aux=sc.nextLine();
-            aux=aux.toUpperCase();
-
-            if (aux.equals("PREMIUM")){producto.setTipoSuscripcion(Suscripcion.PREMIUM);}
-            else if(aux.equals("BASICA")|| aux.equals("BASICO")){producto.setTipoSuscripcion(Suscripcion.BASICA);}
-
-            case 11: if(o instanceof Juego) {
-            ((Juego) o).setRequisitosMinimos(sc.nextLine());
+        switch (opcion){
+            case 1 -> {
+                System.out.println("\nIngrese nuevo nombre: ");
+                p.setNombre(sc.nextLine());
+                return true;
             }
-            case 12: if(o instanceof Juego) {
-                ((Juego) o).setMultiplayer(sc.nextBoolean());
+            case 2 -> {
+                System.out.println("""
+                        ACCION, AVENTURA, COMEDIA, DRAMA,
+                        FANTASIA, TERROR, ROMANCE, CIENCIA_FICCION
+                        \nIngrese nuevo genero:
+                        """);
+                String g = sc.nextLine().toUpperCase();
+                p.setGenero(Genero.valueOf(g));
+                return true;
             }
-            case 21: if(o instanceof Ebook) {
-                ((Ebook) o).setFormato(sc.nextLine());
+            case 3 -> {
+                System.out.println("\nIngrese nuevo precio: ");
+                p.setPrecio(sc.nextDouble());
+                sc.nextLine();
+                return true;
+            }
+            case 4 -> {
+                System.out.println("""
+                        BASICA, PREMIUM
+                        \nIngrese nuevo tipo de suscripcion:
+                        """);
+                String s = sc.nextLine().toUpperCase();
+                p.setTipoSuscripcion(Suscripcion.valueOf(s));
+                return true;
+            }
+            case 5 -> {
+                if(p instanceof Pelicula pelicula){
+                    return gestorPeliculas.modificar(pelicula);
+                }
+                if(p instanceof Serie serie){
+                    return gestorSeries.modificar(serie);
+                }
+                if(p instanceof Ebook ebook){
+                    return gestorEbooks.modificar(ebook);
+                }
+                if(p instanceof Juego juego){
+                    return gestorJuegos.modificar(juego);
+                }
 
+                return true;
             }
-            case 22: if(o instanceof Ebook) {
-                ((Ebook) o).setIdioma(sc.nextLine());
-            }
-            case 23: if(o instanceof Ebook) {
-                ((Ebook) o).setNumPaginas(sc.nextInt());
-            }
-            case 31: if(o instanceof Pelicula){
-                ((Pelicula) o).setClasificacion(sc.nextLine());
-
-            }
-            case 32: if(o instanceof Pelicula){
-                ((Pelicula) o).setDuracion(sc.nextInt());
-            }
-    case 41: if(o instanceof Serie){
-        ((Serie) o).setTemporadas(sc.nextInt());
-    }
-    case 42: if (o instanceof Serie){
-        ((Serie) o).setCapitulos(sc.nextInt());
-    }
-
-
-            }
-            return true;
+            default -> {return false;}
         }
+
+    }
 
 
     @Override
-    public Object consultar(String nombreProducto) throws ProductoNoEncontradoException {
-        CatalogoProducto catalogo=new CatalogoProducto();
+    public Producto consultar(String nombreProducto) throws ProductoNoEncontradoException {
+        Producto p = CatalogoProducto.buscarPorNombre(nombreProducto);
+
+        if(p instanceof Pelicula)
+            return gestorPeliculas.consultar(nombreProducto);
+
+        if(p instanceof Serie)
+            return gestorSeries.consultar(nombreProducto);
+
+        if(p instanceof Ebook)
+            return gestorEbooks.consultar(nombreProducto);
+
+        if(p instanceof Juego)
+            return gestorJuegos.consultar(nombreProducto);
 
 
-        return catalogo.buscarPorNombre(nombreProducto);
+        throw new ProductoNoEncontradoException("\nNo se ha encontrado el producto.");
     }
 
     @Override
     public void listar() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("""
+                Ingrese el tipo de producto que desea ver:\\
+                \s
+                1. Peliculas
+                2. Series
+                3. Ebooks
+                4. Juegos
+                5. Salir
+                """);
 
-CatalogoProducto catalogo=new CatalogoProducto();
+        int opcion= sc.nextInt();
+        sc.nextLine();
 
-catalogo.mostrarCatalogo();
+        switch (opcion){
+            case 1 -> {
+                gestorPeliculas.listar();
+            }
+            case 2 -> {
+                gestorSeries.listar();
+            }
+            case 3 -> {
+                gestorEbooks.listar();
+            }
+            case 4 -> {
+                gestorJuegos.listar();
+            }
+            default -> {
+                System.out.println("\nOpcion inválida.");
+            }
+        }
 
     }
 
